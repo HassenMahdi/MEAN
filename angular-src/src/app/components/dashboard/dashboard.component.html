@@ -1,8 +1,9 @@
-<div id="wrapper">
+<div id="wrapper" class="toggled">
   <app-sidebar></app-sidebar>
-  <div id="page-content-wrapper">
+  <div>
+    <div id="page-content-wrapper">
       <router-outlet></router-outlet>
-      <a onclick="toggleSidebar(this,event)" href="#menu-toggle" class="btn btn-default" id="menu-toggle">Toggle Menu</a>
+  </div>
   </div>
 </div>
 

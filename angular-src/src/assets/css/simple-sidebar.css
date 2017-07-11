@@ -10,6 +10,25 @@
 
 /* Toggle Styles */
 
+.navbar-brand{
+    margin-left: 100px;
+}
+
+.toggle-btn{
+    background: #111;
+    z-index: 999;
+    position: absolute;
+    padding: 10px;
+    top: 100px;
+    left: 0px;
+    border-radius: 0px 0px 0px 0px;
+    border: 0;
+}
+.toggle-btn:hover{
+    padding: 10px;
+    border: 0;
+}
+
 #wrapper {
 
     padding-left: 0;
@@ -33,7 +52,7 @@
     height: 100%;
     margin-left: -250px;
     overflow-y: auto;
-    background: #000;
+    background: #111;
     -webkit-transition: all 0.5s ease;
     -moz-transition: all 0.5s ease;
     -o-transition: all 0.5s ease;
@@ -67,7 +86,7 @@
 }
 
 .sidebar-nav li {
-    text-indent: 20px;
+    text-indent: 10px;
     line-height: 40px;
 }
 
@@ -103,6 +122,40 @@
     background: none;
 }
 
+.sidebar-profile{
+    display: flex;
+    padding-left: 20px;
+    margin: 0px;
+    margin-bottom: 20px;
+    width: 100%;
+}
+
+.sidebar-profile-pic{
+    flex: left;
+    width: 50px;
+    height: 50px;
+    background: grey;
+    margin: 0;
+    padding: 0; 
+    display: inline-block;
+}
+
+.sidebar-profile-info{
+    flex: left;
+    color: white;
+    font-weight: bold;
+    width: auto;
+    height: 50px;
+    padding: 10px;
+    margin: 0;
+    display: inline-block;
+}
+
+.sidebar-profile-info span{
+    color: grey;
+    font-weight: lighter;
+}
+
 @media(min-width:768px) {
     #wrapper {
         padding-left: 0;
@@ -130,3 +183,4 @@
         margin-right: 0;
     }
 }
+

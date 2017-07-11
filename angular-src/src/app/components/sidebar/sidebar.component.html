@@ -1,32 +1,44 @@
+<a onclick="toggleSidebar(this,event)" href="#menu-toggle" class="btn btn-default btn-lg toggle-btn" id="menu-toggle">
+    <span class="glyphicon glyphicon-dashboard" aria-hidden="true"></span>
+</a>
+
+
 <!-- Sidebar -->
 
 <div id="sidebar-wrapper">
     <ul class="sidebar-nav">
         <li class="sidebar-brand">
-            <a href="#">
-                Start Bootstrap
+            <a onclick="toggleSidebar(this,event)">
+             <span class="glyphicon glyphicon-dashboard"></span> Dashboard Menu
+             <span class="glyphicon glyphicon-chevron-left"></span>
             </a>
         </li>
+        <div class="sidebar-profile">
+            <div class="sidebar-profile-pic">
+            </div>
+            <div class="sidebar-profile-info">
+                Hassen Mahdi
+                <br>
+                <span>@hassenmahdi</span>
+            </div>
+        </div>
         <li>
-            <a href="#">Dashboard</a>
+            <a href="#"><span class="glyphicon glyphicon-eye-open"></span> Overview</a>
         </li>
         <li>
-            <a href="#">Shortcuts</a>
+            <a href="#"><span class="glyphicon glyphicon-list-alt"></span> Surveys</a>
         </li>
         <li>
-            <a href="#">Overview</a>
+            <a href="#"><span class="glyphicon glyphicon-briefcase"></span> Teams</a>
         </li>
         <li>
-            <a href="#">Events</a>
+            <a href="#"><span class="glyphicon glyphicon-envelope"></span> Messages</a>
         </li>
         <li>
-            <a href="#">About</a>
+            <a href="#"><span class="glyphicon glyphicon-stats"></span> Statistics</a>
         </li>
         <li>
-            <a href="#">Services</a>
-        </li>
-        <li>
-            <a href="#">Contact</a>
+            <a href="#"><span class="glyphicon glyphicon-user"></span> Profile</a>
         </li>
     </ul>
 </div>
