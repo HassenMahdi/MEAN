@@ -1,6 +1,5 @@
 import { Component, OnInit, ViewContainerRef } from '@angular/core';
 import { ValidateService } from '../../services/validate.service';
-import { FlashMessagesModule } from 'angular2-flash-messages';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
 import { ToastrService } from 'toastr-ng2';
@@ -22,7 +21,6 @@ export class RegisterComponent implements OnInit {
   constructor(
     private authService: AuthService,
     private validateService: ValidateService,
-    private flashMessages: FlashMessagesModule,
     private router: Router,
     private toastr: ToastrService
   ) 
