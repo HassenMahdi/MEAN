@@ -1,0 +1,29 @@
+.profiles-row{
+    overflow-x: scroll;
+    white-space: nowrap;
+    margin-top: 10px;
+    margin-bottom: 10px;
+
+}
+.profile{
+    display: inline-block ;  
+}
+
+.profiles-row::-webkit-scrollbar-track
+{
+	border-radius: 0;
+	background-color: #F5F5F5;
+}
+
+.profiles-row::-webkit-scrollbar
+{
+    height: 3px;
+	width: 2px;
+	background-color: #F5F5F5;
+}
+
+.profiles-row::-webkit-scrollbar-thumb
+{
+	border-radius: 0px;
+	background-color: #AAA;
+}
