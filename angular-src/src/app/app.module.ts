@@ -21,6 +21,9 @@ import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { StatsComponent } from './components/dashboard/components/stats/stats.component';
 import { CreateSurveyComponent } from './components/dashboard/components/create-survey/create-survey.component';
 import { OverviewComponent } from './components/dashboard/components/overview/overview.component';
+import { MessagesComponent } from './components/dashboard/components/messages/messages.component';
+import { TeamsComponent } from './components/dashboard/components/teams/teams.component';
+import { HistorySurveyComponent } from './components/dashboard/components/history-survey/history-survey.component';
 
 const appRoutes : Routes = [
   {path:'' , component: HomeComponent},
@@ -31,8 +34,15 @@ const appRoutes : Routes = [
       {path:'' , redirectTo: 'overview' , pathMatch: 'full'},
       {path:'overview' , component: OverviewComponent},
       {path:'profile' , component: ProfileComponent},
-      {path:'survey' , component: CreateSurveyComponent},
-      {path:'statistics', component: StatsComponent}
+      {path:'statistics', component: StatsComponent},
+      {path:'teams', component: TeamsComponent},
+      {path:'messages', component: MessagesComponent},
+      {path:'survey' ,
+        children:[
+          {path:'' , redirectTo: 'create' , pathMatch: 'full'},
+          {path:'create' , component: CreateSurveyComponent},
+          {path:'history' , component: HistorySurveyComponent}
+        ]}    
     ]},
   {path:'profile' , component: ProfileComponent , canActivate:[AuthGuard]}
 ]; 
@@ -49,7 +59,10 @@ const appRoutes : Routes = [
     SidebarComponent,
     StatsComponent,
     CreateSurveyComponent,
-    OverviewComponent
+    OverviewComponent,
+    MessagesComponent,
+    TeamsComponent,
+    HistorySurveyComponent
   ],
   imports: [
     BrowserModule,

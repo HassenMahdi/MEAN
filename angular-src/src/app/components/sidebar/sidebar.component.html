@@ -26,13 +26,28 @@
             <a [routerLink]="['/dashboard/overview']"><span class="glyphicon glyphicon-eye-open"></span> Overview</a>
         </li>
         <li class="nav-option" [routerLinkActive]="['sidebar-active']" [routerLinkActiveOptions]="{exact:true}">
-            <a [routerLink]="['/dashboard/survey']"><span class="glyphicon glyphicon-list-alt"></span> Surveys</a>
+
+            <a data-toggle="collapse" data-target="#submenu1"><span class="glyphicon glyphicon-list-alt"></span> Surveys
+                <div align="right" style="float:right;">
+                    <span class="glyphicon glyphicon-chevron-down"></span>    
+                </div>
+            </a>
+        </li>
+        <li class="collapse submenu" id="submenu1">
+            <ul>
+                <li [routerLinkActive]="['sidebar-active']" [routerLinkActiveOptions]="{exact:true}">
+                    <a [routerLink]="['/dashboard/survey/create']"> Create survey</a>
+                </li>
+                <li [routerLinkActive]="['sidebar-active']" [routerLinkActiveOptions]="{exact:true}">
+                    <a [routerLink]="['/dashboard/survey/history']"> View surveys history</a>
+                </li>
+            </ul>
         </li>
         <li class="nav-option" [routerLinkActive]="['sidebar-active']" [routerLinkActiveOptions]="{exact:true}">
-            <a [routerLink]="['/dashboard/overview']"><span class="glyphicon glyphicon-briefcase"></span> Teams</a>
+            <a [routerLink]="['/dashboard/teams']"><span class="glyphicon glyphicon-briefcase"></span> Teams</a>
         </li>
         <li class="nav-option" [routerLinkActive]="['sidebar-active']" [routerLinkActiveOptions]="{exact:true}">
-            <a [routerLink]="['/dashboard/overview']"><span class="glyphicon glyphicon-envelope"></span> Messages</a>
+            <a [routerLink]="['/dashboard/messages']"><span class="glyphicon glyphicon-envelope"></span> Messages</a>
         </li>
         <li class="nav-option" [routerLinkActive]="['sidebar-active']" [routerLinkActiveOptions]="{exact:true}">
             <a [routerLink]="['/dashboard/statistics']"><span class="glyphicon glyphicon-stats"></span> Statistics</a>
