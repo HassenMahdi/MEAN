@@ -21,6 +21,7 @@ import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { StatsComponent } from './components/dashboard/components/stats/stats.component';
 import { CreateSurveyComponent } from './components/dashboard/components/create-survey/create-survey.component';
 import { OverviewComponent } from './components/dashboard/components/overview/overview.component';
+import { TeamsComponent } from './components/dashboard/components/teams/teams.component';
 
 const appRoutes : Routes = [
   {path:'' , component: HomeComponent},
@@ -32,7 +33,9 @@ const appRoutes : Routes = [
       {path:'overview' , component: OverviewComponent},
       {path:'profile' , component: ProfileComponent},
       {path:'survey' , component: CreateSurveyComponent},
-      {path:'statistics', component: StatsComponent}
+      {path:'statistics', component: StatsComponent},
+      {path:'teams', component: TeamsComponent}
+
     ]},
   {path:'profile' , component: ProfileComponent , canActivate:[AuthGuard]}
 ]; 
@@ -49,7 +52,8 @@ const appRoutes : Routes = [
     SidebarComponent,
     StatsComponent,
     CreateSurveyComponent,
-    OverviewComponent
+    OverviewComponent,
+    TeamsComponent
   ],
   imports: [
     BrowserModule,
