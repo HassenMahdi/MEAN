@@ -17,11 +17,11 @@
 .toggle-btn{
     background: #111;
     z-index: 999;
-    position: absolute;
+    position: fixed;
     padding: 10px;
-    top: 100px;
+    top: 35%;
     left: 0px;
-    border-radius: 0px 0px 0px 0px;
+    border-radius: 0px 5px 5px 0px;
     border: 0;
 }
 .toggle-btn:hover{
@@ -44,7 +44,7 @@
 
 #sidebar-wrapper {
     z-index: 1000;
-    position: fixed;
+    position: absolute;
     left: 250px;
      /* Navbar padding offset */
     margin-top:-18px;
@@ -85,9 +85,19 @@
     list-style: none;
 }
 
+.sibebar-active{
+    background: white !important;
+    color:#333;
+    font-weight: bold;
+}
+
 .sidebar-nav li {
     text-indent: 10px;
     line-height: 40px;
+}
+
+.nav-option a span{
+    padding-right: 20px;
 }
 
 .sidebar-nav li a {
@@ -105,6 +115,8 @@
 .sidebar-nav li a:active,
 .sidebar-nav li a:focus {
     text-decoration: none;
+    padding-left: 0;
+    margin-right: 0
 }
 
 .sidebar-nav > .sidebar-brand {
@@ -183,4 +195,3 @@
         margin-right: 0;
     }
 }
-

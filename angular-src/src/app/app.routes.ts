@@ -1,10 +1,4 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { HttpModule } from '@angular/http';
-import { RouterModule , Routes } from '@angular/router';
-import { ToastrModule } from 'toastr-ng2';
-
+import { Routes } from '@angular/router'
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { LoginComponent } from './components/login/login.component';
@@ -28,8 +22,7 @@ const appRoutes : Routes = [
   {path:'register' , component: RegisterComponent},
   {path:'dashboard' , component: DashboardComponent , canActivate:[AuthGuard] ,
     children:[
-      {path:'' , redirectTo: 'overview' , pathMatch: 'full'},
-      {path:'overview' , component: OverviewComponent},
+      {path:'' , component: OverviewComponent },
       {path:'profile' , component: ProfileComponent},
       {path:'survey' , component: CreateSurveyComponent},
       {path:'statistics', component: StatsComponent}
@@ -37,34 +30,4 @@ const appRoutes : Routes = [
   {path:'profile' , component: ProfileComponent , canActivate:[AuthGuard]}
 ]; 
 
-@NgModule({
-  declarations: [
-    AppComponent,
-    NavbarComponent,
-    LoginComponent,
-    RegisterComponent,
-    HomeComponent,
-    DashboardComponent,
-    ProfileComponent,
-    SidebarComponent,
-    StatsComponent,
-    CreateSurveyComponent,
-    OverviewComponent
-  ],
-  imports: [
-    BrowserModule,
-    FormsModule,
-    HttpModule,
-    RouterModule.forRoot(appRoutes),
-    ToastrModule.forRoot()
-  ],
-  providers: [ 
-    ValidateService,
-    AuthService,
-    AuthGuard
-  ],
-  bootstrap: [
-    AppComponent
-    ]
-})
-export class AppModule { }
+exports = appRoutes;

@@ -22,23 +22,23 @@
                 <span>@hassenmahdi</span>
             </div>
         </div>
-        <li>
-            <a href="#"><span class="glyphicon glyphicon-eye-open"></span> Overview</a>
+        <li class="nav-option" [routerLinkActive]="['sidebar-active']" [routerLinkActiveOptions]="{exact:true}">
+            <a [routerLink]="['/dashboard/overview']"><span class="glyphicon glyphicon-eye-open"></span> Overview</a>
         </li>
-        <li>
-            <a href="#"><span class="glyphicon glyphicon-list-alt"></span> Surveys</a>
+        <li class="nav-option" [routerLinkActive]="['sidebar-active']" [routerLinkActiveOptions]="{exact:true}">
+            <a [routerLink]="['/dashboard/survey']"><span class="glyphicon glyphicon-list-alt"></span> Surveys</a>
         </li>
-        <li>
-            <a href="#"><span class="glyphicon glyphicon-briefcase"></span> Teams</a>
+        <li class="nav-option" [routerLinkActive]="['sidebar-active']" [routerLinkActiveOptions]="{exact:true}">
+            <a [routerLink]="['/dashboard/overview']"><span class="glyphicon glyphicon-briefcase"></span> Teams</a>
         </li>
-        <li>
-            <a href="#"><span class="glyphicon glyphicon-envelope"></span> Messages</a>
+        <li class="nav-option" [routerLinkActive]="['sidebar-active']" [routerLinkActiveOptions]="{exact:true}">
+            <a [routerLink]="['/dashboard/overview']"><span class="glyphicon glyphicon-envelope"></span> Messages</a>
         </li>
-        <li>
-            <a href="#"><span class="glyphicon glyphicon-stats"></span> Statistics</a>
+        <li class="nav-option" [routerLinkActive]="['sidebar-active']" [routerLinkActiveOptions]="{exact:true}">
+            <a [routerLink]="['/dashboard/statistics']"><span class="glyphicon glyphicon-stats"></span> Statistics</a>
         </li>
-        <li>
-            <a href="#"><span class="glyphicon glyphicon-user"></span> Profile</a>
+        <li class="nav-option" [routerLinkActive]="['sidebar-active']" [routerLinkActiveOptions]="{exact:true}">
+            <a [routerLink]="['/dashboard/profile']"><span class="glyphicon glyphicon-user"></span> Profile</a>
         </li>
     </ul>
 </div>
