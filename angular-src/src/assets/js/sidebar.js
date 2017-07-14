@@ -1,16 +1,20 @@
 
 function toggleSidebar(element,event){
-    event.preventDefault(); 
+    event.preventDefault();
+
+    var unToggleButtonClass="glyphicon-arrow-left";
+    var toggeleButtonClass="glyphicon-menu-hamburger";
+
     $("#wrapper").toggleClass("toggled");
 
     var toggleButton = $("#menu-toggle span");
 
     if ( $("#wrapper").hasClass("toggled")){
-        toggleButton.removeClass("glyphicon-option-vertical");
-        toggleButton.addClass("glyphicon-remove");    
+        toggleButton.removeClass(toggeleButtonClass);
+        toggleButton.addClass(unToggleButtonClass);    
     }else{
-        toggleButton.removeClass("glyphicon-remove");
-        toggleButton.addClass("glyphicon-option-vertical");    
+        toggleButton.removeClass(unToggleButtonClass);
+        toggleButton.addClass(toggeleButtonClass);    
     }
 
 }

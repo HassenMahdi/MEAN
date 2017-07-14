@@ -371,3 +371,9 @@ body {
 	border-radius: 0px;
 	background-color: #AAA;
 }
+
+#loading-team{
+    text-align: center;
+    position: relative;
+    line-height: 400px;
+}

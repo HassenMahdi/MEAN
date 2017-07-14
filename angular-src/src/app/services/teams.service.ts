@@ -12,5 +12,4 @@ export class TeamsService {
     return  this.http.get('http://localhost:3000/teams/get/'+ team_id )
       .map(res => res.json());
   }
-
 }

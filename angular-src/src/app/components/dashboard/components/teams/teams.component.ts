@@ -10,6 +10,7 @@ import { AuthService } from '../../../../services/auth.service';
 export class TeamsComponent implements OnInit {
 
   private user: any;
+  private teams: any[];
   private team: any;
 
   constructor(
@@ -18,11 +19,16 @@ export class TeamsComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-     this.authService.getProfile().subscribe( profile => {
-        this.user = new Object(profile.user);
-        console.log(this.user);
 
-        this.teamService.getUserTeams(this.user.teams[0].team).subscribe( res => {
+    this.authService.getProfile().subscribe( profile => {
+        this.user = profile.user;
+        this.teams = profile.user.teams ;
+        this.team = this.teams[0].team;
+        
+        console.log(this.user);
+        console.log(this.teams);
+
+        this.teamService.getUserTeams(this.team._id).subscribe( res => {
           this.team = res.team;
           console.log(res);
         },
@@ -37,6 +43,20 @@ export class TeamsComponent implements OnInit {
         console.log(err);
         return false;
       })
+  }
+
+  selectTeam(index){
+    
+    this.team=null;
+    
+    this.teamService.getUserTeams(this.teams[index].team._id).subscribe( res => {
+          this.team = res.team;
+          console.log(res);
+        },
+        err=>{
+          console.log(err);
+          return false;
+        });
   }
 
 }
