@@ -1,20 +1,96 @@
 <link rel="stylesheet" src="teams.css">
+<link rel="stylesheet" src="teams.comp.css">
 
+<div class="container-fluid">
 
-<div class="list-group">
-    <a href="#" class="list-group-item active">
-        <h4 class="list-group-item-heading">List group item heading</h4>
-        <p class="list-group-item-text">Content goes here</p>
-        <p>{{team?.team_name}}</p>
-    </a>
+    <div class="row">
+        <div class="col-md-12">
+
+            <select name="" class="form-control">
+                    <option value="">Select a team</option>
+            </select>
+            
+            <br>
+
+            <div class="panel panel-default">
+                <div class="panel-body">
+    
+                    <div class="team-image">
+                        <img src="assets/images/team.jpg" alt="This team's image" class="thumbnail" width="100px" height="100px"/>
+                    </div>        
+
+                    <div class="team-info">
+                        <h3><b>{{team?.team_name}}</b></h3>
+                        <h5>{{team?.team_info}}</h5>
+                        <a href=""><span class="glyphicon glyphicon-edit"></span> Edit</a>
+                        <a href=""><span class="glyphicon glyphicon-remove"></span> Delete</a>    
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <h3>Leaders</h3>
+                    <p><span class="glyphicon glyphicon-note"></span><b> Leaders</b> can create surveys and add other team members.</p>
+                    <a href=""><span class="glyphicon glyphicon-plus"></span> Add a new member</a>
+                    <ul class="profiles-row">
+                        <li class="profile">
+                            <img class="img-circle img-leader" src="assets/images/profile.png" alt="" width="100px" height="100px">
+                            <p><b>Hassen Mahdi</b>
+                            <br>@hassenmahdi</p>
+                        </li>
+                         <li class="profile">
+                            <img class="img-circle img-leader" src="assets/images/profile.png" alt="" width="100px" height="100px">
+                            <p><b>Hassen Mahdi</b>
+                            <br>@hassenmahdi</p>
+                        </li> 
+                         <li class="profile">
+                            <img class="img-circle img-leader" src="assets/images/profile.png" alt="" width="100px" height="100px">
+                            <p><b>Hassen Mahdi</b>
+                            <br>@hassenmahdi</p>
+                        </li> 
+                    </ul>      
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <h3>Members</h3>
+                    <a href=""><span class="glyphicon glyphicon-plus"></span> Add a new member</a>
+                    <ul class="profiles-row">
+                        <li class="profile">
+                            <img class="img-circle img-member" src="assets/images/profile.png" alt="" width="100px" height="100px">
+                            <p><b>Hassen Mahdi</b>
+                            <br>@hassenmahdi</p>
+                        </li>
+                         <li class="profile">
+                            <img class="img-circle img-member" src="assets/images/profile.png" alt="" width="100px" height="100px">
+                            <p><b>Hassen Mahdi</b>
+                            <br>@hassenmahdi</p>
+                        </li> 
+                         <li class="profile">
+                            <img class="img-circle img-member" src="assets/images/profile.png" alt="" width="100px" height="100px">
+                            <p><b>Hassen Mahdi</b>
+                            <br>@hassenmahdi</p>
+                        </li> 
+                    </ul>      
+                </div>
+            </div>
+        </div>
+    </div>
+
 </div>
 
 
 <div class="">
     <div class="row">
-        <h2 class="title">
+        <h3 class="title">
             PRESENT YOUR TEAM IN AN INTERESTING WAY
-        </h2>
+        </h3>
         <div class="col-sm-10 col-sm-offset-1">
           <!-- First card-->
          <div class="col-md-4 col-sm-6">

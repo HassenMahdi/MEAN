@@ -307,6 +307,7 @@ body {
     .back {
         visibility: hidden;
         -ms-transition: all 0.2s cubic-bezier(.92,.01,.83,.67);
+        transition: all 0.2s cubic-bezier(.92,.01,.83,.67);
     }
     .front{
         z-index: 4;
@@ -316,4 +317,57 @@ body {
         z-index: 5;
         visibility: visible;
     }
+}
+
+
+/*Added by hassen*/
+
+.team-image{
+    float: left;
+}
+
+.team-info{
+    float: left;
+    margin-left:20px; 
+}
+
+.profiles-row{
+    overflow-x: scroll;
+    text-align: center;
+    padding-left:0; 
+    white-space: nowrap;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    list-style: none;
+}
+.profile{
+    padding: 5px;
+    display: inline-block ;  
+}
+
+.img-leader{
+    border: 3px solid #0099CC;
+}
+
+.img-member{
+    border: 3px solid lightgrey;
+}
+
+.profiles-row::-webkit-scrollbar-track
+{
+	border-radius: 0;
+	background-color: #F5F5F5;
+}
+
+.profiles-row::-webkit-scrollbar
+{
+    height: 3px;
+	width: 2px;
+	background-color: #F5F5F5;
+}
+
+.profiles-row::-webkit-scrollbar-thumb
+{
+	border-radius: 0px;
+	background-color: #AAA;
 }

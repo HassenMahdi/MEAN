@@ -22,9 +22,9 @@ export class TeamsComponent implements OnInit {
         this.user = new Object(profile.user);
         console.log(this.user);
 
-        this.teamService.getUserTeams(this.user.teams[0]._id).subscribe( team => {
-          this.team = team;
-          console.log(team);
+        this.teamService.getUserTeams(this.user.teams[0].team).subscribe( res => {
+          this.team = res.team;
+          console.log(res);
         },
         err=>{
           console.log(err);
