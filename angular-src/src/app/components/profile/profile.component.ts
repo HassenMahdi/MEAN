@@ -9,21 +9,27 @@ import { Router } from '@angular/router';
 })
 export class ProfileComponent implements OnInit {
 
-  user : any;
+  public user : Object;
 
   constructor(
     private router : Router,
-    private authService : AuthService
-  ) { }
+    private authService : AuthService,
+  ) {}
 
   ngOnInit() {
     this.authService.getProfile().subscribe( profile => {
       this.user = profile.user;
+
+      console.log(this.user);
+      
     },
     err=>{
       console.log(err);
       return false;
     })
+
+    console.log(this.user);
   }
+  
 
 }

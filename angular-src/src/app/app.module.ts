@@ -13,6 +13,8 @@ import { HomeComponent } from './components/home/home.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { ProfileComponent } from './components/profile/profile.component';
 
+import { TeamsService } from './services/teams.service';
+import { SurveysService } from './services/surveys.service';
 import { ValidateService } from './services/validate.service';
 import { AuthService } from './services/auth.service';
 import { AuthGuard } from './guards/auth.guard';
@@ -74,7 +76,9 @@ const appRoutes : Routes = [
   providers: [ 
     ValidateService,
     AuthService,
-    AuthGuard
+    AuthGuard,
+    TeamsService,
+    SurveysService
   ],
   bootstrap: [
     AppComponent

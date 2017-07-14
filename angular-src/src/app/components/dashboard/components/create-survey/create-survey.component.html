@@ -1,3 +1,66 @@
-<p>
-  create-survey works!
-</p>
+<div class="container-fluid">
+    
+    <div class="row">
+        <div class="col-md-9">
+            
+            <div class="panel panel-default">
+                  <div class="panel-body">
+                        <h3>Create a survey</h3>
+                        <br>
+                        <p>Choose a date</p>
+                        
+                <form class="form-group" action="" method="POST" class="form-inline" role="form">
+                            
+                        <div class="input-group">
+                                <span class="input-group-addon" id="basic-addon1">Date</span>
+                                
+                                <select name="" id="input1/(\w+)/\u\1/g" class="form-control" required="required">
+                                    <option value=""></option>
+                                    <option value="">21/22/2017</option>
+                                    <option value="">22/22/2017</option>
+                                    <option value="">23/22/2017</option>
+                                    <option value="">24/22/2017</option>
+                                </select>
+                                
+                            </div>
+                        </form>
+                        
+                        <br>
+                        <p>Choose a question type to add.</p>
+                        
+
+                        <div class="dropdown">
+                            <button class="btn btn-sm btn-inverse dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                <span class="glyphicon glyphicon-plus"></span>
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                                <li><a href="#">Question/Answer</a></li>
+                                <li><a href="#">Star Rating</a></li>
+                            </ul>
+                        </div>
+                        <br><br>
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-sm btn-default">Preview</button>
+                            <button type="button" class="btn btn-sm btn-default">Sumbit</button>
+                        </div>
+                        
+                        
+                  </div>
+            </div>
+            
+        </div>
+        <div class="col-md-3">
+            <div class="panel panel-default">
+                  <div class="panel-body">
+                        <p>Compeltion</p>
+                        <div class="progress">
+                            <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;">
+                                60%
+                            </div>
+                        </div>
+                  </div>
+            </div>
+        </div>
+    </div>
+        
+</div>
