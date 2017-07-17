@@ -1,0 +1,11 @@
+html{
+    height: 100%;
+}
+
+body{
+    min-height: 100%;
+}
+
+.page-body{
+    padding-top: 60px;
+}

@@ -45,7 +45,7 @@
 
 #sidebar-wrapper {
     z-index: 1000;
-    position: absolute;
+    position: fixed;
     left: 250px;
      /* Navbar padding offset */
     margin-top:-18px;

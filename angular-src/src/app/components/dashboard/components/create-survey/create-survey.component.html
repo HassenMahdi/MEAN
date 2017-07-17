@@ -1,34 +1,60 @@
 <div class="container-fluid">
     
     <div class="row">
-        <div class="col-md-9">
+        <div class="col-md-4">
             
             <div class="panel panel-default">
-                  <div class="panel-body">
-                        <h3>Create a survey</h3>
+                    <div class="panel-body">
+                        <h3><b>SURVEY OPTIONS</b></h3>
                         <br>
-                        <p>Choose a date</p>
-                        
-                <form class="form-group" action="" method="POST" class="form-inline" role="form">
+                        <form class="form-group" action="" method="POST" role="form">
+                            <p>Choose a date</p>
+                            <div class="row">
+                                
                             
-                        <div class="input-group">
+                            <div class="col-xs-6">
+                                <div class="input-group">
                                 <span class="input-group-addon" id="basic-addon1">Date</span>
                                 
                                 <select name="" id="input1/(\w+)/\u\1/g" class="form-control" required="required">
                                     <option value=""></option>
                                     <option value="">21/22/2017</option>
-                                    <option value="">22/22/2017</option>
-                                    <option value="">23/22/2017</option>
-                                    <option value="">24/22/2017</option>
                                 </select>
                                 
                             </div>
+                                
+                            </div>  
+                        
+                            <div class="col-xs-6">
+                                <div class="input-group">
+                                <span class="input-group-addon" id="basic-addon1">Date</span>
+                                
+                                <select name="" id="input1/(\w+)/\u\1/g" class="form-control" required="required">
+                                    <option value=""></option>
+                                    <option value="">21/22/2017</option>
+                                </select>
+                                
+                            </div>
+                            
+                            </div>
+                            </div>
+                            <br>
+                            <p>Select a team</p>                                                    
+                            <div class="input-group">
+                                <span class="input-group-addon" id="basic-addon1">Team</span>
+                                
+                                <select name="" id="input1/(\w+)/\u\1/g" class="form-control" required="required">
+                                    <option value=""></option>
+                                    <option value="">21/22/2017</option>
+                                </select>
+                                
+                            </div>
+                            
+                        
                         </form>
                         
                         <br>
                         <p>Choose a question type to add.</p>
-                        
-
                         <div class="dropdown">
                             <button class="btn btn-sm btn-inverse dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                                 <span class="glyphicon glyphicon-plus"></span>
@@ -39,6 +65,11 @@
                             </ul>
                         </div>
                         <br><br>
+                        <div class="progress">
+                            <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;">
+                                60%
+                            </div>
+                        </div>
                         <div class="btn-group">
                             <button type="button" class="btn btn-sm btn-default">Preview</button>
                             <button type="button" class="btn btn-sm btn-default">Sumbit</button>
@@ -49,15 +80,34 @@
             </div>
             
         </div>
-        <div class="col-md-3">
+        <div class="col-md-8">
             <div class="panel panel-default">
-                  <div class="panel-body">
-                        <p>Compeltion</p>
-                        <div class="progress">
-                            <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;">
-                                60%
+                  <div class="panel-heading">
+                        <h3>GENERATED SURVEY</h3>
+                        
+                  </div>
+                
+                    <div class="panel-body">
+                        
+                        
+                        <form action="" method="POST" role="form">
+                            
+                            <div class="form-group">
+                                <label for="">Question 1</label>
+                                <input type="text" class="form-control" id="" placeholder="Type your question here...">
                             </div>
-                        </div>
+
+                            <div class="form-group">
+                                <label for="">Question 2</label>
+                                <input type="text" class="form-control" id="" placeholder="Type your question here...">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="">Question 3</label>
+                                <input type="text" class="form-control" id="" placeholder="Type your question here...">
+                            </div>
+                        </form>
+                        
                   </div>
             </div>
         </div>
