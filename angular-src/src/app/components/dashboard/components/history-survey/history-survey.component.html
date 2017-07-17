@@ -1,3 +1,7 @@
-<p>
-  history-survey works!
-</p>
+<div class="list-group">
+    <a href="#" class="list-group-item active">
+        <h4 class="list-group-item-heading">List group item heading</h4>
+        <p class="list-group-item-text">Content goes here</p>
+        <li *ngFor="let survey of surveys">{{survey?.name}}</li>
+    </a>
+</div>

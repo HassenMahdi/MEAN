@@ -22,6 +22,19 @@ router.post('/add',(req,res,next)=>{
     })
 })
 
+//Get all surveys
+router.route('/get')
+
+	.get(function(req, res){
+		Survey.find(function(err, surveys){
+			if(err){
+				return res.send(500, err);
+			}
+			return res.send(200,surveys);
+		});
+	});
+
+    //Get survey by ID
 router.get('/get/:id',(req,res,next)=>{
  
     Survey.getSurveyById(
