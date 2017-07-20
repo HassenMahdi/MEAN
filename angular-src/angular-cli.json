@@ -18,9 +18,14 @@
       "tsconfig": "tsconfig.json",
       "prefix": "app",
       "styles": [
-        "styles.css"
+        "styles.css",
+        "assets/css/survey.css",
+        "assets/css/surveyeditor.css",
+        "assets/css/font-awesome.min.css"
       ],
-      "scripts": [],
+      "scripts": [
+        "../node_modules/dateformat/lib/dateformat.js"
+        ],
       "environments": {
         "source": "environments/environment.ts",
         "dev": "environments/environment.ts",

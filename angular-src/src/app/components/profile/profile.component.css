@@ -1,0 +1,25 @@
+.user_image{
+    height: 250px;
+    widows: 250px;
+    margin-bottom: 10px; 
+}
+
+.image_container{
+    float: left;
+    margin: 20px;
+}
+
+.info_container{
+    float: left;
+    margin: 20px;
+}
+
+.info_container p,.info_container ul {
+    color: #555555;
+    list-style: square;
+}
+
+.title{
+    margin-top: 10px;
+    padding-top: 0;
+}

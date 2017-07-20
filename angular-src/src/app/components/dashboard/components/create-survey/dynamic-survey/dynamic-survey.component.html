@@ -1,0 +1,24 @@
+<div class="form-group" *ngFor="let q of questions;let i = index" >
+    <label for=""><b>{{i+1}}: {{q.typeFull}}</b></label>
+    <input [(ngModel)]="q.text" type="text" class="form-control" id="" placeholder="Type your question here...">
+    
+    <div *ngIf="q.bchoice">
+        <input *ngFor="let choice of q.choices" class="form-control" type="text" name="" value="{{choice}}">
+        <a href=""><span class="glyphicon glyphicon-plus"></span> Add another option.</a>
+    </div>
+    <p>{{q.text}}</p>
+    <a href="#" (click)="deleteSurveyQuestion($event,i)"><span class="glyphicon glyphicon-remove"></span> Delete</a>
+</div>
+
+<p>Choose a question type to add.</p>
+<div class="dropdown">
+    <button class="btn btn-sm btn-inverse dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+        <span class="glyphicon glyphicon-plus"></span>
+    </button>
+    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+        <li><a href="#" (click)="addSurveyQuestion($event,'qa')" >Question/Answer</a></li>
+        <li><a href="#" (click)="addSurveyQuestion($event,'sr')" >Star Rating</a></li>
+        <li><a href="#" (click)="addSurveyQuestion($event,'po')">Poll</a></li>
+        <li><a href="#" (click)="addSurveyQuestion($event,'mc')">Multiple Choise</a></li>
+    </ul>
+</div>

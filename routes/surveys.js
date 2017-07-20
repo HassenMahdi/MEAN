@@ -5,9 +5,10 @@ const config = require('../config/database');
 
 router.post('/add',(req,res,next)=>{
     let newSurvey = new Survey({
+        team_id : req.body.team_id,
         owner_id : req.body.owner_id,
         name : req.body.name,
-        subject : req.body.name,
+        subject : req.body.subject,
         begindate : req.body.begindate,
         enddate : req.body.enddate,
         questions : req.body.questions
@@ -34,7 +35,7 @@ router.route('/get')
 		});
 	});
 
-    //Get survey by ID
+//Get survey by ID
 router.get('/get/:id',(req,res,next)=>{
  
     Survey.getSurveyById(
@@ -49,6 +50,21 @@ router.get('/get/:id',(req,res,next)=>{
 
 })
 
+//Get survey by the owner ID
+router.get('/get/owner/:id',(req,res,next)=>{
+ 
+    Survey.getSurveyByOwenrId(
+        req.params.id,
+        (err, survey)=>{
+            if (err) throw err;
+            else {
+                res.json(survey);
+            }
+        }
+    )
+
+});
+
 router.get('/get/owner/:id',(req,res,next)=>{
  
     Survey.getSurvey(
@@ -61,7 +77,7 @@ router.get('/get/owner/:id',(req,res,next)=>{
         }
     )
 
-})
+});
 
 router.get('/get/date/:id/:date',(req,res,next)=>{
  

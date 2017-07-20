@@ -13,4 +13,19 @@ export class SurveysService {
       .map(res => res.json());
   }
 
+  getOwnedSurveys(owner_id){
+    console.log('http://localhost:3000/surveys/get/owner/' + owner_id );
+    return this.http.get("http://localhost:3000/surveys/get/" + owner_id)
+      .map(res => res.json());
+  }
+
+  CreateSurvey(survey){
+    console.log('http://localhost:3000/surveys/add');
+    let headers = new Headers();
+    headers.append('Content-Type','application/json');
+    return  this.http.post('http://localhost:3000/surveys/add',survey)
+      .map(res => res.json());
+  }
+  
+
 }

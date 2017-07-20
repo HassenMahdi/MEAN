@@ -1,9 +1,8 @@
-
 function toggleSidebar(element,event){
     event.preventDefault();
 
-    var unToggleButtonClass="glyphicon-arrow-left";
-    var toggeleButtonClass="glyphicon-menu-hamburger";
+    var unToggleButtonClass="glyphicon-remove";
+    var toggeleButtonClass="glyphicon-dashboard";
 
     $("#wrapper").toggleClass("toggled");
 
@@ -22,5 +21,4 @@ function toggleSidebar(element,event){
 $(document).on("click",".nav-option a",function(){
     $("span.arrow",this).toggleClass("glyphicon glyphicon-chevron-up glyphicon glyphicon-chevron-down");;
 });
-
 
