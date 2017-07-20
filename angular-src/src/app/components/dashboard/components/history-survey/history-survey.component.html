@@ -1,7 +1,92 @@
-<div class="list-group">
-    <a href="#" class="list-group-item active">
-        <h4 class="list-group-item-heading">List group item heading</h4>
-        <p class="list-group-item-text">Content goes here</p>
-        <li *ngFor="let survey of surveys">{{survey?.name}}</li>
-    </a>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <h3>Created surveys</h3>
+                    <p >You <b>cannot edit</b> any submitted survey. but you can <b>always delete</b> them.</p>
+                    
+                    <div class="container-fluid">
+                        <div class="row">
+                            <button type="button" class="pull-right btn btn-sm btn-default"><span class="fa fa-th"></span></button>
+                            <button type="button" class="pull-right btn btn-sm btn-default"><span class="fa fa-ellipsis-h"></span> </button>
+                            
+                            <div class="pull-right dropdown">
+                                <button class="btn btn-sm btn-default dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Sort <span class="fa fa-angle-down"></span>
+                                </button>
+                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                    <li><a class="dropdown-item" href="#">Recently created</a></li>
+                                    <li><a class="dropdown-item" href="#">Oldest created</a></li>
+                                </ul>
+                            </div>
+
+                            <div class="pull-right dropdown">
+                                <button class="btn btn-sm btn-default dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Filter <span class="fa fa-angle-down"></span>
+                                </button>
+                                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                    <li><a class="dropdown-item" href="#">None</a></li>
+                                    <li><a class="dropdown-item" href="#">Active</a></li>
+                                    <li><a class="dropdown-item" href="#">Inavtive</a></li>
+                                </ul>
+                            </div>
+
+                        </div>
+                    </div>
+                    <br>
+                    
+                    
+                    <ul class="surveyslist">
+                        <li *ngFor="let survey of surveys; let i = index">
+                            <div>
+                                <h4>{{survey?.name}}</h4>
+                                <h5>{{survey?.subject}}</h5>
+                                
+                                <div class="bottom">
+                                    <div class="lifespan">
+                                        <div class="date"><div>Begin</div>: {{survey.begindate}}</div>
+                                        <div class="date"><div>End</div>: {{survey.enddate}}</div>
+                                        <a href=""><span class="fa fa-clock-o"></span> Expand</a>
+                                    </div>
+                                    <a data-toggle="modal" data-target="#myModal" (click)="selectSurvey($event,i)" href="">Preview</a> <a (click)="deleteSurvey($event,i)" href="">Delete</a>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>        
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">        
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                
+                <!--    <survey-display [json]="questions"></survey-display> -->
+                
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div id="myModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+        
+            
+       
+            <div class="row">
+                <div class="col-md-12">
+                    
+                    <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <button type="button" class="close modalclose" data-dismiss="modal">&times;</button>
+                                <h4>Preview</h4>
+                            </div>
+                            <survey-display [json]="questions"></survey-display>
+                    </div>
+                </div>
+            </div>
+        
+  </div>
 </div>

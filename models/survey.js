@@ -4,20 +4,29 @@ const ShemaTypes = mongoose.Schema.Types;
 
 const SurveySchema = mongoose.Schema({
      
-    owner_id: {type:ShemaTypes.ObjectId , ref:'User'},
+    team_id: {type:[{type:ShemaTypes.ObjectId , ref:'Team'}], required: true },
 
-    name: String,
+    owner_id: {type:ShemaTypes.ObjectId , ref:'User' , required: true},
+
+    name: {
+        type:String,
+        required: true
+    },
     
     subject: String,
     
-    begindate: Date,
-    enddate: Date,
+    begindate: {
+        type:Date,
+        required: true
+    },
+    enddate: {
+        type:Date,
+        required: true
+    },
     
     questions:[
         {
-            num: Number,
-            content: String,
-            model: String,
+            type: ShemaTypes.Mixed,
         }
     ],
     submissions:[
@@ -25,9 +34,8 @@ const SurveySchema = mongoose.Schema({
             submitter_id: { type:ShemaTypes.ObjectId, ref : 'User'},
             answers:[
                 {
-                    question_num: Number,
-                    content: String,
-                } 
+                    type: ShemaTypes.Mixed,
+                }
             ]
         }
     ]
@@ -41,17 +49,22 @@ module.exports.addSurvey = function(survey,callback){
 
 module.exports.getSurvey = function (owner_id,callback){
     const query = { owner_id : owner_id };
-    Survey.find(query).populate('owner_id').exec(callback);
+    Survey.find(query).populate('owner_id').populate('team_id').exec(callback);
 }
 
 module.exports.getSurveyById = function (survey_id,callback){
     const query = { _id : survey_id };
-    Survey.findOne(query).populate('owner_id').exec(callback);
+    Survey.findOne(query).populate('owner_id').populate('team_id').exec(callback);
+}
+
+module.exports.getSurveyById = function (owner_id,callback){
+    const query = { owner_id : owner_id };
+    Survey.find(query).populate('owner_id').populate('team_id').exec(callback);
 }
 
 module.exports.getSurveyByDate = function(owner_id,date,callback){
     const query = { owner_id : owner_id , begindate : date };
-    Survey.find(query).populate('owner_id').exec(callback);;
+    Survey.find(query).populate('owner_id').populate('team_id').exec(callback);;
 }
 
 module.exports.addSurveySub = function(survey_id,submission,callback){

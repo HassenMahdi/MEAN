@@ -9,6 +9,8 @@ import { StatsComponent } from './components/stats/stats.component';
 
 export class DashboardComponent implements OnInit {
   
+  userInfo:any;
+
   constructor() { }
 
   ngOnInit() {

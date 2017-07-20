@@ -13,7 +13,7 @@
                 <span class="caret"></span></button>
                 <ul class="dropdown-menu btn-block">
                     <li *ngFor="let team of teams; let i = index" >
-                        <a (click)="selectTeam(i)">{{team?.team.team_name}}</a></li>
+                        <a (click)="selectTeam(i)">{{team?.team?.team_name}}</a></li>
                     <hr>
                     <li><a href="#"  data-toggle="modal" data-target="#myModalHorizontal" ><span class="glyphicon glyphicon-plus"></span> Create a new team</a></li>
                 </ul>
@@ -38,7 +38,7 @@
                     </div>        
 
                     <div class="team-info">
-                        <h3><b>{{team?.team_name}}</b></h3>
+                        <h3>{{team?.team_name}}</h3>
                         <h5>{{team?.team_info}}</h5>
                         <a href=""><span class="glyphicon glyphicon-edit"></span> Edit</a>
                         <a href=""><span class="glyphicon glyphicon-remove"></span> Delete</a>    
@@ -140,8 +140,8 @@
                 
                 
                 
-                
-                
+            
+            
                 
             </div>
             

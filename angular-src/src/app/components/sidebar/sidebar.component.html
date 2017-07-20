@@ -2,11 +2,7 @@
 
 <div id="sidebar-wrapper">
     <ul class="sidebar-nav">
-        <li class="sidebar-brand">
-            <a onclick="toggleSidebar(this,event)">
-             <span class="glyphicon glyphicon-dashboard"></span> Dashboard Menu
-            </a>
-        </li>
+        <br>
         <div class="sidebar-profile">
             <div class="sidebar-profile-pic">
             </div>
@@ -17,11 +13,11 @@
             </div>
         </div>
         <li class="nav-option" [routerLinkActive]="['sidebar-active']" [routerLinkActiveOptions]="{exact:true}">
-            <a [routerLink]="['/dashboard/overview']"><span class="glyphicon glyphicon-eye-open"></span> Overview</a>
+            <a [routerLink]="['/dashboard/overview']"><span class="glyphicon glyphicon-eye-open"></span> OVERVIEW</a>
         </li>
         <li class="nav-option" [routerLinkActive]="['sidebar-active']" [routerLinkActiveOptions]="{exact:true}">
 
-            <a data-toggle="collapse" data-target="#submenu1"><span class="glyphicon glyphicon-list-alt"></span> Surveys
+            <a data-toggle="collapse" data-target="#submenu1"><span class="glyphicon glyphicon-list-alt"></span> SURVEYS
                 <div align="right" style="float:right;">
                     <span class="arrow glyphicon glyphicon-chevron-down"></span>    
                 </div>
@@ -38,20 +34,16 @@
             </ul>
         </li>
         <li class="nav-option" [routerLinkActive]="['sidebar-active']" [routerLinkActiveOptions]="{exact:true}">
-            <a [routerLink]="['/dashboard/teams']"><span class="glyphicon glyphicon-briefcase"></span> Teams</a>
+            <a [routerLink]="['/dashboard/teams']"><span class="glyphicon glyphicon-briefcase"></span> TEAMS</a>
         </li>
         <li class="nav-option" [routerLinkActive]="['sidebar-active']" [routerLinkActiveOptions]="{exact:true}">
-            <a [routerLink]="['/dashboard/messages']"><span class="glyphicon glyphicon-envelope"></span> Messages</a>
+            <a [routerLink]="['/dashboard/messages']"><span class="glyphicon glyphicon-envelope"></span> MESSAGES</a>
         </li>
         <li class="nav-option" [routerLinkActive]="['sidebar-active']" [routerLinkActiveOptions]="{exact:true}">
-            <a [routerLink]="['/dashboard/statistics']"><span class="glyphicon glyphicon-stats"></span> Statistics</a>
+            <a [routerLink]="['/dashboard/statistics']"><span class="glyphicon glyphicon-stats"></span> STATISTICS</a>
         </li>
         <li class="nav-option" [routerLinkActive]="['sidebar-active']" [routerLinkActiveOptions]="{exact:true}">
-            <a [routerLink]="['/dashboard/profile']"><span class="glyphicon glyphicon-user"></span> Profile</a>
+            <a [routerLink]="['/dashboard/profile']"><span class="glyphicon glyphicon-user"></span> PROFILE</a>
         </li>
     </ul>
 </div>
-
-<a onclick="toggleSidebar(this,event)" href="#menu-toggle" id="menu-toggle">
-    <span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span>
-</a>

@@ -1,0 +1,66 @@
+.surveyslist{
+    list-style: none;
+    white-space: nowrap;
+    overflow-x: scroll;
+    padding: 0;
+    margin: 0;
+    padding-bottom: 0px;
+}
+.surveyslist li{
+    border-top: 5px solid lightgreen;  
+    white-space: normal;
+    display: inline-block;
+    vertical-align:top;
+    width: 230px;
+    height: 230px;
+    padding:10px;
+    margin-right: 1px;
+    top: 0;
+    margin-top:0;
+    position: relative;
+    background: #EFE;
+}
+
+.surveyslist .bottom{
+    position: absolute;
+    bottom: 0;
+    margin-bottom: 10px;
+    width: 100%;
+}
+
+.surveyslist .bottom  a{
+    margin-right: 10px;
+}
+.surveyslist::-webkit-scrollbar-track
+{
+	background-color: #F5F5F5;
+}
+
+.surveyslist::-webkit-scrollbar
+{
+    width: 5px;
+    height: 5px;
+	background-color: #F5F5F5;
+}
+
+.surveyslist::-webkit-scrollbar-thumb
+{
+	background-color: lightgrey;
+}
+
+.lifespan{
+    margin-bottom: 10px;
+}
+
+.date{
+    color: #777;
+}
+
+.date div{
+    width: 35px;
+    display: inline-block;
+}
+
+.modalclose{
+    margin: 10px;
+}

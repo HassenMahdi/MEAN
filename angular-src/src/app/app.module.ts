@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { RouterModule , Routes } from '@angular/router';
 import { ToastrModule } from 'toastr-ng2';
+import { MyDatePickerModule } from 'mydatepicker';
 
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
@@ -26,6 +27,11 @@ import { OverviewComponent } from './components/dashboard/components/overview/ov
 import { MessagesComponent } from './components/dashboard/components/messages/messages.component';
 import { TeamsComponent } from './components/dashboard/components/teams/teams.component';
 import { HistorySurveyComponent } from './components/dashboard/components/history-survey/history-survey.component';
+import { DynamicSurveyComponent } from './components/dashboard/components/create-survey/dynamic-survey/dynamic-survey.component';
+import { SurveyQuestionQaComponent } from './components/dashboard/components/create-survey/dynamic-survey/survey-question-qa/survey-question-qa.component';
+import { SurveyQuestionSrComponent } from './components/dashboard/components/create-survey/dynamic-survey/survey-question-sr/survey-question-sr.component';
+import { AnswerSurveyComponent } from './components/dashboard/components/answer-survey/answer-survey.component';
+import { EditorSurveyComponent } from './components/dashboard/components/editor-survey/editor-survey.component';
 
 const appRoutes : Routes = [
   {path:'' , component: HomeComponent},
@@ -64,16 +70,22 @@ const appRoutes : Routes = [
     OverviewComponent,
     MessagesComponent,
     TeamsComponent,
-    HistorySurveyComponent
+    HistorySurveyComponent,
+    DynamicSurveyComponent,
+    SurveyQuestionQaComponent,
+    SurveyQuestionSrComponent,
+    AnswerSurveyComponent,
+    EditorSurveyComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpModule,
     RouterModule.forRoot(appRoutes),
-    ToastrModule.forRoot()
+    ToastrModule.forRoot(),
+    MyDatePickerModule
   ],
-  providers: [ 
+  providers: [
     ValidateService,
     AuthService,
     AuthGuard,
