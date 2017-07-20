@@ -50,7 +50,7 @@ router.get('/get/:id',(req,res,next)=>{
 })
 
 
-//add team mebmer (set leader to true to add a leader)
+//add team member (set leader to true to add a leader)
 router.post('/members',(req,res,next)=>{
     let member_id = req.body.member_id;
     let team_id = req.body.team_id;
@@ -61,13 +61,13 @@ router.post('/members',(req,res,next)=>{
         return;
     }
     
-    Team.addTeamMember(team_id,member_id,false,(err,team)=>{
+    Team.addTeamMember(team_id,member_id,leader,(err,team)=>{
         if(err)
             res.json({success:false,msg:"Member not added"+err});
         else{
             if(team)
                 User.addTeam(member_id, team_id, leader, (err,user)=>{
-                    res.json({success:true,msg:"Member "+user.username+" added to team "+team.team_name});
+                    res.json({user:user,team:team,success:true,msg:"Member "+user.username+" added to team "+team.team_name});
                 })
             else
                 res.json({success:false,msg:"Could not add team member"});
@@ -85,11 +85,47 @@ router.delete('/members',(req,res,next)=>{
         return;
     }
         
-    Team.removeTeamMember(team_id,member_id,(err)=>{
+    Team.removeTeamMember(team_id,member_id,(err,team)=>{
         if(err)
             res.json({success:false,msg:"Member not deleted"+err});
         else
-            res.json({success:true,msg:"Member deleted successfully"});
+            User.removeTeam(member_id, team_id,(err,user)=>{
+                    res.json({user:user,team:team,success:true,msg:"Member deleted"});
+                })
+    })
+})
+
+//delete team leader
+router.delete('/leaders',(req,res,next)=>{
+    let leader_id = req.body.leader_id;
+    let team_id = req.body.team_id;
+    if ( !leader_id || !team_id ){
+        res.json({success:false,msg:"null values for leader id or team id"});
+        return;
+    }
+        
+    Team.removeTeamLeader(team_id,leader_id,(err,team)=>{
+        if(err)
+            res.json({success:false,msg:"Leader not deleted"+err});
+        else
+            User.removeTeam(leader_id, team_id,(err,user)=>{
+                    res.json({user:user,team:team,success:true,msg:"Leader deleted"});
+                })
+    })
+})
+
+//delete team from database
+router.delete('/:id', function(req,res,next){
+    Team.findByIdAndRemove(req.params.id,(err,team)=>{
+        if(err){
+            res.json({success: false , msg : "failed to get team"})
+            throw err;
+        }
+        if (!team){
+                res.json({success: false , msg : "failed to get team"})
+        }else{
+            res.json({team : team , success: true , msg : "Team removed successfully"});
+        }
     })
 })
 
