@@ -24,7 +24,7 @@ module.exports.addTeam = function(team,callback){
     team.save(callback);
 };
 
-module.exports.addTeamMember = function(team_id, member_id, leader = false,callback){
+module.exports.addTeamMember = function(team_id, member_id, leader,callback){
     if (leader)
         Team.findOneAndUpdate({_id :  team_id} , {$push:{team_leaders:member_id}},callback);
     else
@@ -36,9 +36,19 @@ module.exports.removeTeamMember = function(team_id , member_id,callback){
     Team.findOneAndUpdate({_id :  team_id} , {$pull:{team_members:member_id}},callback);
 }
 
+//Remove all team members
+module.exports.removeAllTeamMembers = function(team_id,callback){
+    Team.findOneAndUpdate({_id :  team_id} , {team_members:[]},callback);
+}
+
+//Remove all team leaders
+module.exports.removeAllTeamLeaders = function(team_id,callback){
+    Team.findOneAndUpdate({_id :  team_id} , {team_leaders:[]},callback);
+}
+
 //Remove Team Leader
-module.exports.removeTeamLeader = function(team_id, member_id, callback){
-    Team.findOneAndUpdate({_id :  team_id} , {$pull:{team_leader:member_id}},callback);
+module.exports.removeTeamLeader = function(team_id, leader_id, callback){
+    Team.findOneAndUpdate({_id :  team_id} , {$pull:{team_leaders:leader_id}},callback);
 }
 
 module.exports.getTeamById = function (team_id,callback){
