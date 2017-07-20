@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { SurveysService } from '../../../../services/surveys.service';
+import { ToastrService } from 'toastr-ng2'
 
 
 
@@ -23,7 +24,8 @@ export class TakeSurveyComponent implements OnInit {
   user_id :any;
 
   constructor( 
-    private surveysService : SurveysService
+    private surveysService : SurveysService,
+    private toastr : ToastrService,
   ) { }
 
   ngOnInit() {
@@ -42,16 +44,26 @@ export class TakeSurveyComponent implements OnInit {
         });
   }
 
+  onSurveySubmitted(answers){
+    console.log(this.survey._id)
+    this.surveysService.submitSurveyAnswers(this.survey._id,this.user_id,answers)
+      .subscribe(
+        res=>{
+          if (res.success) 
+            this.toastr.success("Your answers have been submitted","Success");
+          else
+            this.toastr.error(res.msg,"Error");
+        },
+      err=>{
+              console.log(err);
+              return false;
+        })
+  }
+
   selectSurvey(e:Event,index){
     e.preventDefault();
     this.survey = this.displayesurveys[index];
     this.questions = this.survey.questions[0];
-    this.data = {
-      survey_id : this.survey._id,
-      submitter_id : this.user_id,
-      answers :[]
-    } ;
-
     }
 
 }

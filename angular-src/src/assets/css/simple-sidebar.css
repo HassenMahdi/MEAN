@@ -92,7 +92,7 @@
 }
 
 .sidebar-nav li {
-    text-indent: 10px;
+    text-indent: 20px;
     line-height: 40px;
 }
 
@@ -146,17 +146,20 @@
 }
 
 .sidebar-profile{
+    font-size: 15px;
     display: flex;
     padding-left: 20px;
     margin: 0px;
-    margin-bottom: 20px;
+    margin-top: 10px;
+    margin-bottom: 25px;
     width: 100%;
 }
 
 .sidebar-profile-pic{
+    border-radius: 360px;
     flex: left;
-    width: 50px;
-    height: 50px;
+    width: 55px;
+    height: 55px;
     background: grey;
     margin: 0;
     padding: 0; 
@@ -189,6 +192,22 @@
 }
 #menu-toggle.active{
     display: block;
+}
+
+#sidebar-wrapper::-webkit-scrollbar-track
+{
+	background-color: #2b2b2b;
+}
+
+#sidebar-wrapper::-webkit-scrollbar
+{
+	width: 10px;
+	background-color: #F5F5F5;
+}
+
+#sidebar-wrapper::-webkit-scrollbar-thumb
+{
+	background-color: #333;
 }
 
 @media(min-width:768px) {

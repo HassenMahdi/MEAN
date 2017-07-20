@@ -1,4 +1,4 @@
-<div class="container-fluid">
+<div class="container-fluid fadeIn animated">
     <div class="row">
         <div class="col-md-12">
             <div class="panel panel-default">
@@ -37,7 +37,7 @@
                     <br>
                     
                     
-                    <ul class="surveyslist">
+                    <ul class="surveyslist fadeIn animated" *ngIf="surveys">
                         <li *ngFor="let survey of surveys; let i = index" class="{{survey?.activeclass}}">
                             <div>
                                 <h4>{{survey?.name}}</h4>
@@ -54,15 +54,6 @@
                         </li>
                     </ul>        
                 </div>
-            </div>
-        </div>
-    </div>
-    <div class="row">        
-        <div class="col-md-12">
-            <div class="panel panel-default">
-                
-                <!--    <survey-display [json]="questions"></survey-display> -->
-                
             </div>
         </div>
     </div>

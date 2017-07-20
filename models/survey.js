@@ -48,7 +48,7 @@ module.exports.addSurvey = function(survey,callback){
 };
 
 module.exports.addSurveySubmission = function(survey_id,sub,callback){
-    Survey.findOneAndUpdate({_id:survey_id},{ $push:{ submissions: sub} } ,callback );
+    Survey.findOneAndUpdate({ _id : survey_id },{ $push:{ submissions: sub} } , callback );
 };
 
 

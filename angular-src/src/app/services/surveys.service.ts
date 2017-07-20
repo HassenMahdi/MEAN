@@ -29,14 +29,14 @@ export class SurveysService {
       .map(res => res.json());
   }
 
-  submitSurveyAnswers(data){
+  submitSurveyAnswers( survey_id, submitter_id, answers ){
     
-    if(!data) return;
-
     let body = {
-      _id : data.survey_id,
-      submitter_id : data.submitter_id,
-      answers : data.answers
+      sub : {
+        submitter_id : submitter_id,
+        answers : answers,
+      },
+      survey_id : survey_id,
     }
 
     let headers = new Headers();

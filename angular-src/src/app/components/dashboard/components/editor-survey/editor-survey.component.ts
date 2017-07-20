@@ -32,7 +32,6 @@ export class EditorSurveyComponent implements OnInit {
 
     }
 
-
     saveMySurvey = () => {
         console.log(this.editor.text);
         this.surveySaved.emit(JSON.parse(this.editor.text));
