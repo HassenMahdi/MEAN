@@ -9,13 +9,13 @@
                   <p><a href="">Change my profile picture</a></p>
               </div>            
               <div class="info_container">
-                  <h2 class="title">{{user.name}}<br> <small>@{{user.username}}</small></h2>
-                  <p><span class="glyphicon glyphicon-envelope"></span> {{user.email}}</p>
+                  <h2 class="title">{{user?.name}}<br> <small>@{{user?.username}}</small></h2>
+                  <p><span class="glyphicon glyphicon-envelope"></span> {{user?.email}}</p>
                   <br>
                   <p><i class="fa fa-users" aria-hidden="true"></i> User Belongs to the followinf teams</p>
                   <ul>
                     <li *ngFor="let team of user.teams">
-                      {{team.team.team_name}} as <span *ngIf="team.leader">(leader)</span> <span *ngIf="!team.leader">(Member)</span>
+                      {{team.team?.team_name}} as <span *ngIf="team.leader">(leader)</span> <span *ngIf="!team.leader">(Member)</span>
                     </li>
                   </ul>
                   <div>

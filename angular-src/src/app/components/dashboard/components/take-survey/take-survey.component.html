@@ -3,8 +3,8 @@
         <div class="col-md-12">
             <div class="panel panel-default">
                 <div class="panel-body">
-                    <h3>Created surveys</h3>
-                    <p >You <b>cannot edit</b> any submitted survey. but you can <b>always delete</b> them.</p>
+                    <h3>Currently active surveys</h3>
+                    <p >You <b>can take</b> surveys from here. please select a survey from below.</p>
                     
                     <div class="container-fluid">
                         <div class="row">
@@ -38,7 +38,7 @@
                     
                     
                     <ul class="surveyslist">
-                        <li *ngFor="let survey of surveys; let i = index" class="{{survey?.activeclass}}">
+                        <li *ngFor="let survey of displayesurveys; let i = index" class="{{survey?.activeclass}}">
                             <div>
                                 <h4>{{survey?.name}}</h4>
                                 <h5>{{survey?.subject}}</h5>
@@ -46,23 +46,13 @@
                                     <div class="lifespan">
                                         <div class="date"><div>Begin</div>: {{survey.begindate}}</div>
                                         <div class="date"><div>End</div>: {{survey.enddate}}</div>
-                                        <a href=""><span class="fa fa-clock-o"></span> Expand</a>
                                     </div>
-                                    <a data-toggle="modal" data-target="#myModal" (click)="selectSurvey($event,i)" href="">Preview</a> <a (click)="deleteSurvey($event,i)" href="">Delete</a>
+                                    <a class="btn btn-small btn-default" data-toggle="modal" data-target="#myModal" (click)="selectSurvey($event,i)" href="">Take</a>
                                 </div>
                             </div>
                         </li>
                     </ul>        
                 </div>
-            </div>
-        </div>
-    </div>
-    <div class="row">        
-        <div class="col-md-12">
-            <div class="panel panel-default">
-                
-                <!--    <survey-display [json]="questions"></survey-display> -->
-                
             </div>
         </div>
     </div>
@@ -82,7 +72,7 @@
                                 <button type="button" class="close modalclose" data-dismiss="modal">&times;</button>
                                 <h4>Preview</h4>
                             </div>
-                            <survey-display [json]="questions"></survey-display>
+                            <survey-display [data]="data" [json]="questions" [preview]="preview"></survey-display>
                     </div>
                 </div>
             </div>

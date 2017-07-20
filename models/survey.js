@@ -47,6 +47,11 @@ module.exports.addSurvey = function(survey,callback){
     survey.save(callback);
 };
 
+module.exports.addSurveySubmission = function(survey_id,sub,callback){
+    Survey.findOneAndUpdate({_id:survey_id},{ $push:{ submissions: sub} } ,callback );
+};
+
+
 module.exports.getSurvey = function (owner_id,callback){
     const query = { owner_id : owner_id };
     Survey.find(query).populate('owner_id').populate('team_id').exec(callback);
@@ -57,7 +62,7 @@ module.exports.getSurveyById = function (survey_id,callback){
     Survey.findOne(query).populate('owner_id').populate('team_id').exec(callback);
 }
 
-module.exports.getSurveyById = function (owner_id,callback){
+module.exports.getSurveyByOwnerId = function (owner_id,callback){
     const query = { owner_id : owner_id };
     Survey.find(query).populate('owner_id').populate('team_id').exec(callback);
 }

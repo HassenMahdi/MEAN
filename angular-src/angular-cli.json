@@ -21,7 +21,8 @@
         "styles.css",
         "assets/css/survey.css",
         "assets/css/surveyeditor.css",
-        "assets/css/font-awesome.min.css"
+        "assets/css/font-awesome.min.css",
+        "assets/css/surveybox.css"
       ],
       "scripts": [
         "../node_modules/dateformat/lib/dateformat.js"

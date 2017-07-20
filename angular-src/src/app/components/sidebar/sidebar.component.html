@@ -26,6 +26,9 @@
         <li class="collapse submenu" id="submenu1">
             <ul>
                 <li [routerLinkActive]="['sidebar-active']" [routerLinkActiveOptions]="{exact:true}">
+                    <a [routerLink]="['/dashboard/survey/take']"> Take survey</a>
+                </li>
+                <li [routerLinkActive]="['sidebar-active']" [routerLinkActiveOptions]="{exact:true}">
                     <a [routerLink]="['/dashboard/survey/create']"> Create survey</a>
                 </li>
                 <li [routerLinkActive]="['sidebar-active']" [routerLinkActiveOptions]="{exact:true}">

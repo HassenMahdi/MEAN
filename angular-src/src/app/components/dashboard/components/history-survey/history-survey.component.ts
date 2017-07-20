@@ -19,7 +19,7 @@ export class HistorySurveyComponent implements OnInit {
     private authService : AuthService,
   ) { }
 
-  surveys:any;
+  surveys:any[];
   survey: any;
   questions:any;
 
@@ -29,7 +29,7 @@ export class HistorySurveyComponent implements OnInit {
       this.surveysService.getOwnedSurveys( JSON.parse(localStorage.getItem('user'))._id ).subscribe( survey => {
           this.surveys = survey;
           this.formatSurveys(this.surveys);
-          console.log(survey);
+          console.log(this.surveys);
         },
         err=>{
           console.log(err);
@@ -37,19 +37,48 @@ export class HistorySurveyComponent implements OnInit {
         });
 
   }
-
+      
   selectSurvey(e:Event,index){
     e.preventDefault();
     this.survey = this.surveys[index];
     this.questions = this.survey.questions[0];
     }
 
-  formatSurveys(surveys){
+  formatSurveys(surveys:any[]){
+    if (surveys == null ) return;
     surveys.forEach(element => {
+
+      if (new Date(element.enddate) >= new Date())
+      {
+        element.active = true;
+        element.activeclass= "activesurvey";
+      }
+      else{ 
+        element.active = "false"
+        element.activeclass= "inactivesurvey";
+      }
+
       element.begindate = dateFormat(element.begindate, "dd/mm/yyyy");
-      element.enddate = dateFormat(element.enddate, "dd/mm/yyyy");
+      element.enddate = dateFormat(element.enddate, "dd/mm/yyyy");      
     });
 
+  }
+
+  filterSurveysByStatus(surveys:any[], getActive: Boolean){
+    if (surveys == null ) return;
+    surveys.forEach((element,index) => {
+      if (new Date(element.enddate) >= new Date())
+      {
+        element.active = true;
+        if (!getActive)
+          surveys.splice(index,1);
+      }
+      else{ 
+        element.active = "false"
+        if (getActive)
+          surveys.splice(index,1);
+      }
+    });
   }
 
 }

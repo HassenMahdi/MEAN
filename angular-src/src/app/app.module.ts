@@ -32,6 +32,7 @@ import { SurveyQuestionQaComponent } from './components/dashboard/components/cre
 import { SurveyQuestionSrComponent } from './components/dashboard/components/create-survey/dynamic-survey/survey-question-sr/survey-question-sr.component';
 import { AnswerSurveyComponent } from './components/dashboard/components/answer-survey/answer-survey.component';
 import { EditorSurveyComponent } from './components/dashboard/components/editor-survey/editor-survey.component';
+import { TakeSurveyComponent } from './components/dashboard/components/take-survey/take-survey.component';
 
 const appRoutes : Routes = [
   {path:'' , component: HomeComponent},
@@ -47,7 +48,8 @@ const appRoutes : Routes = [
       {path:'messages', component: MessagesComponent},
       {path:'survey' ,
         children:[
-          {path:'' , redirectTo: 'create' , pathMatch: 'full'},
+          {path:'' , redirectTo: 'take' , pathMatch: 'full'},
+          {path:'take' , component: TakeSurveyComponent},
           {path:'create' , component: CreateSurveyComponent},
           {path:'history' , component: HistorySurveyComponent}
         ]}    
@@ -75,7 +77,8 @@ const appRoutes : Routes = [
     SurveyQuestionQaComponent,
     SurveyQuestionSrComponent,
     AnswerSurveyComponent,
-    EditorSurveyComponent
+    EditorSurveyComponent,
+    TakeSurveyComponent
   ],
   imports: [
     BrowserModule,
