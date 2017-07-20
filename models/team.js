@@ -36,6 +36,16 @@ module.exports.removeTeamMember = function(team_id , member_id,callback){
     Team.findOneAndUpdate({_id :  team_id} , {$pull:{team_members:member_id}},callback);
 }
 
+//Remove all team members
+module.exports.removeAllTeamMembers = function(team_id,callback){
+    Team.findOneAndUpdate({_id :  team_id} , {team_members:[]},callback);
+}
+
+//Remove all team leaders
+module.exports.removeAllTeamLeaders = function(team_id,callback){
+    Team.findOneAndUpdate({_id :  team_id} , {team_leaders:[]},callback);
+}
+
 //Remove Team Leader
 module.exports.removeTeamLeader = function(team_id, leader_id, callback){
     Team.findOneAndUpdate({_id :  team_id} , {$pull:{team_leaders:leader_id}},callback);

@@ -53,7 +53,7 @@ router.get('/get/:id',(req,res,next)=>{
 //Get survey by the owner ID
 router.get('/get/owner/:id',(req,res,next)=>{
  
-    Survey.getSurveyByOwenrId(
+    Survey.getSurveyByOwnerId(
         req.params.id,
         (err, survey)=>{
             if (err) throw err;
