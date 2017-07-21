@@ -21,7 +21,7 @@ export class HistorySurveyComponent implements OnInit {
     private toastr : ToastrService
   ) { }
 
-  surveys:any;
+  surveys:any[];
   survey: any;
   questions:any;
 
@@ -35,26 +35,37 @@ export class HistorySurveyComponent implements OnInit {
           this.formatSurveys(this.surveys);
         }else{
           this.toastr.info(res.msg);
-        }
-          
-        },
-        err=>{
-          console.log("could not get surveys of memeber with id "+ JSON.parse(localStorage.getItem('user'))._id +  " : " + err);
-          return false;
-        });
+          }
+      },
+      err=>{
+        console.log("could not get surveys of memeber with id "+ JSON.parse(localStorage.getItem('user'))._id +  " : " + err);
+        return false;
+      });
 
   }
-
+      
   selectSurvey(e:Event,index){
     e.preventDefault();
     this.survey = this.surveys[index];
     this.questions = this.survey.questions[0];
     }
 
-  formatSurveys(surveys){
+  formatSurveys(surveys:any[]){
+    if (surveys == null ) return;
     surveys.forEach(element => {
+
+      if (new Date(element.enddate) >= new Date())
+      {
+        element.active = true;
+        element.activeclass= "activesurvey";
+      }
+      else{ 
+        element.active = "false"
+        element.activeclass= "inactivesurvey";
+      }
+
       element.begindate = dateFormat(element.begindate, "dd/mm/yyyy");
-      element.enddate = dateFormat(element.enddate, "dd/mm/yyyy");
+      element.enddate = dateFormat(element.enddate, "dd/mm/yyyy");      
     });
 
   }

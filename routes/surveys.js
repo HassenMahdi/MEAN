@@ -23,6 +23,26 @@ router.post('/add',(req,res,next)=>{
     })
 })
 
+//add Survey submission
+router.post('/add/answers',(req,res,next) =>{
+    let sub = {
+        submitter_id : req.body.submitter_id,
+        answers : req.body.answers
+    }
+    let survey_id = req.body.survey_id;
+
+    Survey.addSurveySubmission(survey_id,sub,(err, survey)=>{
+        if(err){
+            res.json({success: false, msg:'Failed to add survey submission: '+err});
+        } else {
+            if (survey)
+                res.json({survey : survey , success: true, msg:'Survey added'});
+            else
+                res.json({success: false, msg:'Survey does not exist'});
+        }
+    })
+});
+
 //Get all surveys
 router.route('/get')
 

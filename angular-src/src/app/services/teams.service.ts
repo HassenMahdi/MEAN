@@ -12,7 +12,6 @@ export class TeamsService {
       .map(res => res.json());
   }
 
-
   addTeam(team){
     let headers = new Headers();
     headers.append('Content-Type','application/json');
@@ -75,5 +74,6 @@ export class TeamsService {
     return  this.http.delete('http://localhost:3000/teams/'+id, {headers:headers})
       .map(res => res.json());
   }
-}    
 
+  
+}    

@@ -1,6 +1,6 @@
 <!-- Sidebar -->
 
-<div id="sidebar-wrapper">
+<div id="sidebar-wrapper" class="slideInLeft animated" >
     <ul class="sidebar-nav">
         <br>
         <div class="sidebar-profile">
@@ -13,18 +13,21 @@
             </div>
         </div>
         <li class="nav-option" [routerLinkActive]="['sidebar-active']" [routerLinkActiveOptions]="{exact:true}">
-            <a [routerLink]="['/dashboard/overview']"><span class="glyphicon glyphicon-eye-open"></span> OVERVIEW</a>
+            <a [routerLink]="['/dashboard/overview']"><span class="fa fa-pie-chart"></span> Overview</a>
         </li>
         <li class="nav-option" [routerLinkActive]="['sidebar-active']" [routerLinkActiveOptions]="{exact:true}">
 
-            <a data-toggle="collapse" data-target="#submenu1"><span class="glyphicon glyphicon-list-alt"></span> SURVEYS
+            <a data-toggle="collapse" data-target="#submenu1"><span class="fa fa-clipboard"></span> Surveys
                 <div align="right" style="float:right;">
-                    <span class="arrow glyphicon glyphicon-chevron-down"></span>    
+                    <span class="arrow fa fa-chevron-down"></span>    
                 </div>
             </a>
         </li>
         <li class="collapse submenu" id="submenu1">
             <ul>
+                <li [routerLinkActive]="['sidebar-active']" [routerLinkActiveOptions]="{exact:true}">
+                    <a [routerLink]="['/dashboard/survey/take']"> Take survey</a>
+                </li>
                 <li [routerLinkActive]="['sidebar-active']" [routerLinkActiveOptions]="{exact:true}">
                     <a [routerLink]="['/dashboard/survey/create']"> Create survey</a>
                 </li>
@@ -34,16 +37,16 @@
             </ul>
         </li>
         <li class="nav-option" [routerLinkActive]="['sidebar-active']" [routerLinkActiveOptions]="{exact:true}">
-            <a [routerLink]="['/dashboard/teams']"><span class="glyphicon glyphicon-briefcase"></span> TEAMS</a>
+            <a [routerLink]="['/dashboard/teams']"><span class="fa fa-group"></span> Teams</a>
         </li>
         <li class="nav-option" [routerLinkActive]="['sidebar-active']" [routerLinkActiveOptions]="{exact:true}">
-            <a [routerLink]="['/dashboard/messages']"><span class="glyphicon glyphicon-envelope"></span> MESSAGES</a>
+            <a [routerLink]="['/dashboard/messages']"><span class="fa fa-paper-plane"></span> Messages</a>
         </li>
         <li class="nav-option" [routerLinkActive]="['sidebar-active']" [routerLinkActiveOptions]="{exact:true}">
-            <a [routerLink]="['/dashboard/statistics']"><span class="glyphicon glyphicon-stats"></span> STATISTICS</a>
+            <a [routerLink]="['/dashboard/statistics']"><span class="fa fa-line-chart"></span> Stats</a>
         </li>
         <li class="nav-option" [routerLinkActive]="['sidebar-active']" [routerLinkActiveOptions]="{exact:true}">
-            <a [routerLink]="['/dashboard/profile']"><span class="glyphicon glyphicon-user"></span> PROFILE</a>
+            <a [routerLink]="['/dashboard/profile']"><span class="fa fa-user"></span> Profile</a>
         </li>
     </ul>
 </div>
