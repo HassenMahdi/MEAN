@@ -75,5 +75,15 @@ export class TeamsService {
       .map(res => res.json());
   }
 
+  getValidTeams(teams:any[]){
+    teams = teams.filter((ele)=>{
+      if (ele.team)
+        return true;
+      else
+        return false;
+    })
+    return teams;
+  }
+
   
 }    

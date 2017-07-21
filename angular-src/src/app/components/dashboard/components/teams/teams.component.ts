@@ -38,7 +38,8 @@ export class TeamsComponent implements OnInit {
 
     this.authService.getProfile().subscribe( profile => {
         this.user = profile.user;
-        this.teams = profile.user.teams ;
+        this.teams = this.teamService.getValidTeams(profile.user.teams) ;
+        console.log(this.teams);
         this.team = this.teams[0].team;
         this.teamService.getUserTeams(this.team._id).subscribe( res => {
           this.team = res.team;

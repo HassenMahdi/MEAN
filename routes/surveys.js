@@ -88,6 +88,25 @@ router.get('/get/owner/:id',(req,res,next)=>{
 
 });
 
+//get surveys by team id list
+router.get('/get/teams/:id_list',(req,res,next)=>{
+    let teams_list = req.params.id_list.split(',');
+
+    Survey.getSurveysByTeamIdList(teams_list,(err,surveys)=>{
+        if(err){
+            return res.json({success:false,msg:"Bad request"})
+        }else{
+            if(surveys){
+                return res.json({surveys:surveys,success:true,msg:"Surveys extracted"})
+            }else{
+                return res.json({success:false,msg:"Could not find any survey"})
+            }
+        }
+    })
+    
+})
+
+
 router.get('/get/date/:id/:date',(req,res,next)=>{
  
     Survey.getSurveyByDate(

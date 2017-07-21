@@ -14,7 +14,7 @@
                   <br>
                   <p><i class="fa fa-users" aria-hidden="true"></i> User Belongs to the followinf teams</p>
                   <ul>
-                    <li *ngFor="let team of user.teams">
+                    <li *ngFor="let team of teams">
                       {{team.team?.team_name}} as <span *ngIf="team.leader">(leader)</span> <span *ngIf="!team.leader">(Member)</span>
                     </li>
                   </ul>

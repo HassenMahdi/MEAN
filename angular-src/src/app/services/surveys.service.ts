@@ -20,6 +20,11 @@ export class SurveysService {
       .map(res => res.json());
   }
 
+  getTeamsSurvey(team_id_list){
+    return this.http.get('http://localhost:3000/surveys/get/teams/'+team_id_list.toString())
+      .map(res => res.json());
+  }
+
   CreateSurvey(survey){
     console.log('http://localhost:3000/surveys/add');
     let headers = new Headers();

@@ -22,6 +22,8 @@ export class TakeSurveyComponent implements OnInit {
   questions:any[];
 
   user_id :any;
+  user :any;
+  teamsList : any[];
 
   constructor( 
     private surveysService : SurveysService,
@@ -32,7 +34,17 @@ export class TakeSurveyComponent implements OnInit {
 
     this.user_id = JSON.parse(localStorage.getItem('user'))._id;
 
-    this.surveysService.getOwnedSurveys( this.user_id ).subscribe( res => {
+    this.user =  JSON.parse(localStorage.getItem('user'));
+    
+    this.teamsList=[];
+
+    this.user.teams.forEach(element => {
+      if (element.team){
+        this.teamsList.push(element.team)
+      }
+    });
+
+    this.surveysService.getTeamsSurvey( this.teamsList ).subscribe( res => {
           if( res.success)
           {
             this.surveys = res.surveys;
