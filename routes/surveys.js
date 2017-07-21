@@ -55,24 +55,13 @@ router.get('/get/owner/:id',(req,res,next)=>{
  
     Survey.getSurveyByOwnerId(
         req.params.id,
-        (err, survey)=>{
+        (err, surveys)=>{
             if (err) throw err;
             else {
-                res.json(survey);
-            }
-        }
-    )
-
-});
-
-router.get('/get/owner/:id',(req,res,next)=>{
- 
-    Survey.getSurvey(
-        req.params.id,
-        (err, survey)=>{
-            if (err) throw err;
-            else {
-                res.json(survey);
+            if (surveys)
+                res.json({surveys:surveys,success:true, msg:"Surveys found"});
+            else
+                res.json({success:false, msg:"No surveys found"});
             }
         }
     )

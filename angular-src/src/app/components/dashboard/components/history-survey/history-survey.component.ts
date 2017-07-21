@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { SurveysService } from '../../../../services/surveys.service';
 import { AuthService } from '../../../../services/auth.service';
+import { ToastrService } from 'toastr-ng2';
 
 declare var dateFormat : any;
 
@@ -17,6 +18,7 @@ export class HistorySurveyComponent implements OnInit {
   constructor(
     private surveysService : SurveysService,
     private authService : AuthService,
+    private toastr : ToastrService
   ) { }
 
   surveys:any;
@@ -26,13 +28,18 @@ export class HistorySurveyComponent implements OnInit {
 
   ngOnInit() {
 
-      this.surveysService.getOwnedSurveys( JSON.parse(localStorage.getItem('user'))._id ).subscribe( survey => {
-          this.surveys = survey;
+      this.surveysService.getOwnedSurveys( JSON.parse(localStorage.getItem('user'))._id ).subscribe( res => {
+        if (res.success)
+        {
+          this.surveys = res.surveys;
           this.formatSurveys(this.surveys);
-          console.log(survey);
+        }else{
+          this.toastr.info(res.msg);
+        }
+          
         },
         err=>{
-          console.log(err);
+          console.log("could not get surveys of memeber with id "+ JSON.parse(localStorage.getItem('user'))._id +  " : " + err);
           return false;
         });
 
