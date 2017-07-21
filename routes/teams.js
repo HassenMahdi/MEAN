@@ -232,4 +232,28 @@ router.delete('/leaders/all', (req,res,next)=>{
     })
 })
 
+//Transfer member to leader of a team
+
+router.post('/graduate',(req,res,next)=>{
+    let member_id = req.body.member_id;
+    let team_id = req.body.team_id;
+
+    if ( !member_id || !team_id ){
+        res.json({success:false,msg:"null values for member id or team id"});
+        return;
+    }
+
+    Team.graduateMemberToLeader(member_id,team_id,(err,team)=>{
+        if(err){
+            res.json({success: false , msg : "failed update team"});
+        }
+        else{
+            User.graduateMember(member_id, team_id,(err,user)=>{
+                    res.json({user:user,team:team,success:true,msg:"Updated"});
+                })
+            }})
+            
+        }
+);
+
 module.exports = router;

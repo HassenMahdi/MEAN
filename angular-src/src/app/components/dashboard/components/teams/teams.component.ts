@@ -77,8 +77,7 @@ export class TeamsComponent implements OnInit {
     this.user=null;
     this.teamService.getMemberbyUsername(this.team.team_members[index].username).subscribe( res => {
           this.user = res.user;
-          this.selectedMember = index;  
-          console.log(this.team.team_members.map(function(e) { return e.username; }).indexOf(this.user.username) > -1);             
+          this.selectedMember = index;               
           console.log(res);
         },
         err=>{
@@ -133,10 +132,21 @@ export class TeamsComponent implements OnInit {
     event.preventDefault();
     this.teamService.getMemberbyUsername(this.user_name).subscribe( res => {
           if(res.success){
-            if((this.team.team_members.map(function(e) { return e.username; }).indexOf(res.user.username) > -1)
-                  || (this.team.team_leaders.map(function(e) { return e.username; }).indexOf(res.user.username) > -1)){
-              this.toastr.error('User with a same username already exists in this team')
+            if((this.team.team_leaders.map(function(e) { return e.username; }).indexOf(res.user.username) > -1)){
+                    this.toastr.error('User with a same username already exists in this team')
             }else{
+              if((this.team.team_members.map(function(e) { return e.username; }).indexOf(res.user.username) > -1)){
+                this.teamService.graduateMember(res.user._id, this.team._id).subscribe(data =>{
+                if (data.success){
+                  console.log(data.user);
+                  this.team.team_members.splice(this.team.team_members.indexOf(data.user),1);
+                  this.team.team_leaders.push(data.user);
+                  this.toastr.success('User transferred from member to leader');
+                }else{
+                  this.toastr.error('Oops, we encountred an error while adding leader');                  
+                }
+                })
+              }else{
               this.teamService.addLeader(res.user._id, this.team._id).subscribe(data =>{
                 if (data.success){
                   console.log(this.selectedMember);
@@ -149,7 +159,7 @@ export class TeamsComponent implements OnInit {
                   this.toastr.clear();
                   this.toastr.error("Oops, it seems you need to try again");
                 }
-              })
+              })}
             }}
           else{
             this.toastr.error('User not found with that username')

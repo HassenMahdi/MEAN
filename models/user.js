@@ -70,3 +70,7 @@ module.exports.comparePassword = function(candidatePassword, hash, callback){
   });
 
 } 
+
+module.exports.graduateMember = function(user_id,team_id,callback){
+  User.findOneAndUpdate({_id:user_id}, {$pull:{teams:{team: team_id}}},callback)
+}

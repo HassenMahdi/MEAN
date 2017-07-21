@@ -75,5 +75,16 @@ export class TeamsService {
       .map(res => res.json());
   }
 
+  graduateMember(member_id,team_id){
+    const newObject = {
+      "member_id":member_id,
+      "team_id":team_id,
+    }  
+    let headers = new Headers();
+    headers.append('Content-Type','application/json');
+    return  this.http.post('http://localhost:3000/teams/graduate', newObject, {headers:headers})
+      .map(res => res.json());
+  }
   
 }    
+

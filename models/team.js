@@ -60,3 +60,12 @@ module.exports.getTeamByName = function (team_name,callback){
     const query = { name : team_name };
     Team.findOne(query).populate('team_members').populate('team_leaders').exec(callback);
 }
+
+//transfer member to leader
+module.exports.graduateMemberToLeader = function (member_id,team_id,callback){
+    Team.findOneAndUpdate({_id:team_id},{$pull:{team_members:member_id}},(err,res)=>{
+        if (err){throw err}else{
+            Team.findOneAndUpdate({_id:res._id},{$push:{team_leaders:member_id}},callback);        
+    }});    
+}
+
