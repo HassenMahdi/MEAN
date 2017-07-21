@@ -32,11 +32,15 @@ export class TakeSurveyComponent implements OnInit {
 
     this.user_id = JSON.parse(localStorage.getItem('user'))._id;
 
-    this.surveysService.getOwnedSurveys( this.user_id ).subscribe( survey => {
-          this.surveys = survey;
-          this.displayesurveys = this.surveysService.filterSurveysByStatus(this.surveys,true);
-          this.surveysService.formatSurveys(this.displayesurveys);
-          console.log(this.surveys);
+    this.surveysService.getOwnedSurveys( this.user_id ).subscribe( res => {
+          if( res.success)
+          {
+            this.surveys = res.surveys;
+            this.displayesurveys = this.surveysService.filterSurveysByStatus(this.surveys,true);
+            this.surveysService.formatSurveys(this.displayesurveys);
+          }else{
+            this.toastr.info(res.msg);
+          }
         },
         err=>{
           console.log(err);

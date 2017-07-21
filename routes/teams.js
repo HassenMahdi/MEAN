@@ -60,21 +60,31 @@ router.post('/members',(req,res,next)=>{
         res.json({success:false,msg:"null values for member id or team id"});
         return;
     }
-    
-    Team.addTeamMember(team_id,member_id,leader,(err,team)=>{
-        if(err)
-            res.json({success:false,msg:"Member not added"+err});
-        else{
-            if(team)
-                User.addTeam(member_id, team_id, leader, (err,user)=>{
-                    res.json({user:user,team:team,success:true,msg:"Member "+user.username+" added to team "+team.team_name});
+
+            Team.getTeamById(team_id,(err,team)=>{
+            if(err){
+                throw err;
+            }if (team.team_members.indexOf(member_id)>-1) {
+                res.json({success:false,msg:"Member already exists"+err})
+            }else{
+                Team.addTeamMember(team_id,member_id,leader,(err,team)=>{
+                    if(err){
+                         res.json({success:false,msg:"Member not added"+err});}
+                    else{
+                        if(team){
+                            User.addTeam(member_id, team_id, leader, (err,user)=>{
+                                res.json({user:user,team:team,success:true,msg:"Member "+user.username+" added to team "+team.team_name});
+                            })}
+                        else
+                    res.json({success:false,msg:"Could not add team member"});
+            }
+                
                 })
-            else
-                res.json({success:false,msg:"Could not add team member"});
-        }
-            
+
+        }        
     })
-})
+        
+    })
 
 //delete team member
 router.delete('/members',(req,res,next)=>{

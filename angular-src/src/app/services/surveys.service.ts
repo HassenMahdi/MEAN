@@ -16,7 +16,6 @@ export class SurveysService {
   }
 
   getOwnedSurveys(owner_id){
-    console.log('http://localhost:3000/surveys/get/owner/'+owner_id );
     return this.http.get('http://localhost:3000/surveys/get/owner/'+owner_id)
       .map(res => res.json());
   }

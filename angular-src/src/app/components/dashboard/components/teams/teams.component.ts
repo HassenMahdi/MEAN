@@ -62,6 +62,9 @@ export class TeamsComponent implements OnInit {
     this.teamService.getUserTeams(this.teams[index].team._id).subscribe( res => {
           this.team = res.team;
           this.selectedTeam = index;
+          console.log('debugging');
+          console.log(this.user.teams);
+          console.log(this.selectedTeam);
           console.log(res);
         },
         err=>{
@@ -74,7 +77,8 @@ export class TeamsComponent implements OnInit {
     this.user=null;
     this.teamService.getMemberbyUsername(this.team.team_members[index].username).subscribe( res => {
           this.user = res.user;
-          this.selectedMember = index;
+          this.selectedMember = index;  
+          console.log(this.team.team_members.map(function(e) { return e.username; }).indexOf(this.user.username) > -1);             
           console.log(res);
         },
         err=>{
@@ -101,14 +105,10 @@ export class TeamsComponent implements OnInit {
     event.preventDefault();
     this.teamService.getMemberbyUsername(this.username).subscribe( res => {
           if(res.success){
-            //If user already exists in team NOT IMPLEMENTED
-            /*console.log('debug1');
-            console.log(JSON.stringify(res.user._id));
-            console.log('debug2');         
-            console.log(this.user.teams[this.selectedTeam].team.team_members); 
-            console.log(this.user.teams[this.selectedTeam].team.team_members.indexOf(JSON.stringify(res.user._id)));*/
-            //console.log(this.team.team_members.indexOf(res.user));
-            //console.log(this.team.team_members.indexOf(res.user));
+            if((this.team.team_members.map(function(e) { return e.username; }).indexOf(res.user.username) > -1)
+                  || (this.team.team_leaders.map(function(e) { return e.username; }).indexOf(res.user.username) > -1)){
+              this.toastr.error('User with a same username already exists in this team')
+            }else{
             this.teamService.addMember(res.user._id, this.team._id).subscribe(data =>{
               if (data.success){
                 console.log(this.selectedMember);
@@ -122,41 +122,35 @@ export class TeamsComponent implements OnInit {
                 this.toastr.error("Oops, it seems you need to try again");
               }
             })
-          }
+          }}
           else{
             this.toastr.error('User not found with that username')
           }},err=>{return false;});
   }
 
-  // Add a member to a Team
+  // Add a leader to a Team
   addLeader(event: Event){
     event.preventDefault();
-    console.log('debug1');
     this.teamService.getMemberbyUsername(this.user_name).subscribe( res => {
           if(res.success){
-            console.log('debug2');            
-            //If user already exists in team NOT IMPLEMENTED
-            /*console.log('debug1');
-            console.log(JSON.stringify(res.user._id));
-            console.log('debug2');         
-            console.log(this.user.teams[this.selectedTeam].team.team_members); 
-            console.log(this.user.teams[this.selectedTeam].team.team_members.indexOf(JSON.stringify(res.user._id)));*/
-            //console.log(this.team.team_members.indexOf(res.user));
-            //console.log(this.team.team_members.indexOf(res.user));
-            this.teamService.addLeader(res.user._id, this.team._id).subscribe(data =>{
-              if (data.success){
-                console.log(this.selectedMember);
-                this.selectedMember = this.team.team_leaders.length-1;
-                this.team.team_leaders.push(data.user);
-                this.toastr.clear();
-                this.toastr.success(data.user.name +" has been successfully added to "+data.team.team_name+" as a leader");
-                this.user_name='';
-              }else{
-                this.toastr.clear();
-                this.toastr.error("Oops, it seems you need to try again");
-              }
-            })
-          }
+            if((this.team.team_members.map(function(e) { return e.username; }).indexOf(res.user.username) > -1)
+                  || (this.team.team_leaders.map(function(e) { return e.username; }).indexOf(res.user.username) > -1)){
+              this.toastr.error('User with a same username already exists in this team')
+            }else{
+              this.teamService.addLeader(res.user._id, this.team._id).subscribe(data =>{
+                if (data.success){
+                  console.log(this.selectedMember);
+                  this.selectedMember = this.team.team_leaders.length-1;
+                  this.team.team_leaders.push(data.user);
+                  this.toastr.clear();
+                  this.toastr.success(data.user.name +" has been successfully added to "+data.team.team_name+" as a leader");
+                  this.user_name='';
+                }else{
+                  this.toastr.clear();
+                  this.toastr.error("Oops, it seems you need to try again");
+                }
+              })
+            }}
           else{
             this.toastr.error('User not found with that username')
           }},err=>{return false;});
@@ -180,6 +174,9 @@ export class TeamsComponent implements OnInit {
         this.team = data.team;
         this.team.team_leaders[0] = this.user;
         this.toastr.clear();
+        console.log('debu1');
+        console.log(this.selectedTeam);
+        console.log(this.user.teams);
         this.toastr.success(data.team.team_name+" has been successfully created");
         this.team_name='';
         this.team_info='';
@@ -210,7 +207,7 @@ export class TeamsComponent implements OnInit {
     })
   }
 
-  //Remove member from a team
+  //Remove Leader from a team
   removeLeader(event: Event){
     event.preventDefault();
     const newObject = {
