@@ -65,6 +65,7 @@ export class SurveysService {
   }
 
   filterSurveysByStatus(surveys:any[], getActive: Boolean){
+    console.log(surveys);
     if (surveys == null ) return;
     surveys = surveys.filter((element,index) => {
       if (new Date(element.enddate) >= new Date())
