@@ -64,6 +64,7 @@
 }
 
 #page-content-wrapper {
+    overflow-y: hidden;
     width: 100%;
     position: absolute;
     padding: 5px;

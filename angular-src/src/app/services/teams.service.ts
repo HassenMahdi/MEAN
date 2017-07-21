@@ -85,6 +85,18 @@ export class TeamsService {
     return  this.http.post('http://localhost:3000/teams/graduate', newObject, {headers:headers})
       .map(res => res.json());
   }
+
+  getValidTeams(teams:any[]){
+    teams = teams.filter((ele)=>{
+      if (ele.team)
+        return true;
+      else
+        return false;
+    })
+    return teams;
+  }
+
+
   
 }    
 

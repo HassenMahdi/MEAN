@@ -72,9 +72,18 @@ module.exports.getSurveyByDate = function(owner_id,date,callback){
     Survey.find(query).populate('owner_id').populate('team_id').exec(callback);;
 }
 
+module.exports.getSurveysByTeamIdList = function (team_id_list,callback){
+    const query = { team_id : { $in : team_id_list }} ;
+    Survey.find(query).populate('owner_id').populate('team_id').exec(callback);
+}
+
 module.exports.addSurveySub = function(survey_id,submission,callback){
     Survey.findByIdAndUpdate(
         {_id:survey_id},
         {$push:{submissions:submission}},
         callback);
+}
+
+var populateSurvey = function(){
+    
 }
