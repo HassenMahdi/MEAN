@@ -24,7 +24,7 @@ export class DashboardComponent implements OnInit {
   ngOnInit() {
 
     this.user = JSON.parse(localStorage.getItem('user'))
-    this.fireService.init()
+    
     this.fireService.getUserRegToken(token =>{
       this.authService.saveUserRegToken(this.user._id,token).subscribe(res=>{
         if (res.success)

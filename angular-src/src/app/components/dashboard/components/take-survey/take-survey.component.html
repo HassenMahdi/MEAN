@@ -56,13 +56,74 @@
             </div>
         </div>
     </div>
+
+    <div class="row ">
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <h3>View Answered surveys</h3>
+                    <p >You <b>can take</b> surveys from here. please select a survey from below.</p>
+                    
+                    <div class="container-fluid">
+                        <div class="row">
+                            <button type="button" class="pull-right btn btn-sm btn-default"><span class="fa fa-th"></span></button>
+                            <button type="button" class="pull-right btn btn-sm btn-default"><span class="fa fa-ellipsis-h"></span> </button>
+                            
+                            <div class="pull-right dropdown">
+                                <button class="btn btn-sm btn-default dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Sort <span class="fa fa-angle-down"></span>
+                                </button>
+                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                    <li><a class="dropdown-item" href="#">Recently created</a></li>
+                                    <li><a class="dropdown-item" href="#">Oldest created</a></li>
+                                </ul>
+                            </div>
+
+                            <div class="pull-right dropdown">
+                                <button class="btn btn-sm btn-default dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Filter <span class="fa fa-angle-down"></span>
+                                </button>
+                                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                    <li><a class="dropdown-item" href="#">None</a></li>
+                                    <li><a class="dropdown-item" href="#">Active</a></li>
+                                    <li><a class="dropdown-item" href="#">Inavtive</a></li>
+                                </ul>
+                            </div>
+
+                        </div>
+                    </div>
+                    <br>
+                    
+                    
+                    <ul class="surveyslist fadeIn animated" *ngIf="displayanswered">
+                        <li *ngFor="let survey of displayanswered; let i = index" class="{{survey?.activeclass}}">
+                            <div>
+                                <h4>{{survey?.name}}</h4>
+                                <h5>{{survey?.subject}}</h5>
+                                <div class="bottom">
+                                    <div class="lifespan">
+                                        <div class="date"><div>Begin</div>: {{survey.begindate}}</div>
+                                        <div class="date"><div>End</div>: {{survey.enddate}}</div>
+                                    </div>
+                                    <a (click)="selectAnswer($event,i)" class="btn btn-small btn-default" data-toggle="modal" data-target="#myModalView" href="">View Answers</a>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>        
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
 </div>
 
 <div id="surveyAnswer">
   
 </div>
 
-<!-- Modal -->
+<!-- Modal take-->
 <div id="myModal" class="modal fade" role="dialog">
   <div class="modal-dialog">     
     <div class="row">
@@ -71,9 +132,38 @@
             <div class="panel panel-default">
                     <div class="panel-heading">
                         <button type="button" class="close modalclose" data-dismiss="modal">&times;</button>
-                        <h4>Preview</h4>
+                        <h4>Please answer the questions</h4>
                     </div>
                     <survey-display (surveySaved)="onSurveySubmitted($event)" [json]="questions"></survey-display>
+            </div>
+        </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal view-->
+<div id="myModalView" class="modal fade" role="dialog">
+  <div class="modal-dialog">     
+    <div class="row">
+        <div class="col-md-12">
+            
+            <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <button type="button" class="close modalclose" data-dismiss="modal">&times;</button>
+                        <h4>Your answers</h4>
+                    </div>
+                    <div class="panel-body">
+                        <div *ngIf="0 >= answers?.length">
+                            <p>You've submitted an empty survey.</p>    
+                        </div>
+                        <div *ngIf="answers">
+                            <div *ngFor="let a of answers, let i = index">
+                                <h5><b>{{i+1}}. {{a.q}}</b></h5>
+                                <p>Your answer: <br><span class="an">{{a.a}}</span> </p>
+                                <br>
+                            </div>   
+                        </div>
+                    </div>
             </div>
         </div>
     </div>

@@ -38,12 +38,12 @@ router.post('/add',(req,res,next)=>{
 //add Survey submission
 router.post('/add/answers',(req,res,next) =>{
     let sub = {
-        submitter_id : req.body.submitter_id,
-        answers : req.body.answers
+        submitter_id : req.body.sub.submitter_id,
+        answers : req.body.sub.answers
     }
     let survey_id = req.body.survey_id;
 
-    Survey.addSurveySubmission(survey_id,sub,(err, survey)=>{
+    Survey.addSurveySub(survey_id,sub,(err, survey)=>{
         if(err){
             res.json({success: false, msg:'Failed to add survey submission: '+err});
         } else {
@@ -132,26 +132,6 @@ router.get('/get/date/:id/:date',(req,res,next)=>{
         }
     )
 
-})
-
-router.post('/submit',(req,res,next)=>{
-    let submission = {
-        submitter_id: req.body.submitter_id,
-        answers: req.body.answers
-    }
-
-    let survey_id = req.body.survey_id;
-
-    Survey.addSurveySub(survey_id,submission,(err,sub)=>{
-        if (err){
-            res.json({success:false, msg:"Submission not accomplished"});
-            throw err;
-        }
-        else{
-            res.json({submission,success:true, msg:"Submission successful"});
-        }
-
-    })
 })
 
 module.exports = router;

@@ -47,42 +47,51 @@ module.exports.addSurvey = function(survey,callback){
     survey.save(callback);
 };
 
-module.exports.addSurveySubmission = function(survey_id,sub,callback){
-    Survey.findOneAndUpdate({ _id : survey_id },{ $push:{ submissions: sub} } , callback );
-};
-
 
 module.exports.getSurvey = function (owner_id,callback){
     const query = { owner_id : owner_id };
-    Survey.find(query).populate('owner_id').populate('team_id').exec(callback);
+    Survey.find(query)
+        .populate('owner_id')
+        .populate('team_id')
+        .populate('submissions')
+        .exec(callback);
 }
 
 module.exports.getSurveyById = function (survey_id,callback){
     const query = { _id : survey_id };
-    Survey.findOne(query).populate('owner_id').populate('team_id').exec(callback);
+    Survey.findOne(query)
+        .populate('owner_id')
+        .populate('team_id')
+        .populate('submissions')
+        .exec(callback);
 }
 
 module.exports.getSurveyByOwnerId = function (owner_id,callback){
     const query = { owner_id : owner_id };
-    Survey.find(query).populate('owner_id').populate('team_id').exec(callback);
+    Survey.find(query)
+        .populate('owner_id')
+        .populate('team_id')
+        .populate('submissions')
+        .exec(callback);
 }
 
 module.exports.getSurveyByDate = function(owner_id,date,callback){
     const query = { owner_id : owner_id , begindate : date };
-    Survey.find(query).populate('owner_id').populate('team_id').exec(callback);;
+    Survey.find(query).populate('owner_id')
+        .populate('owner_id')
+        .populate('team_id')
+        .populate('submissions')
+        .exec(callback);
 }
 
 module.exports.getSurveysByTeamIdList = function (team_id_list,callback){
     const query = { team_id : { $in : team_id_list }} ;
-    Survey.find(query).populate('owner_id').populate('team_id').exec(callback);
+    Survey.find(query).exec(callback);
 }
 
-module.exports.addSurveySub = function(survey_id,submission,callback){
-    Survey.findByIdAndUpdate(
-        {_id:survey_id},
-        {$push:{submissions:submission}},
-        callback);
-}
+module.exports.addSurveySub = function(survey_id,sub,callback){
+    Survey.findOneAndUpdate({ _id : survey_id },{ $push:{ submissions: sub} } , callback );
+};
 
 var populateSurvey = function(){
     

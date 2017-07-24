@@ -32,9 +32,9 @@ router.post('/regtoken', (req,res,next)=>{
       return res.json({success:false,msg:err})
     }
     else if(user){
-      return res.json({user:user,success:true,msg:"token added"})
+      return res.json({user:user,success:true,msg:"registration token added"})
     }else{
-      return res.json({success:false,msg:err})
+      return res.json({success:false,msg:"No user found"})
     }
   })
 })

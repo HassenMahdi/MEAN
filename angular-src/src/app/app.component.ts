@@ -1,4 +1,5 @@
 import { Component , OnInit } from '@angular/core';
+import { FirebaseService } from './services/firebase.service'
 
 @Component({ 
   selector: 'app-root',
@@ -6,5 +7,13 @@ import { Component , OnInit } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+
+  constructor(
+    private fireService : FirebaseService
+  ){}
+
   title = 'app works!';
+  ngOnInit(){
+    this.fireService.init()
+  }
 }

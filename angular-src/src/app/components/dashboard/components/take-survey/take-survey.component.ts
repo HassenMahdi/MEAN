@@ -19,8 +19,12 @@ export class TakeSurveyComponent implements OnInit {
 
   surveys:any[];
   displayesurveys:any[];
+  displayanswered:any[]
   survey:any;
   questions:any[];
+  answers:any[];
+  selectedAnswersIndex:any
+  selectedSurveyIndex:any
 
   user_id :any;
   user :any;
@@ -49,14 +53,27 @@ export class TakeSurveyComponent implements OnInit {
           }
         });
 
-        console.log(this.teamsList);
-
         this.surveysService.getTeamsSurvey( this.teamsList ).subscribe( res => {
           if( res.success)
           {
             this.surveys = res.surveys;
-            this.displayesurveys = this.surveysService.filterSurveysByStatus(this.surveys,true);
-            this.surveysService.formatSurveys(this.displayesurveys);
+
+            this.displayesurveys=[]
+            this.displayanswered=[]
+            
+            this.surveys.forEach(element => {
+              var index = element.submissions.findIndex( a => ( a.submitter_id == this.user._id ) )
+              if ( index >= 0)
+              {
+                this.displayanswered.push(element);
+              }else
+              {
+                this.displayesurveys.push(element);
+              }
+            });
+
+            this.updateDisplayedSurveys()
+            
           }else{
             this.toastr.info(res.msg);
           }
@@ -80,12 +97,20 @@ export class TakeSurveyComponent implements OnInit {
   }
 
   onSurveySubmitted(answers){
-    console.log(this.survey._id)
-    this.surveysService.submitSurveyAnswers(this.survey._id,this.user_id,answers)
+    this.surveysService.submitSurveyAnswers(this.survey._id,this.user._id,answers)
       .subscribe(
         res=>{
-          if (res.success) 
+          if (res.success){
             this.toastr.success("Your answers have been submitted","Success");
+            
+            this.displayanswered.push(
+              this.displayesurveys[this.selectedSurveyIndex]
+            )
+            
+            this.displayesurveys.splice(this.selectedSurveyIndex,1)
+
+            //this.updateDisplayedSurveys();
+          }
           else
             this.toastr.error(res.msg,"Error");
         },
@@ -98,7 +123,38 @@ export class TakeSurveyComponent implements OnInit {
   selectSurvey(e:Event,index){
     e.preventDefault();
     this.survey = this.displayesurveys[index];
+    this.selectedSurveyIndex = index;
     this.questions = this.survey.questions[0];
     }
+
+    selectAnswer(e:Event,index){
+    e.preventDefault();
+    this.selectedAnswersIndex = index;
+    var ai = this.displayanswered[index].submissions.findIndex(
+      a => (a.submitter_id = this.user_id )
+    )
+    this.answers = this.displayanswered[index].submissions[ai].answers
+    var an = this.displayanswered[index].submissions[ai].answers
+    console.log(an)
+
+    this.answers =[]
+    for (var key in an) {
+      for( var key2 in an[key]){
+        this.answers.push({
+          q: key2,
+          a: an[key][key2]
+        })
+      }
+
+   // do some more stuff with obj[key]
+    }
+  }
+
+  updateDisplayedSurveys(){
+
+    this.displayesurveys = this.surveysService.filterSurveysByStatus(this.displayesurveys,true);
+    this.surveysService.formatSurveys(this.displayesurveys);
+    this.surveysService.formatSurveys(this.displayanswered);
+  }
 
 }
