@@ -6,6 +6,11 @@ const passport = require('passport');
 const mongoose = require('mongoose');
 const config = require('./config/database');
 
+const notify = require('./push_notifications/notify');
+
+notify.init();
+notify.sendServerStart();
+
 // Connect To Database
 mongoose.connect(config.database);
 
@@ -30,9 +35,6 @@ const port = 3000;
 
 // CORS Middleware
 app.use(cors());
-
-// Set Static Folder
-app.use(express.static(path.join(__dirname, 'public')));
 
 // Body Parser Middleware
 app.use(bodyParser.json());

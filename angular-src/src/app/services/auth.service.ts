@@ -34,6 +34,17 @@ export class AuthService {
       .map(res => res.json());
   }
 
+  saveUserRegToken(user_id, token){
+    let body = {
+      user_id : user_id,
+      token : token,
+    }
+    let headers = new Headers();
+    headers.append('Content-Type','application/json');
+    return  this.http.post('http://localhost:3000/users/regtoken', body, {headers:headers})
+      .map(res => res.json());
+  }
+
   loadToken(){
     const token= localStorage.getItem('id_token');
     this.authToken = token;

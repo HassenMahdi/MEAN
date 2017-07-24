@@ -26,7 +26,6 @@ export class SurveysService {
   }
 
   CreateSurvey(survey){
-    console.log('http://localhost:3000/surveys/add');
     let headers = new Headers();
     headers.append('Content-Type','application/json');
     return  this.http.post('http://localhost:3000/surveys/add',survey)

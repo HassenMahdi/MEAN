@@ -26,7 +26,8 @@
         "assets/css/animate.css"
       ],
       "scripts": [
-        "../node_modules/dateformat/lib/dateformat.js"
+        "../node_modules/dateformat/lib/dateformat.js",
+        "assets/js/main.js"
         ],
       "environments": {
         "source": "environments/environment.ts",

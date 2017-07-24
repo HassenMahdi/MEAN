@@ -1,7 +1,9 @@
 const express = require('express');
 const router = express.Router();
 const Survey = require('../models/survey');
+const Team = require('../models/team');
 const config = require('../config/database');
+const notify = require('../push_notifications/notify');
 
 router.post('/add',(req,res,next)=>{
     let newSurvey = new Survey({
@@ -19,6 +21,16 @@ router.post('/add',(req,res,next)=>{
             res.json({success: false, msg:'Failed to add survey: '+err});
         } else {
             res.json({success: true, msg:'Survey added'});
+            Team.getTeamTokens(newSurvey.team_id,(err,tokens)=>{
+                if( !err && tokens ){
+                    notify.sendNotifById(tokens,{
+                        notification:{
+                            title:"A new survey is added",
+                            body:"Click here to go answer it",
+                        }
+                    })
+                }
+            })
         }
     })
 })
@@ -35,8 +47,9 @@ router.post('/add/answers',(req,res,next) =>{
         if(err){
             res.json({success: false, msg:'Failed to add survey submission: '+err});
         } else {
-            if (survey)
+            if (survey){
                 res.json({survey : survey , success: true, msg:'Survey added'});
+            }
             else
                 res.json({success: false, msg:'Survey does not exist'});
         }

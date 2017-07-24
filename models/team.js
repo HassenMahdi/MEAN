@@ -69,3 +69,27 @@ module.exports.graduateMemberToLeader = function (member_id,team_id,callback){
     }});    
 }
 
+module.exports.getTeamTokens = function(team_id,callback){
+    Team.find({_id:team_id}).populate('team_leaders','regtoken').populate('team_members','regtoken').exec((err,teams)=>{
+        if (err){
+            callback(err,null)
+        }else{
+            if(teams){
+                let res= []
+                teams.forEach(function(team) {
+                    team.team_leaders.forEach(function(element) {
+                        res = res.concat(element.regtoken)
+                    }, this);
+                    team.team_members.forEach(function(element) {
+                        res = res.concat(element.regtoken)
+                    }, this);
+                        
+                }, this);
+                callback(null,res)
+            }else{
+                callback(null,null)
+            }
+        }
+    })
+}
+

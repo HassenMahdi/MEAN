@@ -23,6 +23,22 @@ router.post('/register', (req, res, next) => {
   });
 });
 
+// Save User Token
+router.post('/regtoken', (req,res,next)=>{
+  let id = req.body.user_id
+  let token = req.body.token
+  User.addRegToken(id,token,(err,user)=>{
+    if(err){
+      return res.json({success:false,msg:err})
+    }
+    else if(user){
+      return res.json({user:user,success:true,msg:"token added"})
+    }else{
+      return res.json({success:false,msg:err})
+    }
+  })
+})
+
 // Authenticate
 router.post('/authenticate', (req, res, next) => {
   const username = req.body.username;

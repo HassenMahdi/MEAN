@@ -26,7 +26,14 @@ const UserSchema = mongoose.Schema({
       team :{ type: SchemaTypes.ObjectId , ref : 'Team' },
       leader: { type: Boolean , default : false }
     } 
-   ]
+   ],
+  regtoken: [
+    {
+      type: String,
+      unique : true,
+    }
+  ]
+
 });
 
 const User = module.exports = mongoose.model('User', UserSchema);
@@ -73,4 +80,12 @@ module.exports.comparePassword = function(candidatePassword, hash, callback){
 
 module.exports.graduateMember = function(user_id,team_id,callback){
   User.findOneAndUpdate({_id:user_id}, {$pull:{teams:{team: team_id}}},callback)
+}
+
+module.exports.addRegToken = function (id, token, callback){
+  User.findByIdAndUpdate({_id:id},{$addToSet:{regtoken:token}},callback)
+}
+
+module.exports.getUserTokens = function(user_id,callback){
+  User.findOne({_id:id},'regtoken',callback)
 }

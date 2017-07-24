@@ -5,6 +5,7 @@ import { HttpModule } from '@angular/http';
 import { RouterModule , Routes } from '@angular/router';
 import { ToastrModule } from 'toastr-ng2';
 import { MyDatePickerModule } from 'mydatepicker';
+import { environment } from 'environments/environment'
 
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
@@ -18,6 +19,8 @@ import { TeamsService } from './services/teams.service';
 import { SurveysService } from './services/surveys.service';
 import { ValidateService } from './services/validate.service';
 import { AuthService } from './services/auth.service';
+import { FirebaseService } from './services/firebase.service'
+
 import { AuthGuard } from './guards/auth.guard';
 import { ViewContainerRef } from '@angular/core';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
@@ -86,14 +89,15 @@ const appRoutes : Routes = [
     HttpModule,
     RouterModule.forRoot(appRoutes),
     ToastrModule.forRoot(),
-    MyDatePickerModule
+    MyDatePickerModule,
   ],
   providers: [
     ValidateService,
     AuthService,
     AuthGuard,
     TeamsService,
-    SurveysService
+    SurveysService,
+    FirebaseService
   ],
   bootstrap: [
     AppComponent
