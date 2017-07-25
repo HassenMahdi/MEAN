@@ -19,7 +19,9 @@ import { TeamsService } from './services/teams.service';
 import { SurveysService } from './services/surveys.service';
 import { ValidateService } from './services/validate.service';
 import { AuthService } from './services/auth.service';
-import { FirebaseService } from './services/firebase.service'
+import { FirebaseService } from './services/firebase.service';
+import { ChatService } from './services/chat.service'
+
 
 import { AuthGuard } from './guards/auth.guard';
 import { ViewContainerRef } from '@angular/core';
@@ -36,6 +38,7 @@ import { SurveyQuestionSrComponent } from './components/dashboard/components/cre
 import { AnswerSurveyComponent } from './components/dashboard/components/answer-survey/answer-survey.component';
 import { EditorSurveyComponent } from './components/dashboard/components/editor-survey/editor-survey.component';
 import { TakeSurveyComponent } from './components/dashboard/components/take-survey/take-survey.component';
+import { ChatComponent } from './components/dashboard/components/messages/chat/chat.component';
 
 const appRoutes : Routes = [
   {path:'' , component: HomeComponent},
@@ -81,7 +84,8 @@ const appRoutes : Routes = [
     SurveyQuestionSrComponent,
     AnswerSurveyComponent,
     EditorSurveyComponent,
-    TakeSurveyComponent
+    TakeSurveyComponent,
+    ChatComponent
   ],
   imports: [
     BrowserModule,

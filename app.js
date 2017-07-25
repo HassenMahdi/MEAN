@@ -25,6 +25,8 @@ mongoose.connection.on('error', (err) => {
 });
 
 const app = express();
+const http = require('http').Server(app);
+const io = require('socket.io')(http);
 
 const teams = require('./routes/teams');
 const users = require('./routes/users');
@@ -54,7 +56,20 @@ app.get('/', (req, res) => {
   res.send('Invalid Endpoint');
 });
 
+// Make connection
+io.on('connection', (socket) => {
+  console.log('user connected');
+  
+  socket.on('disconnect', function(){
+    console.log('user disconnected');
+  });
+  
+  socket.on('add-message', (message) => {
+    io.emit('message', {type:'new-message', text: message});    
+  });
+});
+
 // Start Server
-app.listen(port, () => {
+http.listen(port, () => {
   console.log('Server started on port '+port);
 });

@@ -103,6 +103,13 @@ export class TakeSurveyComponent implements OnInit {
           if (res.success){
             this.toastr.success("Your answers have been submitted","Success");
             
+            
+              this.displayesurveys[this.selectedSurveyIndex]
+                .submissions.push({
+                  submitter_id : this.user._id,
+                  answers : answers,
+                })
+
             this.displayanswered.push(
               this.displayesurveys[this.selectedSurveyIndex]
             )
