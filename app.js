@@ -56,20 +56,34 @@ app.get('/', (req, res) => {
   res.send('Invalid Endpoint');
 });
 
+// Table
+var connectedUsers = [];
+var chatRooms = [];
 // Make connection
 io.on('connection', (socket) => {
-  console.log('user connected');
+  socket.on('new user', function(data,callback){
+
+    if( connectedUsers.indexOf(data) != -1 ){
+      ;
+    }else{
+      socket.username = data
+      connectedUsers.push(socket.username)
+    }
+    console.log(data+' connecting...')
+  })
   
-  socket.on('disconnect', function(){
-    console.log('user disconnected');
+  socket.on('disconnect', function(data){
+    if( !socket.username ) return;
+    connectedUsers.splice(connectedUsers.indexOf(socket.username));
+    console.log(data+' disconnected')
   });
   
   socket.on('add-message', (message) => {
-    io.emit('message', {type:'new-message', text: message});    
+    io.emit('message', {type:'new-message', text: message}); 
   });
 });
 
 // Start Server
-http.listen(port, () => {
+http.listen(port,'0.0.0.0', () => {
   console.log('Server started on port '+port);
 });

@@ -7,10 +7,11 @@ import { TeamsService} from '../../../../../services/teams.service';
 @Component({
   moduleId: module.id,
   selector: 'chat-component',
+  styleUrls: ['./chat.component.css'],
   templateUrl: './chat.component.html',
   providers: [ChatService]
 })
-export class ChatComponent implements OnInit, OnDestroy {
+export class ChatComponent implements OnInit{
   private user: any;
   private teams: any[];
   private team: any;
@@ -32,10 +33,6 @@ export class ChatComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.connection = this.chatService.getMessages().subscribe(message => {
-      this.messages.push(message);
-    })
-
     this.authService.getProfile().subscribe( profile => {
         this.user = profile.user;
         this.teams = this.teamService.getValidTeams(profile.user.teams) ;
@@ -56,7 +53,5 @@ export class ChatComponent implements OnInit, OnDestroy {
       })
   }
   
-  ngOnDestroy() {
-    this.connection.unsubscribe();
-  }
+  
 }

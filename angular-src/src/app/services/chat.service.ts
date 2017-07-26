@@ -10,9 +10,10 @@ export class ChatService {
     this.socket.emit('add-message', message);    
   }
   
-  getMessages() {
+  getMessages(username) {
     let observable = new Observable(observer => {
       this.socket = io(this.url);
+      this.socket.emit('new user',username);
       this.socket.on('message', (data) => {
         observer.next(data);    
       });
