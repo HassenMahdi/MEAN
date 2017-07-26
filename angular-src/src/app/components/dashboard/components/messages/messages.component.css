@@ -11,6 +11,12 @@
     background: #fbfbfb;
 }
 
+.chat-group:hover{
+    cursor: pointer;
+    border: 1px solid lightgrey;
+    background: lightgrey;
+}
+
 .chat-group img{
     padding: 5px;
     width: 50px;
@@ -37,4 +43,12 @@
     width: 100%;
     color: white;
     background: blue;
+}
+
+#chat-box-list > div{
+    display: none;
+}
+
+#chat-box-list > div:first-child{
+    display: inline-block;
 }
