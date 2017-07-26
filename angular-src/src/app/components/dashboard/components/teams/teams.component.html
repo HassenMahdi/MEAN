@@ -1,12 +1,9 @@
-<link rel="stylesheet" src="teams.css">
-<link rel="stylesheet" src="teams.comp.css">
-
 <div class="container-fluid fadeIn animated">
 
     <div class="row">
 
         
-        <div class="col-md-12">
+        <div class="col-md-6">
 
             <div class="dropdown">
                 <button class="btn btn-default dropdown-toggle btn-block" type="button" data-toggle="dropdown">Select a team
@@ -29,14 +26,13 @@
     </div>
     <div *ngIf="team" class="fadeInUp animated">
     <div class="row" >
-        <div class="col-md-12">
+        <div class="col-md-6">
             <div class="panel panel-default">
                 <div class="panel-body">
     
                     <div class="team-image">
-                        <img src="assets/images/team.jpg" alt="This team's image" class="thumbnail" width="100px" height="100px"/>
+                        <img src="assets/images/logo_team.png" alt="This team's image" width="100px" height="100px"/>
                     </div>        
-
                     <div class="team-info">
                         <h3><b>{{team?.team_name}}</b></h3>
                         <h5>{{team?.team_info}}</h5>
@@ -46,13 +42,24 @@
                 </div>
             </div>
         </div>
+        <div class="col-md-6">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                      <h3>Good morning {{this.user.name}} !</h3>
+                      <h4>How are you feeling today ?</h4>
+                        <input type="radio" name="gender" value="male" checked> Good
+                        <input type="radio" name="gender" value="female"> Medium
+                        <input type="radio" name="gender" value="other"> Bad
+                </div>
+            </div>
+        </div>
     </div>
     <div class="row">
         <div class="col-md-6">
             <div class="panel panel-default">
                 <div class="panel-body">
                     <h3>Leaders</h3>
-                    <p><span class="glyphicon glyphicon-note"></span><b> Leaders</b> can create surveys and add other team members.</p>
+                    <p><span class="glyphicon glyphicon-note"></span><b > Leaders</b> can create surveys and add other team members.</p>
                     <a href="#" data-toggle="modal" data-target="#addLeader"><span class="glyphicon glyphicon-plus"></span> Add a new leader</a>
                     <ul class="profiles-row">
                         <li class="profile" *ngFor="let leader of team?.team_leaders; let i = index">
@@ -60,7 +67,7 @@
                                 <span class="glyphicon glyphicon-remove-circle"></span>Remove
                             </a>    
                              <br>
-                            <img class="img-circle img-leader" src="assets/images/profile.png" alt="" width="100px" height="100px">
+                             <img class="img-circle img-leader" src="assets/images/emplyee.png" alt="" width="100px" height="100px">
                             <p><b>{{leader.name}}</b>
                             <br>@{{leader.username}}</p>
                         </li> 
@@ -79,8 +86,8 @@
                              <a  href="#" (click)='selectMember(i)' data-toggle="modal" data-target="#removeMember">
                                 <span class="glyphicon glyphicon-remove-circle"></span>Remove
                             </a>    
-                             <br>
-                            <img class="img-circle img-member" src="assets/images/profile.png" alt="" width="100px" height="100px">
+                             <br>                             
+                            <img class="img-circle img-member" src="assets/images/emplyee.png" alt="" width="100px" height="100px">
                             <p><b>{{member.name}}</b>
                             <br>@{{member.username}}</p>
                         </li>  

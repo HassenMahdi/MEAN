@@ -101,7 +101,8 @@ const appRoutes : Routes = [
     AuthGuard,
     TeamsService,
     SurveysService,
-    FirebaseService
+    FirebaseService,
+    ChatService
   ],
   bootstrap: [
     AppComponent

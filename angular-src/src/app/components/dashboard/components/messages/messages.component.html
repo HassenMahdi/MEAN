@@ -1,1 +1,39 @@
-<chat-component></chat-component>
+<h2>Choose a team to open Chatbox with</h2>
+<div class="container-fluid fadeIn animated">
+
+    <div class="row">
+
+        
+        <div class="col-md-3">
+
+            <div class="menu">
+                <button class="btn btn-default dropdown-toggle btn-block" type="button" data-toggle="dropdown">Select a team
+                <span class="caret"></span></button>
+                <ul class="dropdown-menu btn-block">
+                    <li *ngFor="let team of teams; let i = index" >
+                        <a (click)="selectTeam(i)">{{team?.team?.team_name}}</a></li>
+                </ul>
+            </div>
+
+        </div>
+    </div>
+    <br>
+    <div class="row" >
+        <div class="col-md-3">
+            <div class="panel panel-default">
+                <div class="panel-body">     
+                   <br>
+                   <br> 
+                   <br>
+                   <br> 
+                   <br>
+                   <br> 
+                   <br>
+                   <br> 
+                   <br>
+                   <br> 
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
