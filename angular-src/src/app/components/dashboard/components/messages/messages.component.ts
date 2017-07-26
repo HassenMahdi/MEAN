@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../../../services/auth.service'
 import { TeamsService } from '../../../../services/teams.service'
+import { ChatService } from '../../../../services/chat.service'
 
 declare var jQuery : any;
 
@@ -17,10 +18,14 @@ export class MessagesComponent implements OnInit {
   private team: any;
 
   selectedTeam = 0;
+  connection;
+  message;
+  messages=[];
 
   constructor(
     private authService: AuthService,
-    private teamService: TeamsService
+    private teamService: TeamsService,
+    private chatService: ChatService
   ) { }
 
   ngOnInit() {
@@ -52,7 +57,6 @@ export class MessagesComponent implements OnInit {
           this.selectedTeam = index;
           console.log('index');
           console.log(this.selectedTeam);
-          window.open('chat','_blank');
         },
         err=>{
           console.log(err);
@@ -61,6 +65,9 @@ export class MessagesComponent implements OnInit {
   }
 
   openChatBox(i){
+    this.connection = this.chatService.getMessages(this.user.username, this.selectedTeam).subscribe(message => {
+          this.messages.push(message);
+        }) 
     $('#chat-box-list > div').hide();
     $('#chat-box-list > div[id="'+i+'"]').show();
   }

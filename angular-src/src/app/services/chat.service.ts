@@ -5,15 +5,15 @@ import * as io from 'socket.io-client';
 export class ChatService {
   private url = 'http://localhost:3000';  
   private socket;
-  
+
   sendMessage(message){
     this.socket.emit('add-message', message);    
   }
   
-  getMessages(username) {
+  getMessages(username, index) {
     let observable = new Observable(observer => {
       this.socket = io(this.url);
-      this.socket.emit('new user',username);
+      this.socket.emit('new user',{username: username, index:index});
       this.socket.on('message', (data) => {
         observer.next(data);    
       });
@@ -22,5 +22,6 @@ export class ChatService {
       };  
     })     
     return observable;
-  }  
+  } 
+
 }

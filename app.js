@@ -56,20 +56,21 @@ app.get('/', (req, res) => {
   res.send('Invalid Endpoint');
 });
 
+
 // Table
 var connectedUsers = [];
 var chatRooms = [];
-// Make connection
+// Make connection to Chat Rooms
 io.on('connection', (socket) => {
   socket.on('new user', function(data,callback){
 
     if( connectedUsers.indexOf(data) != -1 ){
       ;
     }else{
-      socket.username = data
+      socket.username = data.username
       connectedUsers.push(socket.username)
     }
-    console.log(data+' connecting...')
+    console.log(data.username+' is now connected to Room '+ data.index)
   })
   
   socket.on('disconnect', function(data){

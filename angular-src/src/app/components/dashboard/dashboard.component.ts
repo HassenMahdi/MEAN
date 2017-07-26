@@ -12,7 +12,7 @@ import { ChatService } from '../../services/chat.service'
   styleUrls: ['./dashboard.component.css']
 })
 
-export class DashboardComponent implements OnInit, OnDestroy {
+export class DashboardComponent implements OnInit {
   
   user: any;
   userRegToken: any;
@@ -28,11 +28,6 @@ export class DashboardComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.authService.getProfile().subscribe( profile => {
         this.user = profile.user;
-
-    this.connection = this.chatService.getMessages(this.user.username).subscribe(message => {
-      this.messages.push(message);
-
-    })
     })
 
     this.user = JSON.parse(localStorage.getItem('user'))
@@ -45,9 +40,5 @@ export class DashboardComponent implements OnInit, OnDestroy {
           console.log(res.msg);
       })
     })
-  }
-
-  ngOnDestroy() {
-    this.connection.unsubscribe(this.user.username);
   }
 }

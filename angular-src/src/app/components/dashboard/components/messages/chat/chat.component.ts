@@ -11,7 +11,7 @@ import { TeamsService} from '../../../../../services/teams.service';
   templateUrl: './chat.component.html',
   providers: [ChatService]
 })
-export class ChatComponent implements OnInit{
+export class ChatComponent implements OnInit, OnDestroy{
   private user: any;
   private teams: any[];
   private team: any;
@@ -40,6 +40,7 @@ export class ChatComponent implements OnInit{
         this.teamService.getUserTeams(this.team._id).subscribe( res => {
           this.team = res.team;
         },
+        
         err=>{
           console.log(err);
           return false;
@@ -49,9 +50,13 @@ export class ChatComponent implements OnInit{
       },
       err=>{
         console.log(err);
-        return false;
+        return false;             
       })
   }
+
+  ngOnDestroy() {
+    this.connection.unsubscribe(this.user.username);
+  } 
   
   
 }
