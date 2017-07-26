@@ -5,6 +5,28 @@ const User = require('../models/user');
 const config = require('../config/database');
 const notify = require('../push_notifications/notify');
 
+//Save message
+router.post('/message',(req,res,next)=>{
+        
+    let message = {
+        username : req.body.username,
+        text : req.body.text,
+    }
+    let team_id = req.body.team_id;
+
+    Team.addMessage(team_id,message,(err,team)=>{
+        if(err){
+            return res.json({success:false, msg:"Failed to add message"})
+        }else{
+            if(team)
+                 return res.json({team:team,success:true, msg:"Failed to add message"})
+            else
+                 return res.json({success:false, msg:"Invalid team"})
+        }
+    })
+})
+
+
 //create a new team
 router.post('/create',(req,res,next)=>{
     let team = new Team( {
@@ -25,17 +47,11 @@ router.post('/create',(req,res,next)=>{
                 if(user)
                 {
                     res.json({team : team , success: true , msg : "Successfully created a new team"});
-                }
-                    
+                }      
             })
             
         }
     });
-})
-
-//get the team by team id
-router.get('/get',(req,res,next)=>{
-    res.json({canget:"yes"})
 })
 
 //get the team by team id

@@ -96,7 +96,16 @@ export class TeamsService {
     return teams;
   }
 
-
-  
+  saveMessage(team_id, text ,username ){
+      let body = {
+      team_id:team_id,
+      username:username,
+      text:text,
+    }
+    let headers = new Headers();
+    headers.append('Content-Type','application/json');
+    return  this.http.post('http://localhost:3000/teams/message', body, {headers:headers})
+      .map(res => res.json());
+  }
 }    
 

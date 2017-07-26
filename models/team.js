@@ -15,7 +15,13 @@ const TeamSchema = mongoose.Schema({
 
     team_leaders: {type: [{type: ShemaTypes.ObjectId , ref:'User'} ], required: true},
 
-    team_members: [{type: ShemaTypes.ObjectId , ref:'User'}]
+    team_members: [{type: ShemaTypes.ObjectId , ref:'User'}],
+
+    messages : [ {
+        text : String,
+        username : String,
+        date : { type: Date, default: Date.now },
+    } ]
 });
 
 const Team = module.exports = mongoose.model('Team', TeamSchema);
@@ -91,5 +97,9 @@ module.exports.getTeamTokens = function(team_id,callback){
             }
         }
     })
+}
+
+module.exports.addMessage = function(team_id,message,callback){
+    Team.findOneAndUpdate({ _id: team_id }, { $push:{ messages:message }},callback)
 }
 
