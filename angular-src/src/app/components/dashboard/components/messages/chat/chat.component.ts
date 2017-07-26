@@ -1,57 +1,41 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Input, Component, OnInit, OnDestroy } from '@angular/core';
 import { ChatService } from '../../../../../services/chat.service';
-import { AuthService} from '../../../../../services/auth.service';
 import { TeamsService} from '../../../../../services/teams.service';
 
+declare var jQuery : any;
 
 @Component({
   moduleId: module.id,
   selector: 'chat-component',
   styleUrls: ['./chat.component.css'],
   templateUrl: './chat.component.html',
-  providers: [ChatService]
 })
 export class ChatComponent implements OnInit{
-  private user: any;
-  private teams: any[];
-  private team: any;
 
   messages = [];
   connection;
   message;
   
+  @Input() team : any;
+  @Input() username : any;
+
   constructor(
     private chatService:ChatService,
-    private authService:AuthService,
-    private teamService:TeamsService
-  
+    private teamService:TeamsService  
   ) {}
 
   sendMessage(){
-    this.chatService.sendMessage(this.message);
+    this.teamService.saveMessage( this.team._id,this.message,this.username ).subscribe()
+    //this.chatService.sendMessage(this.message);
+    this.messages.push({
+      username:this.username,
+      text:this.message
+    })
     this.message = '';
+
+    var $target = $(".message-box")
+    $target.animate({scrollTop: 99999}, "fast");
   }
 
-  ngOnInit() {
-    this.authService.getProfile().subscribe( profile => {
-        this.user = profile.user;
-        this.teams = this.teamService.getValidTeams(profile.user.teams) ;
-        this.team = this.teams[0].team;
-        this.teamService.getUserTeams(this.team._id).subscribe( res => {
-          this.team = res.team;
-        },
-        err=>{
-          console.log(err);
-          return false;
-        });
-        
-        
-      },
-      err=>{
-        console.log(err);
-        return false;
-      })
-  }
-  
-  
+  ngOnInit() { }
 }

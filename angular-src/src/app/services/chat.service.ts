@@ -5,7 +5,7 @@ import * as io from 'socket.io-client';
 export class ChatService {
   private url = 'http://localhost:3000';  
   private socket;
-  
+
   sendMessage(message){
     this.socket.emit('add-message', message);    
   }
