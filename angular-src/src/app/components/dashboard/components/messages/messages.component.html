@@ -1,39 +1,57 @@
-<h2>Choose a team to open Chatbox with</h2>
-<div class="container-fluid fadeIn animated">
-
+<div class="container-fluid">
+    
     <div class="row">
-
-        
-        <div class="col-md-3">
-
-            <div class="menu">
-                <button class="btn btn-default dropdown-toggle btn-block" type="button" data-toggle="dropdown">Select a team
-                <span class="caret"></span></button>
-                <ul class="dropdown-menu btn-block">
-                    <li *ngFor="let team of teams; let i = index" >
-                        <a (click)="selectTeam(i)">{{team?.team?.team_name}}</a></li>
-                </ul>
-            </div>
-
-        </div>
-    </div>
-    <br>
-    <div class="row" >
-        <div class="col-md-3">
+        <div class="col-md-4">
             <div class="panel panel-default">
-                <div class="panel-body">     
-                   <br>
-                   <br> 
-                   <br>
-                   <br> 
-                   <br>
-                   <br> 
-                   <br>
-                   <br> 
-                   <br>
-                   <br> 
+                <div class="panel-body">
+                    <div class="chat-group-list">
+                        <h4>Teams list</h4>
+                        <div class="chat-group" (click)="openChatBox(0)">
+                            <img src="assets/images/profile.png" alt="">
+                            <p class="team-name">Team name <span class="badge">5</span></p>
+                        </div>
+                         <div class="chat-group" (click)="openChatBox(1)">
+                            <img src="assets/images/profile.png" alt="">
+                            <p class="team-name">Team name</p>
+                        </div>
+                        <div class="chat-group" (click)="openChatBox(2)">
+                            <img src="assets/images/profile.png" alt="">
+                            <p class="team-name">Team name</p>
+                        </div>
+                    </div>
+                </div>
+            </div>    
+        </div>
+
+
+        <div class="col-md-8" id="chat-box-list">
+            <div class="panel panel-default" id="0">
+                <div class="panel-body">
+                    <h4>Chat box 1</h4>
+                    <div class="chat-box">
+                        <chat-component></chat-component>    
+                    </div>
                 </div>
             </div>
-        </div>
+            
+            <div class="panel panel-default" id="1">
+                <div class="panel-body">
+                    <h4>Chat box 2</h4>
+                    <div class="chat-box">
+                        <chat-component></chat-component>    
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel panel-default" id="2">
+                <div class="panel-body">
+                    <h4>Chat box 3</h4>
+                    <div class="chat-box">
+                        <chat-component></chat-component>    
+                    </div>
+                </div>
+            </div>
+
+        </div>    
     </div>
 </div>

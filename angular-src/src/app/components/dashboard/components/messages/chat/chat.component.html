@@ -1,46 +1,18 @@
-<!DOCTYPE html>
-<html lang="en">
 
-<head>
-    <meta charset="UTF-8">
-    <title>Chatty</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">  
-</head>
-
-<body>
-    <div id="app">
-
-        <div class="col-md-2 userlist">
-            <div class="panel-heading">
-                <span class="glyphicon glyphicon-user"></span> Online (2)
-            </div>
-            <ul class="chat">
-                <li>User 1</li>
-                <li>User 2</li>
-            </ul>
-        </div>
-
-        <div class="col-md-10">
-            <div id="livechat-container">
-                <div class="panel panel-primary">
-                    <div class="panel-heading">
-                        <span class="glyphicon glyphicon-comment"></span>Chatbox
-                    </div>
-                    <div class="panel-body">
-                        <ul>
-                            <div *ngFor="let message of messages">
-                              @{{this.user.username}} : {{message.text}}
-                            </div>
-                        </ul>
-                    </div>
-                    <div class="panel-footer">
-                            <input type="text" [(ngModel)]="message" class="form-control input-lg" placeholder="Type chat here" />
-                        <button (click)="sendMessage()">Send</button>
-                    </div>
-
-
-                </div>
-            </div>
-        </div>
+<div class="message-box">
+  <div class="message" *ngFor="let message of messages">
+    <div class="message-bubble" >
+      {{message.text}}  
     </div>
+    <p>sender name</p>
+  </div>  
+</div>
 
+<div class="input-group">
+<input [(ngModel)]="message"  type="text" class="input-box form-control" placeholder="Type here...">
+      <span class="input-group-btn">
+        <button (click)="sendMessage()" class="send btn btn-secondary" type="button">
+          <i class="fa fa-chevron-right"></i>
+        </button>
+      </span>
+</div>

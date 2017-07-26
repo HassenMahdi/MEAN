@@ -1,0 +1,72 @@
+.main{
+    position: absolute;
+    background-color: #333333;
+    min-height: 100%;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    margin-top: -55px;
+    padding-top: 0px;
+    height: 100%;
+}
+
+.c1{
+    color: white;
+    min-height: 100%;
+    display: table
+}
+
+.c1 > div {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.c1 h2 span{
+    color: yellow;
+}
+
+.c2{
+    background: white;
+}
+
+.r1 > h2 {
+    color: grey;
+}
+
+.r1{
+    color: #333333;
+    padding-top: 50px;
+    padding-bottom: 50px; 
+}
+
+.r1 > div{
+    padding-top: 60px; 
+    padding-bottom: 60px; 
+}
+
+.r1 > div p{
+    color: grey;
+}
+
+.r1 i{
+    font-size: 120px;
+    padding-bottom: 0px;
+}
+
+.c3{
+    color: white;
+    width: 100%;
+    background: #fefe7c;
+}
+
+.gsbtn{
+    padding: 5px 50px 5px 50px;
+    border-radius: 0px;
+    background: rgba(0 , 0, 0, 0);
+    color: lightblue;
+    border: 0;
+}
+
+.gsbtn:hover{
+    color: #0db5ec;
+}

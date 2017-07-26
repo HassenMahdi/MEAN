@@ -157,7 +157,7 @@
 }
 
 .sidebar-profile-pic{
-    border-radius: 360px;
+    /*border-radius: 360px;*/
     flex: left;
     width: 55px;
     height: 55px;
@@ -186,10 +186,11 @@
 #menu-toggle{
     font-size: 32px;
     position: fixed;
-    top: 0px;
+    top: -2px;
     left: 10px;
     display:block;
     z-index: 1030;
+    filter: brightness(1000) grayscale(1000);
 }
 #menu-toggle.active{
     display: block;

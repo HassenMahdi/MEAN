@@ -31,9 +31,9 @@
     "knockout": "^3.4.2",
     "mydatepicker": "^2.0.25",
     "rxjs": "^5.0.1",
+    "survey-angular": "0.12.6",
+    "surveyjs-editor": "0.12.12",
     "socket.io": "^2.0.3",
-    "survey-angular": "^0.12.6",
-    "surveyjs-editor": "^0.12.12",
     "toastr-ng2": "^4.1.1",
     "ts-helpers": "^1.1.1",
     "zone.js": "^0.7.2"

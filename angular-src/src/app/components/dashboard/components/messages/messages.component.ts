@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { ViewChild } from '@angular/core';
 import { AuthService } from '../../../../services/auth.service'
 import { TeamsService } from '../../../../services/teams.service'
+
+declare var jQuery : any;
 
 
 @Component({
@@ -10,7 +11,6 @@ import { TeamsService } from '../../../../services/teams.service'
   styleUrls: ['./messages.component.css']
 })
 export class MessagesComponent implements OnInit {
-  @ViewChild('myModal') modal;
 
   private user: any;
   private teams: any[];
@@ -58,6 +58,11 @@ export class MessagesComponent implements OnInit {
           console.log(err);
           return false;
         });
+  }
+
+  openChatBox(i){
+    $('#chat-box-list > div').hide();
+    $('#chat-box-list > div[id="'+i+'"]').show();
   }
 
 }
