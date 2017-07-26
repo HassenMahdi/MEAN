@@ -25,6 +25,7 @@ export class ChatComponent implements OnInit{
   ) {}
 
   sendMessage(){
+    if ( this.message == null ) return;
     this.teamService.saveMessage( this.team._id,this.message,this.username ).subscribe()
     //this.chatService.sendMessage(this.message);
     this.messages.push({
@@ -34,7 +35,7 @@ export class ChatComponent implements OnInit{
     this.message = '';
 
     var $target = $(".message-box")
-    $target.animate({scrollTop: 99999}, "fast");
+    $target.animate({scrollTop: 9999999 }, "fast");
   }
 
   ngOnInit() { }
