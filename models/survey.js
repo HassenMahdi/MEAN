@@ -71,7 +71,7 @@ module.exports.getSurveyByOwnerId = function (owner_id,callback){
     Survey.find(query)
         .populate('owner_id')
         .populate('team_id')
-        .populate('submissions')
+        .populate('submissions.submitter_id','username name')
         .exec(callback);
 }
 
@@ -80,7 +80,7 @@ module.exports.getSurveyByDate = function(owner_id,date,callback){
     Survey.find(query).populate('owner_id')
         .populate('owner_id')
         .populate('team_id')
-        .populate('submissions')
+        .populate('submitter_id')
         .exec(callback);
 }
 

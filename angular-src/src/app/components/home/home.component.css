@@ -60,13 +60,16 @@
 }
 
 .gsbtn{
+    margin-top: 30px;
     padding: 5px 50px 5px 50px;
-    border-radius: 0px;
+    border-radius: 360px;
     background: rgba(0 , 0, 0, 0);
-    color: lightblue;
-    border: 0;
+    color: lightgrey;
+    border: 1px solid lightgrey;
+    transition: all 0.2s ease-in;
 }
 
 .gsbtn:hover{
-    color: #0db5ec;
+    background: white;
+    color: #222222;
 }

@@ -85,6 +85,59 @@ export class SurveysService {
     })
     return surveys;
   }
+
+  formatAnswersTable(questions, subs){
+
+    var table = new Array(subs.length);
+    for (var i = 0; i < subs.length; i++) {
+      table[i] = new Array(questions.length);
+    }
+    var qList=[];
+
+    try{
+      questions.pages.forEach(page => {
+        page.elements.forEach(element => {
+          qList.push(element.name);
+        });
+      });
+
+      qList.forEach((question,col) => {
+        subs.forEach((sub,row) => {
+
+          var an = sub.answers;
+
+          var answers =[]
+
+          for (var key in an) {
+            for( var key2 in an[key]){
+                answers.push({
+                q: key2,
+                a: an[key][key2]
+              })
+            }
+          }
+
+          for( var i = 0 ; i < answers.length ; i++ )
+          { var answer = answers[i];
+            if ( answer.q == question)
+            {
+              table[row][col] = answer.a;
+              sub.answers.splice(i,1);
+              break;
+            }
+          }
+        });
+      });
+    }
+    catch(e){
+      console.log("Bad survey format")
+    }
+    
+    return {
+       answers : table,
+       questions : qList,
+    };
+  }
   
 
 }

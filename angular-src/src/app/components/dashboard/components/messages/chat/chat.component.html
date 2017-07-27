@@ -1,7 +1,7 @@
 
 <div class="message-box">
 
-  <div class="message" *ngFor="let message of team.messages">
+  <div *ngFor="let message of team.messages" [ngClass]="{'message-own':message.username == username, 'message':message.username != username}">
     <div class="message-bubble" >
       {{message.text}}
     </div>
@@ -9,7 +9,7 @@
   </div>
 
 
-  <div class="message" *ngFor="let message of messages">
+  <div *ngFor="let message of messages" [ngClass]="{'message-own':message.username == username, 'message':message.username != username}">
     <div class="message-bubble" >
       {{message.text}}
     </div>

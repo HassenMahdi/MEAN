@@ -1,5 +1,5 @@
 <div class="container-fluid fadeIn animated">
-    <div class="row ">
+    <div class="row " *ngIf="displayesurveys?.length > 0 ">
         <div class="col-md-12">
             <div class="panel panel-default">
                 <div class="panel-body">
@@ -37,7 +37,7 @@
                     <br>
                     
                     
-                    <ul class="surveyslist fadeIn animated" *ngIf="displayesurveys">
+                    <ul class="surveyslist fadeIn animated" >
                         <li *ngFor="let survey of displayesurveys; let i = index" class="{{survey?.activeclass}}">
                             <div>
                                 <h4>{{survey?.name}}</h4>
@@ -57,7 +57,7 @@
         </div>
     </div>
 
-    <div class="row ">
+    <div class="row " *ngIf="displayanswered?.length > 0 ">
         <div class="col-md-12">
             <div class="panel panel-default">
                 <div class="panel-body">
@@ -95,7 +95,7 @@
                     <br>
                     
                     
-                    <ul class="surveyslist fadeIn animated" *ngIf="displayanswered">
+                    <ul class="surveyslist fadeIn animated">
                         <li *ngFor="let survey of displayanswered; let i = index" class="{{survey?.activeclass}}">
                             <div>
                                 <h4>{{survey?.name}}</h4>

@@ -24,6 +24,10 @@ export class HistorySurveyComponent implements OnInit {
   surveys:any[];
   survey: any;
   questions:any;
+  qList:any;
+  subs:any[];
+  answers:any[];
+  answersTable:any[];
 
 
   ngOnInit() {
@@ -48,7 +52,27 @@ export class HistorySurveyComponent implements OnInit {
     e.preventDefault();
     this.survey = this.surveys[index];
     this.questions = this.survey.questions[0];
+    this.subs = this.survey.submissions;
+    this.answers = [];
+
+    var res = this.surveysService.formatAnswersTable(this.questions,this.subs);
+    this.qList = res.questions;
+    this.answersTable = res.answers;
+
     }
+
+  selectUserAnswer(index){
+    var an = this.subs[index].answers
+    this.answers =[]
+    for (var key in an) {
+      for( var key2 in an[key]){
+        this.answers.push({
+          q: key2,
+          a: an[key][key2]
+        })
+      }
+    }
+  }
 
   formatSurveys(surveys:any[]){
     if (surveys == null ) return;

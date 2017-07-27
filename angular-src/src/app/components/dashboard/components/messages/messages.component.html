@@ -1,6 +1,6 @@
-<div class="container-fluid">
+<div *ngIf="teams" class="container-fluid fadeIn animated">
     
-    <div class="row">
+    <div class="row fadeIn animated">
         <div class="col-md-4">
             <div class="panel panel-default">
                 <div class="panel-body">
@@ -16,7 +16,7 @@
         </div>
 
 
-        <div class="col-md-8" id="chat-box-list">
+        <div class="col-md-8" id="chat-box-list" >
             <div *ngFor="let team of teams; let i = index" class="panel panel-default" id="{{i}}">
                 <div class="panel-body">
                     <h4>Chat box ({{team.team.team_name}})</h4>

@@ -100,6 +100,6 @@ module.exports.getTeamTokens = function(team_id,callback){
 }
 
 module.exports.addMessage = function(team_id,message,callback){
-    Team.findOneAndUpdate({ _id: team_id }, { $push:{ messages:message }},callback)
+    Team.findOneAndUpdate({ _id: team_id },{ $push:{ messages:message }},callback)
 }
 
