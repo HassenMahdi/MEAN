@@ -6,15 +6,15 @@ export class ChatService {
   private url = 'http://localhost:3000';  
   private socket;
 
-  sendMessage(message){
-    this.socket.emit('add-message', message);    
+  sendMessage(tweet){
+    this.socket.emit('add-message', tweet);    
   }
   
-  getMessages(username, index) {
+  getMessages(username, teamname) {
     let observable = new Observable(observer => {
       this.socket = io(this.url);
-      this.socket.emit('new user',{username: username, index:index});
-      this.socket.on('message', (data) => {
+      this.socket.emit('new user',{username: username, teamname:teamname});
+      this.socket.on('tweet', (data) => {
         observer.next(data);    
       });
       return () => {

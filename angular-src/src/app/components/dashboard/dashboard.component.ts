@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core'
+import { Component, OnInit } from '@angular/core'
 import { StatsComponent } from './components/stats/stats.component'
 import { environment } from 'environments/environment'
 import { FirebaseService } from '../../services/firebase.service'

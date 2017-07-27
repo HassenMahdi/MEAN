@@ -14,6 +14,8 @@ export class ChatComponent implements OnInit, OnDestroy{
   messages = [];
   connection;
   message;
+  tweets =[];
+  tweet;
   
   @Input() team : any;
   @Input() username : any;
@@ -25,7 +27,7 @@ export class ChatComponent implements OnInit, OnDestroy{
 
   sendMessage(){
     this.teamService.saveMessage( this.team._id,this.message,this.username ).subscribe()
-    //this.chatService.sendMessage(this.message);
+    this.chatService.sendMessage(this.message);
     this.messages.push({
       username:this.username,
       text:this.message

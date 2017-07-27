@@ -9,12 +9,20 @@
   </div>
 
 
-  <div class="message" *ngFor="let message of messages">
+  <div class="message" id="contain" *ngFor="let message of messages">
     <div class="message-bubble" >
       {{message.text}}
     </div>
     <p>@{{message.username}}</p>
-  </div>  
+  </div> 
+  <div class="tweet" id="contain" *ngFor="let tweet of tweets">
+    <div class="message-bubble" >
+      {{tweet.text}}
+    </div>
+    <p>aaa</p>
+  </div> 
+  
+  
 </div>
 
 <div class="input-group">
