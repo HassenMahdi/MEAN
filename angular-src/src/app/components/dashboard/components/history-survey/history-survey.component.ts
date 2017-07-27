@@ -74,6 +74,30 @@ export class HistorySurveyComponent implements OnInit {
     }
   }
 
+  deleteSurvey(e:Event,i){
+    e.preventDefault();
+    this.survey = this.surveys[i];
+    console.log(this.survey._id)
+  }
+
+  execDeleteSurvey(e:Event){
+    e.preventDefault()
+    var index = this.surveys.findIndex(survey => survey._id == this.survey._id)
+
+    this.surveysService
+      .deleteSurvey(this.surveys[index]._id)
+        .subscribe(res=>{
+          if(res.success)
+          {
+            this.toastr.success("Survey deleted.","Done")
+            this.surveys.splice(index,1)
+          }else{
+            this.toastr.error("Sorry we couldn't delete the survey.","Oops")
+          }
+        })
+
+  }
+
   formatSurveys(surveys:any[]){
     if (surveys == null ) return;
     surveys.forEach(element => {

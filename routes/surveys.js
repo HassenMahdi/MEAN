@@ -134,4 +134,18 @@ router.get('/get/date/:id/:date',(req,res,next)=>{
 
 })
 
+router.delete('/:id',(req,res,next)=>{
+    let id = req.params.id;
+    
+    Survey.deleteById(id,(err,survey)=>{
+        if(err){
+            res.json({success:false,msg:"Survey not deleted"})
+        }else if(survey){
+            res.json({success:true,msg:"Survey deleted"})
+        }else{
+            res.json({success:false,msg:"Survey not deleted"})
+        }
+    })
+})
+
 module.exports = router;

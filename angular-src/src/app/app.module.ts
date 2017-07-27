@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { RouterModule , Routes } from '@angular/router';
 import { ToastrModule } from 'toastr-ng2';
+import { ChartsModule } from 'ng2-charts';
 import { MyDatePickerModule } from 'mydatepicker';
 import { environment } from 'environments/environment'
 
@@ -94,6 +95,7 @@ const appRoutes : Routes = [
     RouterModule.forRoot(appRoutes),
     ToastrModule.forRoot(),
     MyDatePickerModule,
+    ChartsModule
   ],
   providers: [
     ValidateService,

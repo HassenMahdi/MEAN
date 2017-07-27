@@ -1,12 +1,126 @@
 <div class="container-fluid fadeIn animated">
   
   <div class="row">
+      <div class="col-xs-12 col-sm-6 col-md-3">
+        <div class="panel panel-default">
+          <div class="panel-body box b1">
+            <h4>Activity</h4>
+            <p>people who've been active today</p>
+            <div class="big_number">
+               <h1><b>12</b></h1>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-xs-12 col-sm-6 col-md-3">
+        <div class="panel panel-default">
+          <div class="panel-body box b2">
+            <h4>Surveys</h4>
+            <p>Number of surveys open today</p>
+            <div class="big_number">
+               <h1><b>5</b></h1>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-xs-12 col-sm-6 col-md-3">
+        <div class="panel panel-default">
+          <div class="panel-body box b3">
+            <h4>Rooms</h4>
+            <p>Number of chat rooms active</p>
+            <div class="big_number">
+               <h1><b>10</b></h1>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-xs-12 col-sm-6 col-md-3">
+        <div class="panel panel-default">
+          <div class="panel-body box b4">
+             <h4>Rooms</h4>
+            <p>Number of chat rooms active</p>
+            <div class="big_number">
+               <h1><b>44</b></h1>
+            </div>
+          </div>
+        </div>
+      </div>
+  </div>
+  
+  <div class="row">
+    <!-- Second row -->
+      <div class="col-md-6">
+        <div class="panel panel-default">
+          <div class="panel-body box row2">
+             <h4>Statistics</h4>
+            <p>Number of chat rooms active</p>
+
+            <div style="display: block;">
+              <canvas baseChart  height="250"
+                          [datasets]="lineChartData"
+                          [labels]="lineChartLabels"
+                          [options]="lineChartOptions"
+                          [colors]="lineChartColors"
+                          [legend]="lineChartLegend"
+                          [chartType]="lineChartType"
+                          (chartHover)="chartHovered($event)"
+                          (chartClick)="chartClicked($event)"></canvas>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <div class="col-sm-6 col-md-3">
+        <div class="panel panel-default">
+          <div class="panel-body box row2">
+             <h4>Pie chart</h4>
+            <p>Number of chat rooms active</p>
+            <div style="display: block;">
+             <div style="display: block">
+              <canvas baseChart height="250"
+                          [options]="lineChartOptions"
+                          [data]="doughnutChartData"
+                          [labels]="doughnutChartLabels"
+                          [chartType]="doughnutChartType"
+                          (chartHover)="chartHovered($event)"
+                          (chartClick)="chartClicked($event)"></canvas>
+            </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-sm-6 col-md-3">
+        <div class="panel panel-default">
+          <div class="panel-body box row2">
+             <h4>Pie chart</h4>
+            <p>Number of chat rooms active</p>
+            <div style="display: block;">
+             <div style="display: block">
+              <canvas baseChart height="250"
+                          [options]="lineChartOptions"
+                          [data]="doughnutChartData"
+                          [labels]="doughnutChartLabels"
+                          [chartType]="doughnutChartType"
+                          (chartHover)="chartHovered($event)"
+                          (chartClick)="chartClicked($event)"></canvas>
+            </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+  </div>
+  
+
+  <div class="row">
 
       <div class="col-sm-6 col-md-6 col-lg-6">
         <div class="panel panel-default">
-          <div class="panel-body">
+          <div class="panel-body row3">
             
-            <h3>Active surveys</h3>
+            <h4>Active surveys</h4>
             <br>
             <p>People who submitted this survey</p><div class="percentage">(70%: 70 out of 100)</div>
             
@@ -65,14 +179,14 @@
       </div>
       <div class="col-sm-6 col-md-6 col-lg-6">
         <div class="panel panel-default">
-          <div class="panel-body">
-            <h3>Upcoming surveys</h3>
+          <div class="panel-body row3">
+            <h4>Upcoming surveys</h4>
             <br>
-            <div class="alert alert-warning">
+            <div class="alert alert-info">
               <p>No Survey have been created for Tomorrow( 24/7/2017 )</p>  
             </div>
-            <p>Click on the button bellow to create one.</p>
-            <button type="button" class="btn btn-default btn-block">Create</button>         
+            <p>Click <a [routerLink]="['../../dashboard/survey/create']"><b>here</b></a> to create one.</p>
+            
           </div>
         </div>
       </div>

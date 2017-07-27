@@ -27,3 +27,33 @@
 	border-radius: 0px;
 	background-color: #AAA;
 }
+
+.welcome{
+    background-color: #EEEEEE;
+    color: #555555;
+}
+
+.row1{
+    min-height: 100px;
+}
+
+.row2{
+    min-height: 300px;
+}
+
+.row3{
+    min-height: 250px;
+}
+
+.box > p{
+    color: grey; 
+}
+
+.box > h4{
+    margin-bottom: 5px;
+}
+
+.big_number{
+    color: lightgreen;
+    text-align: center;
+}

@@ -32,6 +32,11 @@ export class SurveysService {
       .map(res => res.json());
   }
 
+  deleteSurvey(survey_id){
+    return  this.http.delete('http://localhost:3000/surveys/'+survey_id)
+      .map(res => res.json());
+  }
+
   submitSurveyAnswers( survey_id, submitter_id, answers ){
     
     let body = {

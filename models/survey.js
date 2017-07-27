@@ -93,6 +93,10 @@ module.exports.addSurveySub = function(survey_id,sub,callback){
     Survey.findOneAndUpdate({ _id : survey_id },{ $push:{ submissions: sub} } , callback );
 };
 
+module.exports.deleteById = function(id, callback){
+    Survey.findByIdAndRemove({_id:id},callback);
+}
+
 var populateSurvey = function(){
     
 }

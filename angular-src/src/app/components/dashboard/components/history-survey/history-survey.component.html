@@ -50,7 +50,7 @@
                                     </div>
                                     <a data-toggle="modal" data-target="#myModalv" (click)="selectSurvey($event,i)" href="">Answers</a>
                                     <a data-toggle="modal" data-target="#myModal" (click)="selectSurvey($event,i)" href="">Preview</a> 
-                                    <a (click)="deleteSurvey($event,i)" href="">Delete</a>
+                                    <a data-toggle="modal" data-target="#myDeleteModal" (click)="deleteSurvey($event,i)" href="">Delete</a>
                                 </div>
                             </div>
                         </li>
@@ -109,18 +109,21 @@
                             </div>   
                         </div>
 
-                        <table class="table table-inverse">
-                            <tr>
-                                <th>Users</th>
-                                <th *ngFor="let q of qList">{{q}}</th>
-                            </tr>
-                            <tr *ngFor="let user of answersTable; let row = index">
-                                <td>{{subs[row]?.submitter_id?.name}}</td>
-                                <td *ngFor="let answer of user; let col = index">
-                                   {{answer}}
-                                </td>
-                                
-                            </tr>
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Users</th>
+                                    <th *ngFor="let q of qList">{{q}}</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let user of answersTable; let row = index">
+                                    <td>{{subs[row]?.submitter_id?.name}}</td>
+                                    <td *ngFor="let answer of user; let col = index">
+                                    {{answer}}
+                                    </td>  
+                                </tr>
+                            </tbody>
                         </table>
 
                     </div>
@@ -128,4 +131,29 @@
             </div>
         </div>
   </div>
+</div>
+
+<!-- Modal delete Survey -->
+<div class="modal fade" id="myDeleteModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title" id="myModalLabel">Removing survey</h4>
+            </div>            
+            <!-- Modal Body -->
+            <div class="modal-body">
+                <form class="form-horizontal" role="form" > 
+                <p style="text-align:center;"><img class="img-deleting" src="assets/images/deleting.png" alt="" width="100px" height="100px"> </p>    
+                <h3 style='color:red; text-align:center'>Are you sure you want to delete team ?</h3>
+                <h5 style='text-align:center'>It will not be part of your database anymore !</h5>
+            <!-- Modal Footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>   
+                <button (click)="execDeleteSurvey($event)" type="button" class="btn btn-primary" data-dismiss="modal">Yes, definitely</button>                   
+            </div>             
+                </form>                     
+            </div>
+        </div>
+    </div>
 </div>
