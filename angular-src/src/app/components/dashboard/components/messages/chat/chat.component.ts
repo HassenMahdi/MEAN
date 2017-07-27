@@ -10,11 +10,12 @@ declare var jQuery : any;
   styleUrls: ['./chat.component.css'],
   templateUrl: './chat.component.html',
 })
-export class ChatComponent implements OnInit{
-
+export class ChatComponent implements OnInit, OnDestroy{
   messages = [];
   connection;
   message;
+  tweets =[];
+  tweet;
   
   @Input() team : any;
   @Input() username : any;
@@ -27,16 +28,19 @@ export class ChatComponent implements OnInit{
   sendMessage(){
     if ( this.message == null ) return;
     this.teamService.saveMessage( this.team._id,this.message,this.username ).subscribe()
-    //this.chatService.sendMessage(this.message);
+    this.chatService.sendMessage(this.message);
     this.messages.push({
       username:this.username,
       text:this.message
     })
-    this.message = '';
-
+    this.message = '';  
     var $target = $(".message-box")
     $target.animate({scrollTop: 9999999 }, "fast");
   }
 
   ngOnInit() { }
+  ngOnDestroy() {
+    this.connection.unsubscribe(this.username);
+  } 
+
 }

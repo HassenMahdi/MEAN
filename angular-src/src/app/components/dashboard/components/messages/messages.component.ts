@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../../../services/auth.service'
 import { TeamsService } from '../../../../services/teams.service'
+import { ChatService } from '../../../../services/chat.service'
 
 declare var jQuery : any;
 
@@ -17,24 +18,20 @@ export class MessagesComponent implements OnInit {
   private team: any;
 
   selectedTeam = 0;
+  connection;
+  message;
+  messages=[];
 
   constructor(
     private authService: AuthService,
-    private teamService: TeamsService
+    private teamService: TeamsService,
+    private chatService: ChatService
   ) { }
 
   ngOnInit() {
     this.authService.getProfile().subscribe( profile => {
         this.user = profile.user;
         this.teams = this.teamService.getValidTeams(profile.user.teams) ;
-        this.team = this.teams[0].team;
-        this.teamService.getUserTeams(this.team._id).subscribe( res => {
-          this.team = res.team;
-        },
-        err=>{
-          console.log(err);
-          return false;
-        });
         
         
       },
@@ -52,7 +49,6 @@ export class MessagesComponent implements OnInit {
           this.selectedTeam = index;
           console.log('index');
           console.log(this.selectedTeam);
-          window.open('chat','_blank');
         },
         err=>{
           console.log(err);
@@ -61,6 +57,23 @@ export class MessagesComponent implements OnInit {
   }
 
   openChatBox(i){
+    this.team=null;
+    
+    this.teamService.getUserTeams(this.teams[i].team._id).subscribe( res => {
+          this.team = res.team;
+          this.selectedTeam = i;
+          console.log('index');
+          console.log(this.selectedTeam);
+          this.connection = this.chatService.getMessages(this.user.username, this.teams[this.selectedTeam].team.team_name).subscribe(message => {
+          this.messages.push(message);
+          })
+          
+
+        },
+        err=>{
+          console.log(err);
+          return false;
+        });
     $('#chat-box-list > div').hide();
     $('#chat-box-list > div[id="'+i+'"]').show();
   }
