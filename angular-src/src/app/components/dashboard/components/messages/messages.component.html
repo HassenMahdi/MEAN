@@ -1,14 +1,14 @@
 <div *ngIf="teams" class="container-fluid fadeIn animated">
     
     <div class="row fadeIn animated">
-        <div class="col-md-4">
+        <div class="col-sm-4">
             <div class="panel panel-default">
                 <div class="panel-body">
                     <div class="chat-group-list">
                         <h4>Teams list</h4>
                         <div *ngFor="let team of teams; let i = index" class="chat-group" (click)="openChatBox(i)">
                             <img src="assets/images/profile.png" alt="">
-                            <p class="team-name">{{team.team.team_name}} <span class="badge"></span></p>
+                            <p class="team-name">{{team.team.team_name}}</p>
                         </div>
                     </div>
                 </div>
@@ -16,7 +16,7 @@
         </div>
 
 
-        <div class="col-md-8" id="chat-box-list" >
+        <div class="col-sm-8" id="chat-box-list" >
             <div *ngFor="let team of teams; let i = index" class="panel panel-default" id="{{i}}">
                 <div class="panel-body">
                     <h4>Chat box ({{team.team.team_name}})</h4>
