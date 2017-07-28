@@ -41,7 +41,7 @@ export class TeamsComponent implements OnInit {
         this.teams = this.teamService.getValidTeams(profile.user.teams) ;
         console.log(this.teams);
         this.team = this.teams[0].team;
-        this.teamService.getUserTeams(this.team._id).subscribe( res => {
+        this.teamService.getUserTeam(this.team._id).subscribe( res => {
           this.team = res.team;
         },
         err=>{
@@ -60,7 +60,7 @@ export class TeamsComponent implements OnInit {
   selectTeam(index){
     this.team=null;
     
-    this.teamService.getUserTeams(this.teams[index].team._id).subscribe( res => {
+    this.teamService.getUserTeam(this.teams[index].team._id).subscribe( res => {
           this.team = res.team;
           this.selectedTeam = index;
           console.log('debugging');
@@ -244,7 +244,7 @@ export class TeamsComponent implements OnInit {
       if (data.success){
         this.user.teams.splice(this.selectedTeam, 1);
         console.log(this.user.teams);
-        this.teamService.getUserTeams(this.user.teams[0].team._id).subscribe( res => {
+        this.teamService.getUserTeam(this.user.teams[0].team._id).subscribe( res => {
           console.log('debug');
           console.log(res);
           this.team = res.team;

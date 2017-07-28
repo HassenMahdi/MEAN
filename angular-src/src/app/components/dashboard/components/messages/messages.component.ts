@@ -44,7 +44,7 @@ export class MessagesComponent implements OnInit {
   selectTeam(index){
     this.team=null;
     
-    this.teamService.getUserTeams(this.teams[index].team._id).subscribe( res => {
+    this.teamService.getUserTeam(this.teams[index].team._id).subscribe( res => {
           this.team = res.team;
           this.selectedTeam = index;
           console.log('index');
@@ -59,7 +59,7 @@ export class MessagesComponent implements OnInit {
   openChatBox(i){
     this.team=null;
     
-    this.teamService.getUserTeams(this.teams[i].team._id).subscribe( res => {
+    this.teamService.getUserTeam(this.teams[i].team._id).subscribe( res => {
           this.team = res.team;
           this.selectedTeam = i;
           console.log('index');

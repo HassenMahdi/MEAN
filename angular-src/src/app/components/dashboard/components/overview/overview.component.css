@@ -12,14 +12,14 @@
 .profiles-row::-webkit-scrollbar-track
 {
 	border-radius: 0;
-	background-color: #F5F5F5;
+	background-color: white;
 }
 
 .profiles-row::-webkit-scrollbar
 {
     height: 3px;
 	width: 2px;
-	background-color: #F5F5F5;
+	background-color: white;
 }
 
 .profiles-row::-webkit-scrollbar-thumb
@@ -56,4 +56,8 @@
 .big_number{
     color: lightgreen;
     text-align: center;
+}
+
+.percentage{
+    color: grey;
 }

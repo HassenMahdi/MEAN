@@ -25,22 +25,39 @@ export class ChatComponent implements OnInit, OnDestroy{
     private teamService:TeamsService  
   ) {}
 
-  sendMessage(){
-    if ( this.message == null ) return;
-    this.teamService.saveMessage( this.team._id,this.message,this.username ).subscribe()
-    this.chatService.sendMessage(this.message);
-    this.messages.push({
-      username:this.username,
-      text:this.message
+  ngOnInit(){
+    
+    scrollDown();
+
+    this.connection = this.chatService.getMessages(this.username, this.team._id).subscribe(message => {
+          this.messages.push( message );
+          scrollDown();
     })
-    this.message = '';  
-    var $target = $(".message-box")
-    $target.animate({scrollTop: 9999999 }, "fast");
+    
   }
 
-  ngOnInit() { }
+  sendMessage(){
+    if ( this.message == null || this.message == "" ) return;
+
+    var tweet = {
+      team: this.team._id,
+      username: this.username,
+      text: this.message,
+    }
+    
+    this.teamService.saveMessage(this.team._id, this.message , this.username ).subscribe()
+    this.chatService.sendMessage(tweet);
+    
+    this.message = '';  
+  }
+
   ngOnDestroy() {
+    if(this.connection != null )
     this.connection.unsubscribe(this.username);
   } 
 
+}
+
+function scrollDown(){
+    $(".message-box").animate({scrollTop: 99999 }, "slow")
 }

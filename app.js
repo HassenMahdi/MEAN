@@ -112,8 +112,7 @@ io.on('connection', (socket) => {
     
       // send messages
       socket.on('add-message', (message) => {
-        console.log('debug');
-          io.emit('message', {type:'new-message', text: message});    
+          io.to(message.team).emit('tweet', { text: message.text , username: message.username})
         });
       //TODO: Switch room 
 

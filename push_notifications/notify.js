@@ -25,9 +25,6 @@ module.exports.sendServerStart = function(){
             icon: 'images/icon.png',
         },    
     };
-    
-  
-    messaging.sendToDevice(['fefRKVTSh4g:APA91bHdrQhYiuQOe560URA6bhf9txRadfKJYpPdlnlAmDze0SBB4IjxrKaQcLPxSKB4Zfly3I7ZN0snTWJqoycIHv1lnLnvnUzqhQi45BKrPRep54_Oj7NVbY-gPE0prL73u8zRYCoJ'],payload)
 
     messaging.sendToTopic('/topics/dev',payload)
     .then(function(response) {
@@ -41,5 +38,6 @@ module.exports.sendServerStart = function(){
 }
 
 module.exports.sendNotifById = function(token_list,payload){
+    if ( token_list == null ) return;
     messaging.sendToDevice(token_list,payload)
 }

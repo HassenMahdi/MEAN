@@ -6,7 +6,7 @@ export class TeamsService {
 
   constructor(private http:Http) { }
 
-  getUserTeams(team_id){
+  getUserTeam(team_id){
     //console.log('http://localhost:3000/teams/get/'+team_id);
     return  this.http.get('http://localhost:3000/teams/get/'+ team_id )
       .map(res => res.json());

@@ -122,7 +122,7 @@
             
             <h4>Active surveys</h4>
             <br>
-            <p>People who submitted this survey</p><div class="percentage">(70%: 70 out of 100)</div>
+            <p>People who submitted this survey <span class="percentage">(70%)</span></p>
             
             <div class="profiles-row">
               <div class="profile">
@@ -150,28 +150,9 @@
                 <img width="50px" height="50px" src="https://s3.amazonaws.com/whisperinvest-images/default.png" alt="pic">
               </div>
 
-              <div class="profile">
-                <img width="50px" height="50px" src="https://s3.amazonaws.com/whisperinvest-images/default.png" alt="pic">
-              </div>
-
-              <div class="profile">
-                <img width="50px" height="50px" src="https://s3.amazonaws.com/whisperinvest-images/default.png" alt="pic">
-              </div>
-
-              <div class="profile">
-                <img width="50px" height="50px" src="https://s3.amazonaws.com/whisperinvest-images/default.png" alt="pic">
-              </div>
-
-              <div class="profile">
-                <img width="50px" height="50px" src="https://s3.amazonaws.com/whisperinvest-images/default.png" alt="pic">
-              </div>
-
-              <div class="profile">
-                <img width="50px" height="50px" src="https://s3.amazonaws.com/whisperinvest-images/default.png" alt="pic">
-              </div>
             </div>
 
-            <button type="button" class="btn btn-default btn-block">Preview</button>         
+            <p>Click <a [routerLink]="['../../dashboard/survey/history']"><b>here</b></a> to see all active surveys.</p>
 
           </div>
           
@@ -183,7 +164,10 @@
             <h4>Upcoming surveys</h4>
             <br>
             <div class="alert alert-info">
-              <p>No Survey have been created for Tomorrow( 24/7/2017 )</p>  
+              <h4><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> <b>You should probably know</b></h4>
+              <p>
+                No Survey have been created for the future
+              </p>  
             </div>
             <p>Click <a [routerLink]="['../../dashboard/survey/create']"><b>here</b></a> to create one.</p>
             

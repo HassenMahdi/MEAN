@@ -27,8 +27,7 @@
       ],
       "scripts": [
         "../node_modules/dateformat/lib/dateformat.js",
-        "assets/js/main.js",
-        "../node_modules/chart.js/src/chart.js"
+        "assets/js/main.js"
         ],
       "environments": {
         "source": "environments/environment.ts",
