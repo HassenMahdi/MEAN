@@ -22,7 +22,7 @@ import { ValidateService } from './services/validate.service';
 import { AuthService } from './services/auth.service';
 import { FirebaseService } from './services/firebase.service';
 import { ChatService } from './services/chat.service'
-
+import { StatService } from './services/stat.service'
 
 import { AuthGuard } from './guards/auth.guard';
 import { ViewContainerRef } from '@angular/core';
@@ -40,6 +40,9 @@ import { AnswerSurveyComponent } from './components/dashboard/components/answer-
 import { EditorSurveyComponent } from './components/dashboard/components/editor-survey/editor-survey.component';
 import { TakeSurveyComponent } from './components/dashboard/components/take-survey/take-survey.component';
 import { ChatComponent } from './components/dashboard/components/messages/chat/chat.component';
+import { ChartConnTodComponent } from './components/dashboard/components/overview/components/chart-conn-tod/chart-conn-tod.component';
+import { UpcomingSurveysComponent } from './components/dashboard/components/overview/components/upcoming-surveys/upcoming-surveys.component';
+import { ActiveSurveysComponent } from './components/dashboard/components/overview/components/active-surveys/active-surveys.component';
 
 const appRoutes : Routes = [
   {path:'' , component: HomeComponent},
@@ -86,7 +89,10 @@ const appRoutes : Routes = [
     AnswerSurveyComponent,
     EditorSurveyComponent,
     TakeSurveyComponent,
-    ChatComponent
+    ChatComponent,
+    ChartConnTodComponent,
+    UpcomingSurveysComponent,
+    ActiveSurveysComponent
   ],
   imports: [
     BrowserModule,
@@ -104,7 +110,8 @@ const appRoutes : Routes = [
     TeamsService,
     SurveysService,
     FirebaseService,
-    ChatService
+    ChatService,
+    StatService
   ],
   bootstrap: [
     AppComponent

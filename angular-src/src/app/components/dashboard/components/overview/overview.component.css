@@ -58,6 +58,15 @@
     text-align: center;
 }
 
+.big_number h1{
+    min-height: 60px;
+}
+
+
 .percentage{
     color: grey;
+}
+
+.loading{
+    color: lightgrey;
 }

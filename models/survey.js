@@ -97,6 +97,12 @@ module.exports.deleteById = function(id, callback){
     Survey.findByIdAndRemove({_id:id},callback);
 }
 
+module.exports.findActive = function(team_list,currentdate,callback){
+    Survey.find({'team_id':{$in : team_list }},'name subject team_id owner_id begindate enddate')
+        .populate('team_id','team_name')
+        .populate('owner_id','name username')
+        .exec(callback)
+}
+
 var populateSurvey = function(){
-    
 }

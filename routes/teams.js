@@ -94,7 +94,6 @@ router.post('/members',(req,res,next)=>{
                         if(team){
                             User.addTeam(member_id, team_id, leader, (err,user)=>{
                                 res.json({user:user,team:team,success:true,msg:"Member "+user.username+" added to team "+team.team_name});
-                                if (user.regtoken)
                                 notify.sendNotifById(user.regtoken , {
                                     notification:{
                                         title:"You've been added to team " +team.team_name,
@@ -129,7 +128,6 @@ router.delete('/members',(req,res,next)=>{
         else
             User.removeTeam(member_id, team_id,(err,user)=>{
                     res.json({user:user,team:team,success:true,msg:"Member deleted"});
-                    if (user.regtoken)
                     notify.sendNotifById(user.regtoken , {
                                     notification:{
                                         title:"You are no longer member of " +team.team_name,
@@ -155,7 +153,6 @@ router.delete('/leaders',(req,res,next)=>{
         else
             User.removeTeam(leader_id, team_id,(err,user)=>{
                     res.json({user:user,team:team,success:true,msg:"Leader deleted"});
-                    if (user.regtoken)
                     notify.sendNotifById(user.regtoken , {
                                     notification:{
                                         title:"You are no longer member of " +team.team_name,
@@ -292,7 +289,6 @@ router.post('/graduate',(req,res,next)=>{
         else{
             User.graduateMember(member_id, team_id,(err,user)=>{
                     res.json({user:user,team:team,success:true,msg:"Updated"});
-                    if (user.regtoken)
                     notify.sendNotifById(user.regtoken , {
                                     notification:{
                                         title:"You've been assigned as leader to " +team.team_name,

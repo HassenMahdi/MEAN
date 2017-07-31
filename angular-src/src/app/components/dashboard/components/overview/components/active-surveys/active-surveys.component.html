@@ -1,0 +1,44 @@
+<h4>Active surveys 
+  <span class="fadeInUp animated" *ngIf="activesurveys?.length>0">
+    ({{activesurveys?.length}})
+  </span>
+</h4>
+<br>
+
+
+<div *ngIf="activesurveys==null">
+  <div class="loading">
+    fetching data...
+  </div>
+</div>
+
+<div class="fadeInUp animated" *ngIf="activesurveys!=null">
+
+  <div class="survey-list" *ngIf="activesurveys.length>0">
+    <div class="survey" *ngFor="let survey of activesurveys">
+      <h4 class="survey-name">{{survey.name}}</h4>
+      <div class="survey-date">
+        {{survey.begindate}}
+      </div>
+      <div class="survey-teams" *ngFor="let team of survey.team_id">
+        {{team.team_name}} 
+      </div>
+      <br>
+      <div class="survey-creator">
+        @{{survey.owner_id.username}}  
+      </div>
+    </div>
+    <p>Click <a [routerLink]="['../../dashboard/survey/take']"><b>here</b></a> to see take the survey.</p>    
+  </div>
+
+  <div *ngIf="activesurveys.length==0">
+    <div class="alert alert-info">
+      <h4><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> <b>You should probably know</b></h4>
+      <p>
+        No survey are available for the momonet.
+      </p>  
+    </div>
+    <p>Click <a [routerLink]="['../../dashboard/survey/take']"><b>here</b></a> to create a survey.</p>    
+  </div>
+
+</div>

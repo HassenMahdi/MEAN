@@ -20,9 +20,7 @@
     </div>
     <br>
     <div *ngIf="!team">
-        <div id="loading-team">
-            <img src="assets/images/64x64/Preloader_2.gif" alt="">
-        </div>
+        
     </div>
     <div *ngIf="team" class="fadeInUp animated">
     <div class="row" >
@@ -31,7 +29,7 @@
                 <div class="panel-body">
     
                     <div class="team-image">
-                        <img src="assets/images/logo_team.png" alt="This team's image" width="100px" height="100px"/>
+                        <img src="assets/images/group.png" alt="This team's image" width="100px" height="100px"/>
                     </div>        
                     <div class="team-info">
                         <h3><b>{{team?.team_name}}</b></h3>
@@ -63,13 +61,15 @@
                     <a href="#" data-toggle="modal" data-target="#addLeader"><span class="glyphicon glyphicon-plus"></span> Add a new leader</a>
                     <ul class="profiles-row">
                         <li class="profile" *ngFor="let leader of team?.team_leaders; let i = index">
-                            <a  href="#" (click)='selectLeader(i)' data-toggle="modal" data-target="#removeLeader">
-                                <span class="glyphicon glyphicon-remove-circle"></span>Remove
-                            </a>    
-                             <br>
-                             <img class="img-circle img-leader" src="assets/images/emplyee.png" alt="" width="100px" height="100px">
+                            <img class="img-circle img-leader" src="assets/images/profile.png" alt="" width="100px" height="100px">
                             <p><b>{{leader.name}}</b>
-                            <br>@{{leader.username}}</p>
+                            <br>
+                                @{{leader.username}}
+                            <br>
+                                <a  href="#" (click)='selectLeader(i)' data-toggle="modal" data-target="#removeLeader">
+                                <span class="glyphicon glyphicon-remove"></span>
+                                </a>
+                        </p>
                         </li> 
                     </ul>      
                 </div>
@@ -83,13 +83,16 @@
                     <a href="#" data-toggle="modal" data-target="#addMember"><span class="glyphicon glyphicon-plus"></span> Add a new member</a>
                     <ul class="profiles-row">
                          <li class="profile" *ngFor="let member of team?.team_members; let i = index">
-                             <a  href="#" (click)='selectMember(i)' data-toggle="modal" data-target="#removeMember">
-                                <span class="glyphicon glyphicon-remove-circle"></span>Remove
-                            </a>    
-                             <br>                             
-                            <img class="img-circle img-member" src="assets/images/emplyee.png" alt="" width="100px" height="100px">
+                            <img class="img-circle img-member" src="assets/images/profile.png" alt="" width="100px" height="100px">
                             <p><b>{{member.name}}</b>
-                            <br>@{{member.username}}</p>
+                            <br>
+                                @{{member.username}}
+                            <br>
+                                <a  href="#" (click)='selectMember(i)' data-toggle="modal" data-target="#removeMember">
+                                <span class="glyphicon glyphicon-remove"></span>
+                                </a>
+                            </p>
+                            
                         </li>  
                     </ul>      
                 </div>

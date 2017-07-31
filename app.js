@@ -31,6 +31,7 @@ const io = require('socket.io')(http);
 const teams = require('./routes/teams');
 const users = require('./routes/users');
 const surveys = require('./routes/surveys');
+const stats = require('./routes/stats');
 
 // Port Number
 const port = 3000;
@@ -50,6 +51,7 @@ require('./config/passport')(passport);
 app.use('/users', users);
 app.use('/surveys', surveys);
 app.use('/teams', teams);
+app.use('/stats', stats);
 
 // Index Route
 app.get('/', (req, res) => {
@@ -60,31 +62,6 @@ app.get('/', (req, res) => {
 // Table
 var connectedUsers = {};
 var rooms = {};
-/*
-// Make connection to the app
-io.on('connection', (socket) => {
-  socket.on('new user', function(data,callback){
-
-    if( connectedUsers.indexOf(data) != -1 ){
-      ;
-    }else{
-      socket.username = data.username
-      connectedUsers.push(socket.username)
-    }
-    console.log(data.username+' is now connected to Room '+ data.teamname)
-  })
-  
-  socket.on('disconnect', function(data){
-    if( !socket.username ) return;
-    connectedUsers.splice(connectedUsers.indexOf(socket.username));
-    console.log(data+' disconnected')
-  });
-  
-  socket.on('add-message', (message) => {
-    io.emit('message', {type:'new-message', text: message}); 
-  });
-});
-*/
 // Make connection to the chat rooms
 io.on('connection', (socket) => {
   socket.on('new user', function(data,callback){
