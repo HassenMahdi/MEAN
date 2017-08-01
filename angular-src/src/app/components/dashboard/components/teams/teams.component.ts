@@ -79,7 +79,7 @@ export class TeamsComponent implements OnInit {
     this.teamService.getMemberbyUsername(this.team.team_members[index].username).subscribe( res => {
           this.user = res.user;
           this.selectedMember = index;               
-          console.log(res);
+          console.log(res.user);
         },
         err=>{
           console.log(err);
@@ -181,6 +181,7 @@ export class TeamsComponent implements OnInit {
           leader: true,
           team:data.team
         });
+        this.teams = this.user.teams;
         this.selectedTeam = this.user.teams.length-1;
         this.team = data.team;
         this.team.team_leaders[0] = this.user;
@@ -243,6 +244,7 @@ export class TeamsComponent implements OnInit {
     this.teamService.removeTeam(this.team._id).subscribe(data =>{
       if (data.success){
         this.user.teams.splice(this.selectedTeam, 1);
+        this.teams=this.user.teams;
         console.log(this.user.teams);
         this.teamService.getUserTeam(this.user.teams[0].team._id).subscribe( res => {
           console.log('debug');

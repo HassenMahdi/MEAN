@@ -40,5 +40,6 @@ export class DashboardComponent implements OnInit {
           console.log(res.msg);
       })
     })
+    //this.connection = this.chatService.joinServer(this.user.username);
   }
 }

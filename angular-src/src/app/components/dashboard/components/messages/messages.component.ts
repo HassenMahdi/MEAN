@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../../../../services/auth.service'
-import { TeamsService } from '../../../../services/teams.service'
-import { ChatService } from '../../../../services/chat.service'
+import { Component, OnInit, ViewChild, QueryList, AfterContentInit} from '@angular/core';
+import { AuthService } from '../../../../services/auth.service';
+import { TeamsService } from '../../../../services/teams.service';
+import { ChatService } from '../../../../services/chat.service';
+import { ChatComponent } from './chat/chat.component';
 
 declare var jQuery : any;
 
@@ -12,6 +13,8 @@ declare var jQuery : any;
   styleUrls: ['./messages.component.css']
 })
 export class MessagesComponent implements OnInit {
+
+  @ViewChild(ChatComponent) private chatBoxes:ChatComponent
 
   private user: any;
   private teams: any[];
@@ -33,7 +36,8 @@ export class MessagesComponent implements OnInit {
         this.user = profile.user;
         this.teams = this.teamService.getValidTeams(profile.user.teams) ;
         
-        
+        this.openChatBox(0)
+
       },
       err=>{
         console.log(err);
@@ -64,18 +68,14 @@ export class MessagesComponent implements OnInit {
           this.selectedTeam = i;
           console.log('index');
           console.log(this.selectedTeam);
-          this.connection = this.chatService.getMessages(this.user.username, this.teams[this.selectedTeam].team.team_name).subscribe(message => {
-          this.messages.push(message);
-          })
-          
-
+          this.chatBoxes.subscribeRoom(this.user,this.team);
         },
         err=>{
           console.log(err);
           return false;
         });
-    $('#chat-box-list > div').hide();
-    $('#chat-box-list > div[id="'+i+'"]').show();
+    //$('#chat-box-list > div').hide();
+    //$('#chat-box-list > div[id="'+i+'"]').show();
   }
 
 }

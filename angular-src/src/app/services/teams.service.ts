@@ -70,7 +70,7 @@ export class TeamsService {
   }
 
   removeTeam(id){ 
-    let headers = new Headers();
+    var headers = new Headers();
     return  this.http.delete('http://localhost:3000/teams/'+id, {headers:headers})
       .map(res => res.json());
   }

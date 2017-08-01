@@ -1,6 +1,7 @@
 .message-box{
     height: 450px;
     width: 100%;
+    background: #fafafa;
     border: 1px solid lightgrey;
     overflow-y: scroll; 
 }

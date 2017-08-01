@@ -37,13 +37,13 @@ router.post('/create',(req,res,next)=>{
 
     Team.addTeam(team,(err,team)=>{
         if(err){
-            res.json({success: false , msg : "failed to create team"});
+            return res.json({success: false , msg : "failed to create team"});
             throw err;
         }
         if(team){
             User.addTeam(req.body.user_id, team._id,true,(err,user)=>{
                 if (err)
-                    res.json({team : team , success: true , msg : "failed to create team"});
+                    return res.json({team : team , success: true , msg : "failed to create team"});
                 if(user)
                 {
                     res.json({team : team , success: true , msg : "Successfully created a new team"});
@@ -58,7 +58,7 @@ router.post('/create',(req,res,next)=>{
 router.get('/get/:id',(req,res,next)=>{
     Team.getTeamById(req.params.id,(err,team)=>{
         if(err){
-            res.json({success: false , msg : "failed to get team"})
+            return res.json({success: false , msg : "failed to get team"})
             throw err;
         }
         if (!team){
@@ -82,14 +82,14 @@ router.post('/members',(req,res,next)=>{
     }
 
             Team.getTeamById(team_id,(err,team)=>{
-            if(err){
+            if(err){return;
                 throw err;
             }if (team.team_members.indexOf(member_id)>-1) {
                 res.json({success:false,msg:"Member already exists"+err})
             }else{
                 Team.addTeamMember(team_id,member_id,leader,(err,team)=>{
                     if(err){
-                         res.json({success:false,msg:"Member not added"+err});}
+                         return res.json({success:false,msg:"Member not added"+err});}
                     else{
                         if(team){
                             User.addTeam(member_id, team_id, leader, (err,user)=>{
@@ -125,7 +125,7 @@ router.delete('/members',(req,res,next)=>{
         
     Team.removeTeamMember(team_id,member_id,(err,team)=>{
         if(err)
-            res.json({success:false,msg:"Member not deleted"+err});
+            return res.json({success:false,msg:"Member not deleted"+err});
         else
             User.removeTeam(member_id, team_id,(err,user)=>{
                     res.json({user:user,team:team,success:true,msg:"Member deleted"});
@@ -151,7 +151,7 @@ router.delete('/leaders',(req,res,next)=>{
         
     Team.removeTeamLeader(team_id,leader_id,(err,team)=>{
         if(err)
-            res.json({success:false,msg:"Leader not deleted"+err});
+            return res.json({success:false,msg:"Leader not deleted"+err});
         else
             User.removeTeam(leader_id, team_id,(err,user)=>{
                     res.json({user:user,team:team,success:true,msg:"Leader deleted"});
@@ -170,41 +170,29 @@ router.delete('/leaders',(req,res,next)=>{
 router.delete('/:id', function(req,res,next){    
     Team.getTeamById(req.params.id,(err,team)=>{
         if(err){
-            res.json({success: false , msg : "failed to get team"})
+            return res.json({success: false , msg : "failed to get team"})
             throw err;
         }
         if (!team){
                 res.json({success: false , msg : "failed to get team"})
         }else{
             //removing members
-                for (member_id of team.team_members){
-                        User.removeTeam(member_id, req.params.id,(err,user)=>{
-                            if(user){
-                                console.log('Member deleted');
-                            }
-                            })
-                        }
-            //removing leaders
-                for (leader_id of team.team_leaders){
-                        User.removeTeam(leader_id, req.params.id,(err,user)=>{
-                            if(user){
-                                console.log('leader deleted');
-                            }
-                            })
-                        }                                     
+                User.removeTeam(team.team_members.concat(team.team_leaders),team._id ,(err,users)=>{
+                                    Team.findByIdAndRemove(req.params.id,(err,team)=>{
+                    if(err){
+                        return res.json({success: false , msg : "failed to get team"})
+                        throw err;
+                    }
+                    if (!team){
+                            res.json({success: false , msg : "failed to get team"})
+                    }else{
+                        res.json({team : team , success: true , msg : "Team removed successfully"});
+                    }
+                })
+            })                     
         }
-    }); 
-    Team.findByIdAndRemove(req.params.id,(err,team)=>{
-        if(err){
-            res.json({success: false , msg : "failed to get team"})
-            throw err;
-        }
-        if (!team){
-                res.json({success: false , msg : "failed to get team"})
-        }else{
-            res.json({team : team , success: true , msg : "Team removed successfully"});
-        }
-    })
+    });
+    
 })
 
 //delete all team members (Can be useful)
@@ -216,7 +204,7 @@ router.delete('/members/all', (req,res,next)=>{
     }
     Team.getTeamById(team_id,(err,team)=>{
         if(err){
-            res.json({success: false , msg : "failed to get team"})
+            return res.json({success: false , msg : "failed to get team"})
             throw err;
         }
         if (!team){
@@ -233,7 +221,7 @@ router.delete('/members/all', (req,res,next)=>{
     });        
     Team.removeAllTeamMembers(team_id,(err,team)=>{
         if(err)
-            res.json({success:false,msg:"Members not deleted"+err});
+            return res.json({success:false,msg:"Members not deleted"+err});
         else
             res.json({team : team , success:true,msg:"All members successfully removed from team"});
 
@@ -250,7 +238,7 @@ router.delete('/leaders/all', (req,res,next)=>{
     }
     Team.getTeamById(team_id,(err,team)=>{
         if(err){
-            res.json({success: false , msg : "failed to get team"})
+            return res.json({success: false , msg : "failed to get team"})
             throw err;
         }
         if (!team){
@@ -267,7 +255,7 @@ router.delete('/leaders/all', (req,res,next)=>{
     });        
     Team.removeAllTeamLeaders(team_id,(err,team)=>{
         if(err)
-            res.json({success:false,msg:"Leaders not deleted"+err});
+            return res.json({success:false,msg:"Leaders not deleted"+err});
         else
             res.json({team : team , success:true,msg:"All leaders successfully removed from team"});
 
@@ -287,7 +275,7 @@ router.post('/graduate',(req,res,next)=>{
 
     Team.graduateMemberToLeader(member_id,team_id,(err,team)=>{
         if(err){
-            res.json({success: false , msg : "failed update team"});
+            return res.json({success: false , msg : "failed update team"});
         }
         else{
             User.graduateMember(member_id, team_id,(err,user)=>{

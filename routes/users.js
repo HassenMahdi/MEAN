@@ -16,7 +16,7 @@ router.post('/register', (req, res, next) => {
 
   User.addUser(newUser, (err, user) => {
     if(err){
-      res.json({success: false, msg:'Failed to register user'});
+      return res.json({success: false, msg:'Failed to register user'});
     } else {
       res.json({success: true, msg:'User registered'});
     }
@@ -45,13 +45,13 @@ router.post('/authenticate', (req, res, next) => {
   const password = req.body.password;
 
   User.getUserByUsername(username , (err, user)=>{
-    if(err) throw err;
+    if(err){return; throw err};
     if(!user){
       res.json({ 'success': false , "msg": "User not found"});
     }else
     {
       User.comparePassword(password,user.password, (err , isMatch)=>{
-        if (err) throw err;
+        if (err) {return; throw err};
         if(isMatch){
           const token = jwt.sign(user,config.secret,{
             expiresIn: 604800
@@ -83,7 +83,7 @@ router.get('/profile' , passport.authenticate('jwt',{session:false}), (req, res,
 router.get('/get/:username',(req,res,next)=>{
     User.getUserByUsername(req.params.username,(err,user)=>{
         if(err){
-            res.json({success: false , msg : "failed to get user"})
+            return res.json({success: false , msg : "failed to get user"})
             throw err;
         }
         if (!user){

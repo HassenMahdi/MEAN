@@ -45,8 +45,8 @@ module.exports.addTeam = function(user_id,team_id,leader = false,callback){
   }}},callback)
 }
 
-module.exports.removeTeam = function(user_id,team_id,callback){
-  User.findOneAndUpdate({_id:user_id},{$pull:{teams:{
+module.exports.removeTeam = function(user_id_list,team_id,callback){
+  User.findOneAndUpdate({_id:{$in:user_id_list}},{$pull:{teams:{
     team: team_id,
   }}},callback)
 }

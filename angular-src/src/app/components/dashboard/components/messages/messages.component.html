@@ -14,14 +14,12 @@
                 </div>
             </div>    
         </div>
-
-
         <div class="col-sm-8" id="chat-box-list" >
-            <div *ngFor="let team of teams; let i = index" class="panel panel-default" id="{{i}}">
+            <div class="panel panel-default">
                 <div class="panel-body">
-                    <h4>Chat box ({{team.team.team_name}})</h4>
+                    <h4>Chat box</h4>
                     <div class="chat-box">
-                        <chat-component [team]="team.team" [username]="user.username" ></chat-component>   
+                        <chat-component></chat-component>   
                     </div>
                 </div>
             </div>

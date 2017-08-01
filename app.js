@@ -58,79 +58,77 @@ app.get('/', (req, res) => {
 
 
 // Table
-var connectedUsers = {};
+var connectedUsers = {'aaa':[]};
 var rooms = {};
-/*
-// Make connection to the app
-io.on('connection', (socket) => {
-  socket.on('new user', function(data,callback){
-
-    if( connectedUsers.indexOf(data) != -1 ){
-      ;
-    }else{
-      socket.username = data.username
-      connectedUsers.push(socket.username)
-    }
-    console.log(data.username+' is now connected to Room '+ data.teamname)
-  })
-  
-  socket.on('disconnect', function(data){
-    if( !socket.username ) return;
-    connectedUsers.splice(connectedUsers.indexOf(socket.username));
-    console.log(data+' disconnected')
-  });
-  
-  socket.on('add-message', (message) => {
-    io.emit('message', {type:'new-message', text: message}); 
-  });
-});
-*/
 // Make connection to the chat rooms
 io.on('connection', (socket) => {
-  socket.on('new user', function(data,callback){
-    console.log(data.username+' is logging into '+ data.teamname +' room...');
+  
+  socket.on('new chatter', function(data,callback){
     socket.username = data.username;
-    socket.room = data.teamname;
-    connectedUsers[data.username] = socket.username;
-    console.log(socket.username +' is now logged')     
+    socket.roomname = data.teamname;
+    socket.room = data.team_id; 
+    console.log(socket.username+' JOINING '+ socket.roomname);
     socket.join(socket.room);
-    console.log(socket.adapter.rooms[socket.room]);
+    connectedUsers[data.username]=socket.username;    
+    numberUsersInRoom = io.sockets.adapter.rooms[socket.room].length
+    console.log('Number of users currently in this room : '+ numberUsersInRoom);
+    if (rooms[socket.room]){
+      rooms[socket.room].push(socket.username);
+    }else{
+      rooms[socket.room] = new Array();
+      rooms[socket.room].push(socket.username);
+    }  
+    console.log(rooms[socket.room]);
+    //console.log(socket.username +' is now logged')     
+    //socket.join(socket.room);
+    //console.log(socket.adapter.rooms[socket.room]);
     //getting users in room 
-    var tempRoom = io.sockets.adapter.rooms[socket.room];
+    /*var tempRoom = io.sockets.adapter.rooms[socket.room];
       if( tempRoom ) { 
         Object.keys(tempRoom.sockets).forEach( function(socketId){
           var userChatBox = io.sockets.sockets[socketId].username; 
-          console.log(userChatBox);
-        }); 
-    }
+          (socket.rooms.users).append(userChatBox);
+        });
+      }*/
     // emit to the client that he has joined a room
-    updateClient(socket, socket.room);
-    updateChatRoom(socket, ' connected ');
+    /*updateClient(socket, socket.room);
+    updateChatRoom(socket, ' connected ');*/
 
 
       //TODO: Add updating the room list
-    
-      // send messages
-      socket.on('add-message', (message) => {
-          io.to(message.team).emit('tweet', { text: message.text , username: message.username})
-        });
-      //TODO: Switch room 
 
-
-      socket.on('disconnect', function(data){
+      // Leaving a specific room
+      socket.on('disconnect', function(){
         delete connectedUsers[socket.username];
 
-        io.sockets.emit('updateUsers', connectedUsers);
-        console.log(data+' disconnected');
-        updateGlobal(socket, 'disconnected');
+        //io.sockets.emit('updateUsers', connectedUsers);
+        console.log(socket.username+' LEAVING '+socket.roomname );
+        //updateGlobal(socket, 'disconnected');
         socket.leave(socket.room);
       });
         
     })
+      // send messages
+      socket.on('add-message', (message) => {
+          io.to(message.team).emit('tweet', { text: message.text , username: message.username})
+        });
+
+      //TODO: Switch room
+      /*socket.on('switch room', (data)=>{
+        if(data.newRoom != currentRoom){
+          console.log('LEAVING '+currentRoom);
+          socket.leave(currentRoom);
+          currentRoom=data.newRoom;
+          console.log('JOINING '+currentRoom);
+          socket.join(currentRoom);
+        }else{
+          console.log('You are already in this room' )
+        }
+      })*/  
+    
   });  
 
   function updateClient(socket, newRoom){
-    console.log('You are in '+ newRoom);
     socket.emit('updateChat', 'SERVER', 'You\'ve connected to '+ newRoom)
   }
 

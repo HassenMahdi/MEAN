@@ -27,16 +27,30 @@ export class ChatComponent implements OnInit, OnDestroy{
 
   ngOnInit(){
     
-    scrollDown();
+  }
 
-    this.connection = this.chatService.getMessages(this.username, this.team._id).subscribe(message => {
-          this.messages.push( message );
+    subscribeRoom(user, team){
+      
+        if(this.connection != undefined )
+          this.connection.unsubscribe(this.username);
+
+        if ( user && team )
+        {
+          this.username= user.username;
+          this.team = team;
+          
+          this.connection = this.chatService.initialize(this.username, this.team.team_name,this.team._id).subscribe(message => {
+              
+                this.team.messages.push( message );
+                scrollDown();
+          })
           scrollDown();
-    })
-    
+        }
+        
   }
 
   sendMessage(){
+    if( !this.connection ) return;
     if ( this.message == null || this.message == "" ) return;
 
     var tweet = {
