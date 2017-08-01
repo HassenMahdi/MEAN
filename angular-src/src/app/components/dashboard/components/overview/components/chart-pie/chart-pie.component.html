@@ -1,0 +1,12 @@
+<div class="loader" *ngIf="!gotData">
+  <div *ngIf="!message">
+    fetching data...
+  </div>
+  <div>
+    {{message}}
+  </div>
+</div>
+
+<div style="display: block;">
+  <canvas baseChart height="250"></canvas>
+</div>

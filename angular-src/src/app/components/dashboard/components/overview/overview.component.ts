@@ -13,6 +13,8 @@ export class OverviewComponent implements OnInit {
 
   user:any
   datasets1:any[]
+  dataset1:any
+  dataset2:any
   activesurveys:any[]
   upcomingsurveys:any[]
   activemembers:any[]
@@ -37,31 +39,18 @@ export class OverviewComponent implements OnInit {
         this.activesurveys = res.active_surveys
         this.upcomingsurveys = res.upcoming_surveys
         this.activemembers = res.activemembers
-        console.log(this.upcomingsurveys)
+        this.dataset1 = {
+          data : [5,10,8],
+          labels :["Tom","Peter","Hannibal"]
+        }
+        this.dataset2 = {
+          data : [1,2,3,4],
+          labels :["greg","Lecter","Butcher","Kate"]
+        };
+        
       })     
 
     })
     
-  }
-
-  public pieChartType:string = 'pie';
-
-  // Doughnut
-  public lineChartOptions:any = {
-    responsive: true,
-    maintainAspectRatio: false,
-    steppedLine:true,
-  };
-  public doughnutChartLabels:string[] = ['Download Sales', 'In-Store Sales', 'Mail-Order Sales'];
-  public doughnutChartData:number[] = [350, 450, 100];
-  public doughnutChartType:string = 'doughnut';
- 
-  // events
-  public chartClicked(e:any):void {
-    console.log(e);
-  }
- 
-  public chartHovered(e:any):void {
-    console.log(e);
   }
 }

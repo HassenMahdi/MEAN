@@ -64,7 +64,7 @@
 }
 
 #page-content-wrapper {
-    overflow-y: hidden;
+    overflow: hidden;
     width: 100%;
     position: absolute;
     padding: 5px;
@@ -88,7 +88,7 @@
 }
 
 .sidebar-active  a{
-    background: #008cba;
+    background: #34495e;
     color: white !important;
 }
 

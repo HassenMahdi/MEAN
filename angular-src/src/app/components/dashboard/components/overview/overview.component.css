@@ -62,11 +62,15 @@
     min-height: 60px;
 }
 
+.big_number h1:hover{
+    cursor: pointer;
+}
+
 
 .percentage{
     color: grey;
 }
 
-.loading{
+.loading , .loading h1{
     color: lightgrey;
 }

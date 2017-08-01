@@ -7,8 +7,12 @@
             <h4>Activity</h4>
             <p>people who've been active today</p>
             <div class="big_number">
-              <h1 *ngIf="activemembers == null"></h1>
-              <h1 *ngIf="activemembers" class="fadeInUp animated"><b>{{activemembers.length}} </b></h1>
+              <div *ngIf="activemembers == null">
+                <div class="loading">
+                  <h1>...</h1>
+                </div>
+              </div>
+              <div *ngIf="activemembers" data-toggle="modal" data-target="#activeusers" class="fadeInUp animated"><h1><b>{{activemembers?.length}}</b></h1></div>
             </div>
           </div>
         </div>
@@ -19,8 +23,14 @@
             <h4>Active Surveys</h4>
             <p>Number of surveys open now</p>
             <div class="big_number">
-              <h1 *ngIf="activesurveys == null"></h1>
-              <h1 *ngIf="activesurveys" class="fadeInUp animated"><b>{{activesurveys?.length}} </b></h1>
+              <div *ngIf="activesurveys == null">
+                <div class="loading">
+                  <h1>...</h1>
+                </div>
+              </div>
+              <h1 *ngIf="activesurveys" class="fadeInUp animated">
+                <b>{{activesurveys?.length}}</b>
+              </h1>
             </div>
           </div>
         </div>
@@ -31,7 +41,11 @@
             <h4>Upcoming Surveys</h4>
             <p>Number of chat rooms active</p>
             <div class="big_number">
-               <h1 *ngIf="upcomingsurveys == null"></h1>
+               <div *ngIf="upcomingsurveys == null">
+                 <div class="loading">
+                  <h1>...</h1>
+                </div>
+               </div>
               <h1 *ngIf="upcomingsurveys" class="fadeInUp animated"><b>{{upcomingsurveys?.length}} </b></h1>
             </div>
           </div>
@@ -71,11 +85,9 @@
           <div class="panel-body box row2">
              <h4>Pie chart</h4>
             <p>Number of chat rooms active</p>
-            <div style="display: block;">
-             <div style="display: block">
-              
-            </div>
-            </div>
+            
+              <app-chart-pie [user]="user" [list]="dataset1"></app-chart-pie>
+            
           </div>
         </div>
       </div>
@@ -85,11 +97,12 @@
           <div class="panel-body box row2">
              <h4>Pie chart</h4>
             <p>Number of chat rooms active</p>
-            <div style="display: block;">
-             <div style="display: block">
+            
+             
+              <app-chart-pie [user]="user" [list]="dataset2"></app-chart-pie>
               
-            </div>
-            </div>
+            
+            
           </div>
         </div>
       </div>
@@ -118,4 +131,19 @@
         </div>
       </div>
   </div>
+</div>
+
+<div class="modal fade" id="activeusers" role="dialog">
+    <div class="modal-dialog modal-sm">
+      <div class="modal-content">
+        
+       
+        <div class="modal-body">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4>Active users today</h4>
+          <br>
+          <p *ngFor="let user of activemembers">{{user.name}} (@{{user.username}})</p>
+        </div>
+      </div>
+    </div>
 </div>

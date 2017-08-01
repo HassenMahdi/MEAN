@@ -43,6 +43,7 @@ import { ChatComponent } from './components/dashboard/components/messages/chat/c
 import { ChartConnTodComponent } from './components/dashboard/components/overview/components/chart-conn-tod/chart-conn-tod.component';
 import { UpcomingSurveysComponent } from './components/dashboard/components/overview/components/upcoming-surveys/upcoming-surveys.component';
 import { ActiveSurveysComponent } from './components/dashboard/components/overview/components/active-surveys/active-surveys.component';
+import { ChartPieComponent } from './components/dashboard/components/overview/components/chart-pie/chart-pie.component';
 
 const appRoutes : Routes = [
   {path:'' , component: HomeComponent},
@@ -92,7 +93,8 @@ const appRoutes : Routes = [
     ChatComponent,
     ChartConnTodComponent,
     UpcomingSurveysComponent,
-    ActiveSurveysComponent
+    ActiveSurveysComponent,
+    ChartPieComponent
   ],
   imports: [
     BrowserModule,

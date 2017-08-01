@@ -47,7 +47,7 @@
                                         <div class="date"><div>Begin</div>: {{survey.begindate}}</div>
                                         <div class="date"><div>End</div>: {{survey.enddate}}</div>
                                     </div>
-                                    <a class="btn btn-small btn-default" data-toggle="modal" data-target="#myModal" (click)="selectSurvey($event,i)" href="">Take</a>
+                                    <a data-toggle="modal" data-target="#myModal" (click)="selectSurvey($event,i)" href="">Take</a>
                                 </div>
                             </div>
                         </li>
@@ -105,7 +105,7 @@
                                         <div class="date"><div>Begin</div>: {{survey.begindate}}</div>
                                         <div class="date"><div>End</div>: {{survey.enddate}}</div>
                                     </div>
-                                    <a (click)="selectAnswer($event,i)" class="btn btn-small btn-default" data-toggle="modal" data-target="#myModalView" href="">View Answers</a>
+                                    <a (click)="selectAnswer($event,i)" data-toggle="modal" data-target="#myModalView" href="">View Answers</a>
                                 </div>
                             </div>
                         </li>

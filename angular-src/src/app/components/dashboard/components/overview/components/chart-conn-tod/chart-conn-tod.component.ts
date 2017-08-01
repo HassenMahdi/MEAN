@@ -1,6 +1,5 @@
 import { Component, OnInit, Input, ViewChild, OnChanges } from '@angular/core';
 import { BaseChartDirective } from 'ng2-charts'
-import { StatService } from '../../../../../../services/stat.service'
 
 @Component({
   selector: 'app-chart-conn-tod',
@@ -16,9 +15,7 @@ export class ChartConnTodComponent implements OnInit {
 
   gotData:boolean = false
 
-  constructor(
-    private statService : StatService,
-  ) { }
+  constructor() { }
 
   ngOnInit() {
 
