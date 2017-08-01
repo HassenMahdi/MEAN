@@ -48,16 +48,22 @@ getTeamsActivity = function(req,callback){
                 var sublist = []
 
                 var team_users = []
+
                 team_users = users.filter((user)=>{
-                    return (user.teams.findIndex(team => team.team._id == team_id ))
+                    return user.teams.findIndex(team => (team.team == team_id))
                 })
+
+                console.log("-------------------------------")
 
                 for (var d = 0 ; d < 7 ; d++){
 
                     var team_users_date = []
 
                     team_users_date = team_users.filter((user)=>{
-                        return user.logs.indexOf(dates[d]) >= 0
+                        if ( user.logs.indexOf(dates[d]) >= 0 )
+                            return true;
+                        else
+                            return false;
                     })
                     
                     sublist.push(team_users_date.length)
