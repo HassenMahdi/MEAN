@@ -78,6 +78,20 @@ router.get('/profile' , passport.authenticate('jwt',{session:false}), (req, res,
   res.json({ "user":req.user});
 });
 
+//Change password
+router.post('/pass',(req, res, next)=>{
+  User.getUserById(req.body.user_id,(err,user)=>{
+    if( err || !user ) return res.json({success:false})
+      User.comparePassword(req.body.oldpass,user.password,(err,match)=>{
+        if(err || !match) return res.json({success:false})
+          User.changePassword(req.body.user_id,req.body.newpass,(err,user)=>{
+            if(err || !user) return res.json({success:false})
+              return res.json({success:true})
+          })
+      })
+  })
+})
+
 
 //Get user by Username
 router.get('/get/:username',(req,res,next)=>{

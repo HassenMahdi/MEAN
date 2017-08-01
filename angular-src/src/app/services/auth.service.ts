@@ -45,6 +45,18 @@ export class AuthService {
       .map(res => res.json());
   }
 
+  changePassword(user_id,oldpass,newpass){
+    let body ={
+      user_id:user_id,
+      oldpass:oldpass,
+      newpass:newpass,
+    }
+    let headers = new Headers();
+    headers.append('Content-Type','application/json');
+    return  this.http.post('http://localhost:3000/users/pass', body, {headers:headers})
+      .map(res => res.json());
+  }
+
   loadToken(){
     const token= localStorage.getItem('id_token');
     this.authToken = token;

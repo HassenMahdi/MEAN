@@ -95,6 +95,16 @@ module.exports.getUserTokens = function(user_id,callback){
   User.findOne({_id:id},'regtoken',callback)
 }
 
+module.exports.changePassword = function(user_id,newpass,callback){
+  bcrypt.genSalt(10, (err, salt) => {
+    bcrypt.hash(newpass, salt, (err, hash) => {
+      if(err) throw err;
+      newpass = hash;
+      User.findOneAndUpdate({_id:user_id},{password:newpass},callback)
+    });
+  });
+}
+
 module.exports.findQuery = function(query,callback){
   User.find(query,callback)
 }
