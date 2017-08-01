@@ -12,14 +12,22 @@
                   <h2 class="title">{{user?.name}}<br> <small>@{{user?.username}}</small></h2>
                   <p><span class="glyphicon glyphicon-envelope"></span> {{user?.email}}</p>
                   <br>
-                  <p><i class="fa fa-users" aria-hidden="true"></i> User Belongs to the followinf teams</p>
-                  <ul>
-                    <li *ngFor="let team of teams">
-                      {{team.team?.team_name}} as <span *ngIf="team.leader">(leader)</span> <span *ngIf="!team.leader">(Member)</span>
-                    </li>
-                  </ul>
-                  <div>
-                    <p><a href="">Change my password</a></p> 
+                  <div class="teams?.length==-1">
+                    <p>
+                      You dont belong to any team at the moment.
+                      click <a [routerLink]="['../teams']">here</a> create one.
+                    </p>
+                  </div>
+                  <div *ngIf="teams?.length>0">
+                    <p><i class="fa fa-users" aria-hidden="true"></i> User Belongs to the following team(s)</p>
+                      <ul>
+                        <li *ngFor="let team of teams">
+                          {{team.team?.team_name}} as <span *ngIf="team.leader">(leader)</span> <span *ngIf="!team.leader">(Member)</span>
+                        </li>
+                      </ul>
+                      <div>
+                        <p><a href="#" data-toggle="modal" data-target="#changepass" >Change my password</a></p> 
+                      </div>  
                   </div>
               </div>
                   
@@ -27,3 +35,41 @@
         </div>
     </div>
   </div>
+
+  
+  <div class="modal fade" id="changepass">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-body">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h4 class="modal-title">Change my password</h4>
+            <br>
+            <h5>Please fill in the following fields.</h5>
+            <br>
+            <div class="form-group">
+              <label for="oldpass">Old password</label>
+              <input [(ngModel)]="oldpass" type="password" class="form-control" id="oldpass" placeholder="...">
+            </div>
+            <p>{{msg1}}</p>
+            <br>
+            <div class="form-group">
+              <label for="newpass">New password</label>
+              <input [(ngModel)]="newpass" type="password" class="form-control" id="newpass" placeholder="...">
+            </div>
+            <p>{{msg2}}</p>
+            <br>
+            <div class="form-group">
+              <label for="newpassc">Confirm new password</label>
+              <input [(ngModel)]="newpassc" (ngModelChange)="comparePass()" type="password" class="form-control" id="newpassc" placeholder="...">
+            </div>
+            <p>{{msg3}}</p>
+            <br>
+            
+            <button (click)="changePass()" type="button" class="btn btn-invrese">Change</button>
+            
+        </div>
+      </div>
+    </div>
+  </div>
+  
+

@@ -31,6 +31,7 @@ const io = require('socket.io')(http);
 const teams = require('./routes/teams');
 const users = require('./routes/users');
 const surveys = require('./routes/surveys');
+const stats = require('./routes/stats');
 
 // Port Number
 const port = 3000;
@@ -50,6 +51,7 @@ require('./config/passport')(passport);
 app.use('/users', users);
 app.use('/surveys', surveys);
 app.use('/teams', teams);
+app.use('/stats', stats);
 
 // Index Route
 app.get('/', (req, res) => {

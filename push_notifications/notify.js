@@ -38,6 +38,6 @@ module.exports.sendServerStart = function(){
 }
 
 module.exports.sendNotifById = function(token_list,payload){
-    if ( token_list == null ) return;
+    if ( token_list == null || token_list.length == 0 ) return;
     messaging.sendToDevice(token_list,payload)
 }

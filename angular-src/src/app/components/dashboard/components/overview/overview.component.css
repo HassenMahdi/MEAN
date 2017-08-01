@@ -58,6 +58,19 @@
     text-align: center;
 }
 
+.big_number h1{
+    min-height: 60px;
+}
+
+.big_number h1:hover{
+    cursor: pointer;
+}
+
+
 .percentage{
     color: grey;
+}
+
+.loading , .loading h1{
+    color: lightgrey;
 }

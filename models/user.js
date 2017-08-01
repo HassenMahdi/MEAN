@@ -31,9 +31,12 @@ const UserSchema = mongoose.Schema({
     {
       type: String,
       unique : true,
-    }
-  ]
-
+    },
+  ],
+  logs : [{
+    type: String,
+    required: true,
+  }]
 });
 
 const User = module.exports = mongoose.model('User', UserSchema);
@@ -52,7 +55,9 @@ module.exports.removeTeam = function(user_id_list,team_id,callback){
 }
 
 module.exports.getUserById = function(id, callback){
-  User.findById(id).populate('teams.team').exec(callback);
+  date = new Date()
+  date = date.getDate() + "-" + date.getMonth() + "-" + date.getFullYear()
+  User.findOneAndUpdate({_id:id},{$addToSet:{logs:date}}).populate('teams.team').exec(callback);
 }
 
 module.exports.getUserByUsername = function(username, callback){
@@ -88,4 +93,18 @@ module.exports.addRegToken = function (id, token, callback){
 
 module.exports.getUserTokens = function(user_id,callback){
   User.findOne({_id:id},'regtoken',callback)
+}
+
+module.exports.changePassword = function(user_id,newpass,callback){
+  bcrypt.genSalt(10, (err, salt) => {
+    bcrypt.hash(newpass, salt, (err, hash) => {
+      if(err) throw err;
+      newpass = hash;
+      User.findOneAndUpdate({_id:user_id},{password:newpass},callback)
+    });
+  });
+}
+
+module.exports.findQuery = function(query,callback){
+  User.find(query,callback)
 }

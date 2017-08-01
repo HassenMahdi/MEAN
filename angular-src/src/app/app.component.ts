@@ -12,7 +12,6 @@ export class AppComponent {
     private fireService : FirebaseService
   ){}
 
-  title = 'app works!';
   ngOnInit(){
     this.fireService.init()
   }

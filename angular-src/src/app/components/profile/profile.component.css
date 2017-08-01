@@ -23,3 +23,13 @@
     margin-top: 10px;
     padding-top: 0;
 }
+
+.modal-body p{
+    padding-top:0;
+    margin-top: 0;
+    color: red; 
+}
+.modal-body .form-group{
+    padding-bottom:0;
+    margin-bottom: 0;
+}
