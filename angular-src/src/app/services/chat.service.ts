@@ -48,9 +48,17 @@ export class ChatService {
     })     
     return observable;
   }
-  
-  switchRoom(team_id){
-    this.socket.emit('switch room', {newRoom: team_id});
+
+  joiningDashboard(username){
+    this.socket = io(this.url);
+    this.socket.emit('new user', {username:username})
   }
 
+  typingStarts(username,team_id){
+    this.socket.emit('typing', {username:username, room:team_id});
+  }  
+
+  typingEnds(username,team_id){
+    this.socket.emit('typing end', {username:username, room:team_id});
+  }  
 }

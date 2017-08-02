@@ -65,7 +65,6 @@ const appRoutes : Routes = [
           {path:'history' , component: HistorySurveyComponent}
         ]}    
     ]},
-  {path:'profile' , component: ProfileComponent , canActivate:[AuthGuard]}
 ]; 
 
 @NgModule({
