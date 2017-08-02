@@ -267,10 +267,29 @@ export class TeamsComponent implements OnInit {
   editTeam(event: Event){
     event.preventDefault();
     this.teamService.editTeam(this.team._id, this.new_team_name,this.new_team_info).subscribe(data =>{
-      console.log(data);
+      if(data.success){
+        this.team.team_name=this.new_team_name;
+        this.team.team_info=this.new_team_info;  
+        this.user.teams=this.teamService.getValidTeams(this.user.teams);
+        this.user.teams[this.selectedTeam].team=this.team;
+        this.teamService.getUserTeam(this.user.teams[this.selectedTeam].team._id).subscribe( res => {
+          this.team = res.team;
+        },
+        err=>{
+          console.log(err);
+          return false;
+        });      
+        this.toastr.clear();
+        this.toastr.success("The team has been successfully updated ");
+        this.new_team_name='';
+        this.new_team_info='';
+      }else{
+        this.toastr.clear();
+        this.toastr.error("Oops, it seems you need to try again");
+      }
     })
-  }
-}  
+  } 
+}   
 
 
 
