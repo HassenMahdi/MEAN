@@ -49,6 +49,9 @@
         </li>
         -->
         <li class="nav-option" [routerLinkActive]="['sidebar-active']" [routerLinkActiveOptions]="{exact:true}">
+            <a [routerLink]="['/dashboard/dropbox']"><span class="fa fa-dropbox"></span> Dropbox</a>
+        </li>
+        <li class="nav-option" [routerLinkActive]="['sidebar-active']" [routerLinkActiveOptions]="{exact:true}">
             <a [routerLink]="['/dashboard/profile']"><span class="fa fa-user"></span> Profile</a>
         </li>
     </ul>
