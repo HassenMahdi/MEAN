@@ -61,7 +61,7 @@
                     <a href="#" data-toggle="modal" data-target="#addLeader"><span class="glyphicon glyphicon-plus"></span> Add a new leader</a>
                     <ul class="profiles-row">
                         <li class="profile" *ngFor="let leader of team?.team_leaders; let i = index">
-                            <img class="img-circle img-leader" src="assets/images/profile.png" alt="" width="100px" height="100px">
+                            <img class=" img-leader" src="{{leader.image}}" alt="" width="100px" height="100px">
                             <p><b>{{leader.name}}</b>
                             <br>
                                 @{{leader.username}}
@@ -83,7 +83,7 @@
                     <a href="#" data-toggle="modal" data-target="#addMember"><span class="glyphicon glyphicon-plus"></span> Add a new member</a>
                     <ul class="profiles-row">
                          <li class="profile" *ngFor="let member of team?.team_members; let i = index">
-                            <img class="img-circle img-member" src="assets/images/profile.png" alt="" width="100px" height="100px">
+                            <img class=" img-member" src="{{member.image}}" alt="" width="100px" height="100px">
                             <p><b>{{member.name}}</b>
                             <br>
                                 @{{member.username}}

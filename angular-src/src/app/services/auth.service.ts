@@ -8,6 +8,7 @@ export class AuthService {
 
   authToken:any;
   user:any;
+  url="http://localhost:3000"
 
   constructor(private http:Http) {}
 
@@ -77,5 +78,20 @@ export class AuthService {
     localStorage.clear();
     this.authToken = null;
     this.user = null;
+  }
+
+  saveImageUrl(user_id,url){
+    let body = {
+      user_id:user_id,
+      image:url
+    }
+    let headers = new Headers();
+    headers.append('Content-Type','application/json');
+    return this.http.put(this.url+'/users/pic/url',body, {headers:headers})
+      .map(res => res.json());
+  }
+
+  saveImageFile(){
+
   }
 }

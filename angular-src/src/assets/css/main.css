@@ -12,3 +12,9 @@ body{
     margin-top:44px ;
     padding-top: 10px;    
 }
+
+img{
+    object-fit: cover;
+    background-position: 50% 50%;
+    background-size: cover;
+}
