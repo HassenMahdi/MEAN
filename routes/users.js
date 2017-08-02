@@ -108,5 +108,16 @@ router.get('/get/:username',(req,res,next)=>{
     });
 })
 
+router.put('/pic/url',(req,res,next)=>{
+  console.log("Reached")
+  User.changeImage(req.body.user_id,req.body.image,(err,user)=>{
+    if(err || !user){
+      return res.json({success:false})
+    }else{
+      return res.json({success:true,url:req.bodyimage})
+    }
+  })
+})
+
 
 module.exports = router;

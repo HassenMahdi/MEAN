@@ -21,6 +21,7 @@ const UserSchema = mongoose.Schema({
     type: String,
     required: true
   },
+  image:{ type:String, default:"assets/images/profile.png" },
   teams:[
     { 
       team :{ type: SchemaTypes.ObjectId , ref : 'Team' },
@@ -103,6 +104,10 @@ module.exports.changePassword = function(user_id,newpass,callback){
       User.findOneAndUpdate({_id:user_id},{password:newpass},callback)
     });
   });
+}
+
+module.exports.changeImage = function(id,url,callback){
+  User.findOneAndUpdate({_id:id},{image:url},callback)
 }
 
 module.exports.findQuery = function(query,callback){

@@ -1,6 +1,9 @@
 .user_image{
+    object-fit: cover;
     height: 250px;
-    widows: 250px;
+    width: 250px;
+    background-position: 50% 50%;
+    background-size: cover;
     margin-bottom: 10px; 
 }
 
@@ -32,4 +35,19 @@
 .modal-body .form-group{
     padding-bottom:0;
     margin-bottom: 0;
+}
+
+.modal-body .row{
+    margin-top:5px;
+    margin-bottom: 5px; 
+}
+
+.up-image{
+    width: 100%;
+    padding: 5px;
+    border: 1px solid lightgrey;
+}
+
+.up-image img{
+    width: 100%;
 }

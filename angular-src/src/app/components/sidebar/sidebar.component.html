@@ -5,7 +5,7 @@
         <br>
         <div class="sidebar-profile">
             
-            <img class="sidebar-profile-pic" src="assets/images/profile.png" alt="">
+            <img class="sidebar-profile-pic" src="{{user?.image}}" alt="">
             
             <div class="sidebar-profile-info">
                 {{user?.name}}
@@ -48,6 +48,9 @@
             <a [routerLink]="['/dashboard/statistics']"><span class="fa fa-line-chart"></span> Stats</a>
         </li>
         -->
+        <li class="nav-option" [routerLinkActive]="['sidebar-active']" [routerLinkActiveOptions]="{exact:true}">
+            <a [routerLink]="['/dashboard/dropbox']"><span class="fa fa-dropbox"></span> Dropbox</a>
+        </li>
         <li class="nav-option" [routerLinkActive]="['sidebar-active']" [routerLinkActiveOptions]="{exact:true}">
             <a [routerLink]="['/dashboard/profile']"><span class="fa fa-user"></span> Profile</a>
         </li>

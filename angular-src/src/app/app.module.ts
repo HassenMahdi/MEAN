@@ -44,6 +44,7 @@ import { ChartConnTodComponent } from './components/dashboard/components/overvie
 import { UpcomingSurveysComponent } from './components/dashboard/components/overview/components/upcoming-surveys/upcoming-surveys.component';
 import { ActiveSurveysComponent } from './components/dashboard/components/overview/components/active-surveys/active-surveys.component';
 import { ChartPieComponent } from './components/dashboard/components/overview/components/chart-pie/chart-pie.component';
+import { DropboxComponent } from './components/dashboard/components/dropbox/dropbox.component';
 
 const appRoutes : Routes = [
   {path:'' , component: HomeComponent},
@@ -57,6 +58,7 @@ const appRoutes : Routes = [
       {path:'statistics', component: StatsComponent},
       {path:'teams', component: TeamsComponent},
       {path:'messages', component: MessagesComponent},
+      {path:'dropbox' , component: DropboxComponent},
       {path:'survey' ,
         children:[
           {path:'' , redirectTo: 'take' , pathMatch: 'full'},
@@ -93,7 +95,8 @@ const appRoutes : Routes = [
     ChartConnTodComponent,
     UpcomingSurveysComponent,
     ActiveSurveysComponent,
-    ChartPieComponent
+    ChartPieComponent,
+    DropboxComponent
   ],
   imports: [
     BrowserModule,
