@@ -85,8 +85,6 @@ export class ChatComponent implements OnInit, OnDestroy{
     },2000)
   }
 
-
-
   sendMessage(){
     if( !this.connection ) return;
     if ( this.message == null || this.message == "" ) return;

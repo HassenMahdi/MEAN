@@ -12,7 +12,7 @@
                   <h2 class="title">{{user?.name}}<br> <small>@{{user?.username}}</small></h2>
                   <p><span class="glyphicon glyphicon-envelope"></span> {{user?.email}}</p>
                   <br>
-                  <div class="teams?.length==-1">
+                  <div *ngIf="teams?.length==-1">
                     <p>
                       You dont belong to any team at the moment.
                       click <a [routerLink]="['../teams']">here</a> create one.

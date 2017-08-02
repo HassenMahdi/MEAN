@@ -103,3 +103,8 @@ module.exports.addMessage = function(team_id,message,callback){
     Team.findOneAndUpdate({ _id: team_id },{ $push:{ messages:message }},callback)
 }
 
+//Update Team 
+module.exports.editTeam = function(team_id,new_team_name,new_team_info,callback){
+    Team.findOneAndUpdate({_id : team_id} , {team_name : new_team_name, team_info : new_team_info},callback);
+}
+

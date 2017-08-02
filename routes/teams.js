@@ -26,6 +26,26 @@ router.post('/message',(req,res,next)=>{
     })
 })
 
+// Edit team 
+router.post('/edit/:id',(req,res,next)=>{
+    let team_name = req.body.team_name;
+    let team_info = req.body.team_info;
+
+    if ( !team_name || !team_info ){
+        res.json({success:false,msg:"null values for team name or team info"});
+        return;
+    }
+
+    Team.editTeam(req.params.id,team_name,team_info,(err,team)=>{
+        if(err){
+            return res.json({success: false , msg : "failed update team"});
+        }
+        else{
+            return res.json({success: true , msg : "Team updated", team : team});
+            }})
+            
+})
+
 
 //create a new team
 router.post('/create',(req,res,next)=>{

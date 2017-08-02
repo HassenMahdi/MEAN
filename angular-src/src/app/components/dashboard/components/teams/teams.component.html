@@ -34,7 +34,7 @@
                     <div class="team-info">
                         <h3><b>{{team?.team_name}}</b></h3>
                         <h5>{{team?.team_info}}</h5>
-                        <a href=""><span class="glyphicon glyphicon-edit"></span>Edit</a>  
+                        <a href="#"  data-toggle="modal" data-target="#myEditTeamModal" ><span class="glyphicon glyphicon-edit"></span>Edit</a>  
                         <a href="#"  data-toggle="modal" data-target="#myDeleteTeamModal" ><span class="glyphicon glyphicon-remove"></span> Delete</a>
                     </div>
                 </div>
@@ -43,7 +43,7 @@
         <div class="col-md-6">
             <div class="panel panel-default">
                 <div class="panel-body">
-                      <h3>Good morning {{this.user.name}} !</h3>
+                      <h3>Good morning {{this.user?.name}} !</h3>
                       <h4>How are you feeling today ?</h4>
                         <input type="radio" name="gender" value="male" checked> Good
                         <input type="radio" name="gender" value="female"> Medium
@@ -62,7 +62,7 @@
                     <ul class="profiles-row">
                         <li class="profile" *ngFor="let leader of team?.team_leaders; let i = index">
                             <img class="img-circle img-leader" src="assets/images/profile.png" alt="" width="100px" height="100px">
-                            <p><b>{{leader.name}}</b>
+                            <p><b>{{leader?.name}}</b>
                             <br>
                                 @{{leader.username}}
                             <br>
@@ -84,7 +84,7 @@
                     <ul class="profiles-row">
                          <li class="profile" *ngFor="let member of team?.team_members; let i = index">
                             <img class="img-circle img-member" src="assets/images/profile.png" alt="" width="100px" height="100px">
-                            <p><b>{{member.name}}</b>
+                            <p><b>{{member?.name}}</b>
                             <br>
                                 @{{member.username}}
                             <br>
@@ -333,6 +333,47 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>   
                 <button (click)="removeTeam($event)" type="button" class="btn btn-primary" data-dismiss="modal">Yes, definitely</button>                   
+            </div>             
+                </form>                     
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal delete Team -->
+<div class="modal fade" id="myEditTeamModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title" id="myModalLabel">Editing {{team?.team_name}}</h4>
+            </div>            
+            <!-- Modal Body -->
+            <div class="modal-body">
+                <form class="form-horizontal" role="form" > 
+                <p style="text-align:center;"><img class="img-deleting" src="assets/images/editing.png" alt="" width="100px" height="100px"> </p>    
+                <h3 style='color:#660066; text-align:center'>Enter the new information about the team :</h3>
+                <div class="form-group">
+                    <label  class="col-sm-2 control-label"
+                              for="inputName">Name</label>
+                    <div class="col-sm-10">
+                        <input type="text" [(ngModel)]="new_team_name" name="new_team_name" class="form-control" 
+                        id="inputName" placeholder="Old name"/>
+                    </div>
+                </div>
+                    <!-- Second input -->
+                <div class="form-group">
+                    <label class="col-sm-2 control-label"
+                          for="inputInformations" >Informations</label>
+                    <div class="col-sm-10">
+                        <input type="text" [(ngModel)]="new_team_info" name="new_team_info" class="form-control"
+                            id="inputInformations" placeholder="Old information"/>
+                    </div>
+                </div>
+            <!-- Modal Footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>   
+                <button (click)="editTeam($event)" type="button" class="btn btn-primary" data-dismiss="modal">Edit</button>                   
             </div>             
                 </form>                     
             </div>

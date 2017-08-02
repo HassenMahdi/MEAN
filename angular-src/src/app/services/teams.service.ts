@@ -107,5 +107,16 @@ export class TeamsService {
     return  this.http.post('http://localhost:3000/teams/message', body, {headers:headers})
       .map(res => res.json());
   }
+
+  editTeam(team_id,team_name,team_info){
+    const newObject = {
+      "team_name":team_name,
+      "team_info":team_info
+    }  
+    let headers = new Headers();
+    headers.append('Content-Type','application/json');
+    return  this.http.post('http://localhost:3000/teams/edit/'+team_id, newObject, {headers:headers})
+      .map(res => res.json());
+  }
 }    
 
