@@ -28,6 +28,7 @@ export class DashboardComponent implements OnInit {
   ngOnInit() {
     this.authService.getProfile().subscribe( profile => {
         this.user = profile.user;
+        this.chatService.joiningDashboard(this.user.username);
     })
 
     this.user = JSON.parse(localStorage.getItem('user'))

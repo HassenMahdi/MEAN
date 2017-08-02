@@ -16,7 +16,10 @@ export class ChatComponent implements OnInit, OnDestroy{
   message;
   tweets =[];
   tweet;
-  
+  connectedUsers;
+  typing_emissions:String[]=[];
+  feedbacks= [];
+
   @Input() team : any;
   @Input() username : any;
 
@@ -38,16 +41,51 @@ export class ChatComponent implements OnInit, OnDestroy{
         {
           this.username= user.username;
           this.team = team;
+          this.team.feedbacks = []
           
           this.connection = this.chatService.initialize(this.username, this.team.team_name,this.team._id).subscribe(message => {
               
+            if( message["text"] )
                 this.team.messages.push( message );
-                scrollDown();
+            
+            if( message["rooms"])
+              this.connectedUsers = message["rooms"];
+            
+            if ( message["newRoom"])
+              this.team.feedbacks.push('You are connected to ' +message["newRoom"]);
+            
+            if ( message["newUser"])
+              this.team.feedbacks.push('@'+message["newUser"]+' has '+message["message"]);
+             
+            if ( message["typingUser"]){
+               if (this.typing_emissions.indexOf(message["typingUser"]) == -1){
+                    this.typing_emissions.push(message["typingUser"]);  
+               }
+             }
+                
+            if ( message["noneTypingUser"])
+            {
+              this.typing_emissions.splice(this.typing_emissions.indexOf(message["noneTypingUser"]),1) 
+            }
+          
+             scrollDown();
           })
-          scrollDown();
+          
         }
         
   }
+
+  timeoutref
+
+  typing(){
+    clearTimeout(this.timeoutref)
+    this.chatService.typingStarts(this.username,this.team._id)
+    this.timeoutref=setTimeout(()=>{
+      this.chatService.typingEnds(this.username,this.team._id)
+    },2000)
+  }
+
+
 
   sendMessage(){
     if( !this.connection ) return;

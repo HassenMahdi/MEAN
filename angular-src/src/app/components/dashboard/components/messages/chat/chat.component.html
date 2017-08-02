@@ -10,7 +10,7 @@
       </div>
     </div>
     <div class="input-group">
-      <input (keydown.enter)="sendMessage()" [(ngModel)]="message"  type="text" class="input-box form-control" placeholder="Type here...">
+      <input (keydown.enter)="sendMessage()" (keydown)="typing()" [(ngModel)]="message"  type="text" class="input-box form-control" placeholder="Type here...">
             <span class="input-group-btn">
               <button (click)="sendMessage()" class="send btn btn-secondary" type="button">
                 <i class="fa fa-chevron-right"></i>
@@ -19,12 +19,21 @@
       </div>
     </div>
   <div class="col-sm-3">
-    <h4>{{team?.team_name}}</h4>
-    <p>connected(3)</p>
+    <h4><b>{{team?.team_name}}</b></h4>
+    <p>Connected in this room({{connectedUsers?.length}})</p>
     <ul class="users-list">
-      <li>Hassen</li>
-      <li>Ahmed</li>
-      <li>John</li>
+      <div *ngFor="let user of connectedUsers">
+        <li><i>@{{user}}</i></li>
+      </div>
     </ul>
+    <div class="serverside">
+      <b>Server side :</b> 
+    <div class="server-box">
+      <div *ngFor="let feedback of team?.feedbacks">
+        <div><b>SERVER :</b> {{feedback}}</div>
+      </div>
+      <div *ngFor="let user of typing_emissions">{{user}} is typing</div>
+    </div> 
+    </div> 
   </div>
 </div>

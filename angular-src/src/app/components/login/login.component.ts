@@ -32,7 +32,7 @@ export class LoginComponent implements OnInit {
 
     this.authService.loginUser(user).subscribe(data=>{
       if (data.success){
-        this.router.navigate(['/profile']);
+        this.router.navigate(['/dashboard']);
         this.toaster.clear();
         this.toaster.success("you are now logged in","HELLO THERE!");
         console.log(data);
