@@ -33,6 +33,7 @@
     "knockout": "^3.4.2",
     "mydatepicker": "^2.0.25",
     "ng2-charts": "^1.6.0",
+    "ng2-tagsinput": "^0.1.5",
     "rxjs": "^5.0.1",
     "socket.io": "^2.0.3",
     "survey-angular": "0.12.6",

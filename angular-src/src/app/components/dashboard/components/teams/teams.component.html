@@ -138,65 +138,13 @@
                             id="inputInformations" placeholder="Some informations about the team"/>
                     </div>
                   </div>
-
+                    <!-- Third input -->
                   <div class="from-group">
                     <label class="col-sm-2 control-label" for="newteamusers">Members</label>
-                    <tag-input placeholder="Add tags ..."
-                            [model]="tagsArray">
+                    <tag-input placeholder="Add members ..." data-multiple
+                            [(ngModel)]="tag" name="tag" (keydown.enter)="onTagsAdded()" (tagRemoved)="onTagRemoved()" ngDefaultControl>
                     </tag-input>
-                  </div>
-
-                    <!-- Check input -->
-                  <!--
-                      <div class="form-group">
-                    <div class="col-sm-offset-2 col-sm-10">
-                      <div class="checkbox">
-                        <label>
-                            <input type="checkbox"/> Consider me as a leader
-                        </label>
-                      </div>
-                    </div>
-                  </div> -->
-                    <!-- Third input -->
-                    <!--
-                    <div class="form-group">
-                    <label  class="col-sm-2 control-label"
-                              for="inputName">Leaders</label>
-                    <div class="col-sm-10">          
-                    <div class="dropdown">
-                        <button class ="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">
-                            Add leaders<span class="caret"></span>
-                        </button>
-                        
-                        <ul class="dropdown-menu">
-                            <li class="disabled"><a href="#">Ahmed Akakzia</a></li>
-                            <li><a href="#">Hassen Mahdi</a></li>    
-                            <li class="divider"></li>                        
-                            <li><a href="#">Member 1</a></li>
-                            <li><a href="#">Member 2</a></li>
-                            <li><a href="#">Member 3</a></li>
-                        </ul>    
-                    </div>
-                    </div>
-                    </div>    
-                -->
-                    <!-- Fourth input -->
-                    <!--
-                    <div class="form-group">
-                    <label  class="col-sm-2 control-label"
-                              for="inputName">Members</label>
-                    <div class="col-sm-10">
-                        <select class="selectpicker" data-live-search="true">
-                            <option data-tokens="mustard">Hassen Mahdi</option>
-                            <option disabled data-tokens="ketchup mustard">Ahmed Akakzia</option>
-                            <option data-tokens="frosting">Member 1</option>
-                            <option data-tokens="frosting">Member 2</option>
-                            <option data-tokens="frosting">Member 3</option>
-                        </select>
-                    </div>
-                    </div>
-                -->
-            
+                  </div>           
             <!-- Modal Footer -->
             <div class="modal-footer">
                 <button type="button" class="btn btn-default"

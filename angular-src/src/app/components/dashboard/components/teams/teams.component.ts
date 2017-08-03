@@ -15,7 +15,7 @@ export class TeamsComponent implements OnInit {
   @ViewChild('myModal') modal;
 
   private user: any;
-  private auth_user:any;
+  private selectedUser:any;
   private teams: any[];
   private team: any;
   private team_name:any;
@@ -26,10 +26,13 @@ export class TeamsComponent implements OnInit {
   private user_name:any;
   private new_team_name:any;
   private new_team_info:any;
+  private tagsArray=new Array();
+  private tag:any;
 
-  selectedLeader = 0;
-  selectedMember =0;
-  selectedTeam = 0;
+
+  selectedLeaderIndex = 0;
+  selectedMemberIndex =0;
+  selectedTeamIndex = 0;
   constructor(
     private teamService : TeamsService,
     private authService : AuthService,
@@ -40,10 +43,8 @@ export class TeamsComponent implements OnInit {
   ngOnInit() {
 
     this.authService.getProfile().subscribe( profile => {
-        this.auth_user = profile.user;
-        this.user=this.auth_user;
+        this.user = profile.user;
         this.teams = this.teamService.getValidTeams(profile.user.teams) ;
-        console.log(this.teams);
         this.team = this.teams[0].team;
         this.teamService.getUserTeam(this.team._id).subscribe( res => {
           this.team = res.team;
@@ -61,16 +62,11 @@ export class TeamsComponent implements OnInit {
       })
   }
 
-  selectTeam(index){
-    this.team=null;
-    
+  selectTeam(index){    
     this.teamService.getUserTeam(this.teams[index].team._id).subscribe( res => {
           this.team = res.team;
-          this.selectedTeam = index;
-          console.log('debugging');
-          console.log(this.user.teams);
-          console.log(this.selectedTeam);
-          console.log(res);
+          this.selectedTeamIndex = index;
+          console.log(res.team);
         },
         err=>{
           console.log(err);
@@ -80,9 +76,8 @@ export class TeamsComponent implements OnInit {
      
   selectMember(index){
     this.teamService.getMemberbyUsername(this.team.team_members[index].username).subscribe( res => {
-          this.user = res.user;
-          this.selectedMember = index; 
-          console.log(res.user);
+          this.selectedUser = res.user;
+          this.selectedMemberIndex = index; 
         },
         err=>{
           console.log(err);
@@ -92,9 +87,8 @@ export class TeamsComponent implements OnInit {
 
     selectLeader(index){
     this.teamService.getMemberbyUsername(this.team.team_leaders[index].username).subscribe( res => {
-          this.user = res.user;
-          this.selectedLeader = index;
-          console.log(res);
+          this.selectedUser = res.user;
+          this.selectedLeaderIndex = index;
         },
         err=>{
           console.log(err);
@@ -113,8 +107,7 @@ export class TeamsComponent implements OnInit {
             }else{
             this.teamService.addMember(res.user._id, this.team._id).subscribe(data =>{
               if (data.success){
-                console.log(this.selectedMember);
-                this.selectedMember = this.team.team_members.length-1;
+                this.selectedMemberIndex = this.team.team_members.length-1;
                 this.team.team_members.push(data.user);
                 this.toastr.clear();
                 this.toastr.success(data.user.name +" has been successfully added to "+data.team.team_name);
@@ -142,8 +135,9 @@ export class TeamsComponent implements OnInit {
                 // The member is in team members, we need to graduate him
                 this.teamService.graduateMember(res.user._id, this.team._id).subscribe(data =>{
                 if (data.success){
-                  this.team.team_members.splice(this.teams[this.selectedTeam].team.team_members.indexOf(data.user._id),1);
+                  this.team.team_members.splice(this.teams[this.selectedTeamIndex].team.team_members.indexOf(data.user._id),1);
                   this.team.team_leaders.push(data.user);
+                  console.log(data.user.teams);
                   this.toastr.success('User transferred from member to leader');
                 }else{
                   this.toastr.error('Oops, we encountred an error while adding leader');                  
@@ -152,11 +146,12 @@ export class TeamsComponent implements OnInit {
               }else{
               this.teamService.addLeader(res.user._id, this.team._id).subscribe(data =>{
                 if (data.success){
-                  console.log(this.selectedMember);
-                  this.selectedMember = this.team.team_leaders.length-1;
+                  this.selectedMemberIndex = this.team.team_leaders.length-1;
                   this.team.team_leaders.push(data.user);
                   this.toastr.clear();
                   this.toastr.success(data.user.name +" has been successfully added to "+data.team.team_name+" as a leader");
+                  console.log(this.user.teams);
+                  console.log(data.user.teams);
                   this.user_name='';
                 }else{
                   this.toastr.clear();
@@ -169,13 +164,21 @@ export class TeamsComponent implements OnInit {
           }},err=>{return false;});
   }
 
+  onTagsAdded(){
+    this.tagsArray.push(this.tag)
+  }
+
+  onTagRemoved(){
+    this.tagsArray.splice(this.tagsArray.length-1,1)
+  }
   //Add a team to the list
   addTeam(event: Event){
     event.preventDefault();
     const newTeam = {
         "team_name": this.team_name,
         "team_info": this.team_info,
-        "user_id": this.user._id
+        "user_id": this.user._id,
+        "users_usernames": this.tagsArray
       }      
       this.teamService.addTeam(newTeam).subscribe(data =>{
       if (data.success){
@@ -184,13 +187,9 @@ export class TeamsComponent implements OnInit {
           team:data.team
         });
         this.teams = this.teamService.getValidTeams(this.user.teams) ;;
-        this.selectedTeam = this.teams.length-1;
+        this.selectedTeamIndex = this.teams.length-1;
         this.team = data.team;
-        this.team.team_leaders[0] = this.user;
         this.toastr.clear();
-        console.log('debu1');
-        console.log(this.selectedTeam);
-        console.log(this.teams);
         this.toastr.success(data.team.team_name+" has been successfully created");
         this.team_name='';
         this.team_info='';
@@ -206,14 +205,14 @@ export class TeamsComponent implements OnInit {
   removeMember(event: Event){
     event.preventDefault();
     const newObject = {
-      "member_id": this.team.team_members[this.selectedMember]._id,
+      "member_id": this.team.team_members[this.selectedMemberIndex]._id,
       "team_id": this.team._id
     }
     this.teamService.removeMember(newObject).subscribe(data =>{
       if (data.success){
         this.toastr.clear();
         this.toastr.success(data.user.name +" has been successfully removed from "+data.team.team_name);
-        this.team.team_members.splice(this.selectedMember,1);
+        this.team.team_members.splice(this.selectedMemberIndex,1);
       }else{
         this.toastr.clear();
         this.toastr.error("Somthing went wrong while removing member.");
@@ -225,14 +224,14 @@ export class TeamsComponent implements OnInit {
   removeLeader(event: Event){
     event.preventDefault();
     const newObject = {
-      "leader_id": this.team.team_leaders[this.selectedLeader]._id,
+      "leader_id": this.team.team_leaders[this.selectedLeaderIndex]._id,
       "team_id": this.team._id
     }
     this.teamService.removeLeader(newObject).subscribe(data =>{
       if (data.success){
         this.toastr.clear();
         this.toastr.success(data.user.name +" has been successfully removed from "+data.team.team_name);
-        this.team.team_leaders.splice(this.selectedLeader,1);
+        this.team.team_leaders.splice(this.selectedLeaderIndex,1);
       }else{
         this.toastr.clear();
         this.toastr.error("Somthing went wrong while removing member.");
@@ -246,9 +245,9 @@ export class TeamsComponent implements OnInit {
     this.teamService.removeTeam(this.team._id).subscribe(data =>{
       if (data.success){
         console.log(this.user.teams);
-        console.log(this.selectedTeam);
+        console.log(this.selectedTeamIndex);
         this.user.teams = this.teamService.getValidTeams(this.user.teams)
-        this.user.teams.splice(this.selectedTeam, 1);
+        this.user.teams.splice(this.selectedTeamIndex, 1);
         this.teams=this.user.teams;
         console.log(this.teams);
         this.teamService.getUserTeam(this.user.teams[0].team._id).subscribe( res => {
@@ -275,8 +274,8 @@ export class TeamsComponent implements OnInit {
         this.team.team_name=this.new_team_name;
         this.team.team_info=this.new_team_info;  
         this.user.teams=this.teamService.getValidTeams(this.user.teams);
-        this.user.teams[this.selectedTeam].team=this.team;
-        this.teamService.getUserTeam(this.user.teams[this.selectedTeam].team._id).subscribe( res => {
+        this.user.teams[this.selectedTeamIndex].team=this.team;
+        this.teamService.getUserTeam(this.user.teams[this.selectedTeamIndex].team._id).subscribe( res => {
           this.team = res.team;
         },
         err=>{
@@ -295,7 +294,7 @@ export class TeamsComponent implements OnInit {
   }
   
   isLeader(){
-    return (this.teams[this.selectedTeam].team.team_leaders.indexOf(this.auth_user._id) != -1)
+    return (this.teams[this.selectedTeamIndex].team.team_leaders.indexOf(this.user._id) != -1)
   }
 }   
 
