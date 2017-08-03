@@ -18,7 +18,7 @@ import { OverviewComponent } from './components/dashboard/components/overview/ov
 import { TeamsComponent } from './components/dashboard/components/teams/teams.component';
 
 
-const appRoutes : Routes = [
+module.exports = [
   {path:'' , component: HomeComponent},
   {path:'login' , component: LoginComponent},
   {path:'register' , component: RegisterComponent},
@@ -32,5 +32,3 @@ const appRoutes : Routes = [
     ]},
   {path:'profile' , component: ProfileComponent , canActivate:[AuthGuard]}
 ]; 
-
-exports = appRoutes;

@@ -32,6 +32,7 @@ const teams = require('./routes/teams');
 const users = require('./routes/users');
 const surveys = require('./routes/surveys');
 const stats = require('./routes/stats');
+const files = require('./routes/files');
 
 // Port Number
 const port = 3000;
@@ -48,10 +49,14 @@ app.use(passport.session());
 
 require('./config/passport')(passport);
 
+// Public folder
+app.use(express.static(path.join(__dirname, 'public')));
+
 app.use('/users', users);
 app.use('/surveys', surveys);
 app.use('/teams', teams);
 app.use('/stats', stats);
+app.use('/files', files);
 
 // Index Route
 app.get('/', (req, res) => {

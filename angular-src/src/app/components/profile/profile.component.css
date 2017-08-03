@@ -1,6 +1,6 @@
 .user_image{
-    height: 250px;
-    width: 250px;
+    height: 150px;
+    width: 150px;
     object-fit: cover;
     background-position: 50% 50%;
     background-size: cover;
@@ -69,6 +69,10 @@
     .image_container{
         width: auto;
         padding-left: 20px; 
+    }
+    .user_image{
+        height: 250px;
+        width: 250px;
     }
     .info_container{
         padding-left: 50px;
