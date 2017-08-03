@@ -1,7 +1,13 @@
 /*Added by hassen*/
+a, u {
+    text-decoration: none;
+}
 
 .team-image{
     float: left;
+}
+.team-image img{
+    width: 200px;
 }
 
 .team-info{
@@ -11,7 +17,7 @@
 
 .profiles-row{
     overflow-x: scroll;
-    text-align: center;
+    text-align: left;
     padding-left:0; 
     white-space: nowrap;
     margin-top: 10px;
@@ -20,7 +26,16 @@
 }
 .profile{
     padding: 5px;
-    display: inline-block ;  
+    display: inline-block ; 
+    position: relative; 
+}
+
+.profile a{
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 10px;
+    color: white;
 }
 
 .img-leader{
@@ -35,21 +50,21 @@
     border-radius: 5px;
     border-top-width: 5px;
     border-style: solid;
-    background: #f9f9f9;
+    background: #30cbd7;
 }
 
 
 .profiles-row::-webkit-scrollbar-track
 {
 	border-radius: 0;
-	background-color: #F5F5F5;
+	background-color: rgba(0, 0, 0, 0);
 }
 
 .profiles-row::-webkit-scrollbar
 {
-    height: 3px;
-	width: 2px;
-	background-color: #F5F5F5;
+    height: 5px;
+	width: 5px;
+	background-color: rgba(0, 0, 0, 0);
 }
 
 .profiles-row::-webkit-scrollbar-thumb
@@ -64,3 +79,15 @@
     line-height: 400px;
 }
 
+.teams-list{
+    padding: 0;
+}
+
+.teams-list li{
+    list-style: none;
+    padding: 2px 0 2px 0;
+}
+
+.teams-list li:hover{
+    cursor: pointer;
+}
