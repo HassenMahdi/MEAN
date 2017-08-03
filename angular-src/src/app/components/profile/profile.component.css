@@ -1,20 +1,33 @@
 .user_image{
-    object-fit: cover;
     height: 250px;
     width: 250px;
+    object-fit: cover;
     background-position: 50% 50%;
     background-size: cover;
-    margin-bottom: 10px; 
+    margin-bottom: 10px;
+    border-radius: 5px;
+    border-top-width:5px;
+    border-color: skyblue;
+    border-style: solid; 
 }
 
 .image_container{
     float: left;
-    margin: 20px;
+    width: 100%;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    text-align: center;
 }
 
 .info_container{
     float: left;
-    margin: 20px;
+    padding-left: 10px;
+    width: 100%;
+}
+.info_container > h2 {
+    text-align: center;
+    width: 100%;
 }
 
 .info_container p,.info_container ul {
@@ -50,4 +63,20 @@
 
 .up-image img{
     width: 100%;
+}
+
+@media(min-width:768px) {
+    .image_container{
+        width: auto;
+        padding-left: 20px; 
+    }
+    .info_container{
+        padding-left: 50px;
+        width: auto;
+    }
+    .info_container > h2 {
+        text-align: left;
+        width: auto;
+}
+
 }

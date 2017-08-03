@@ -6,7 +6,8 @@ import { RouterModule , Routes } from '@angular/router';
 import { ToastrModule } from 'toastr-ng2';
 import { ChartsModule } from 'ng2-charts';
 import { MyDatePickerModule } from 'mydatepicker';
-import { environment } from 'environments/environment'
+import { environment } from 'environments/environment';
+import { Ng2TagsInputModule } from 'ng2-tagsinput';
 
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
@@ -105,7 +106,8 @@ const appRoutes : Routes = [
     RouterModule.forRoot(appRoutes),
     ToastrModule.forRoot(),
     MyDatePickerModule,
-    ChartsModule
+    ChartsModule,
+    Ng2TagsInputModule,
   ],
   providers: [
     ValidateService,
