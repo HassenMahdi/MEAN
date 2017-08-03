@@ -15,6 +15,7 @@ export class TeamsComponent implements OnInit {
   @ViewChild('myModal') modal;
 
   private user: any;
+  private auth_user:any;
   private teams: any[];
   private team: any;
   private team_name:any;
@@ -23,6 +24,8 @@ export class TeamsComponent implements OnInit {
   private team_leaders:any[];
   private username:any;
   private user_name:any;
+  private new_team_name:any;
+  private new_team_info:any;
 
   selectedLeader = 0;
   selectedMember =0;
@@ -37,7 +40,8 @@ export class TeamsComponent implements OnInit {
   ngOnInit() {
 
     this.authService.getProfile().subscribe( profile => {
-        this.user = profile.user;
+        this.auth_user = profile.user;
+        this.user=this.auth_user;
         this.teams = this.teamService.getValidTeams(profile.user.teams) ;
         console.log(this.teams);
         this.team = this.teams[0].team;
@@ -75,10 +79,9 @@ export class TeamsComponent implements OnInit {
   }
      
   selectMember(index){
-    this.user=null;
     this.teamService.getMemberbyUsername(this.team.team_members[index].username).subscribe( res => {
           this.user = res.user;
-          this.selectedMember = index;               
+          this.selectedMember = index; 
           console.log(res.user);
         },
         err=>{
@@ -88,7 +91,6 @@ export class TeamsComponent implements OnInit {
   }
 
     selectLeader(index){
-    this.user=null;
     this.teamService.getMemberbyUsername(this.team.team_leaders[index].username).subscribe( res => {
           this.user = res.user;
           this.selectedLeader = index;
@@ -137,10 +139,10 @@ export class TeamsComponent implements OnInit {
                     this.toastr.error('User with a same username already exists in this team')
             }else{
               if((this.team.team_members.map(function(e) { return e.username; }).indexOf(res.user.username) > -1)){
+                // The member is in team members, we need to graduate him
                 this.teamService.graduateMember(res.user._id, this.team._id).subscribe(data =>{
                 if (data.success){
-                  console.log(data.user);
-                  this.team.team_members.splice(this.team.team_members.indexOf(data.user),1);
+                  this.team.team_members.splice(this.teams[this.selectedTeam].team.team_members.indexOf(data.user._id),1);
                   this.team.team_leaders.push(data.user);
                   this.toastr.success('User transferred from member to leader');
                 }else{
@@ -181,14 +183,14 @@ export class TeamsComponent implements OnInit {
           leader: true,
           team:data.team
         });
-        this.teams = this.user.teams;
-        this.selectedTeam = this.user.teams.length-1;
+        this.teams = this.teamService.getValidTeams(this.user.teams) ;;
+        this.selectedTeam = this.teams.length-1;
         this.team = data.team;
         this.team.team_leaders[0] = this.user;
         this.toastr.clear();
         console.log('debu1');
         console.log(this.selectedTeam);
-        console.log(this.user.teams);
+        console.log(this.teams);
         this.toastr.success(data.team.team_name+" has been successfully created");
         this.team_name='';
         this.team_info='';
@@ -243,6 +245,7 @@ export class TeamsComponent implements OnInit {
     event.preventDefault();
     this.teamService.removeTeam(this.team._id).subscribe(data =>{
       if (data.success){
+        this.user.teams = this.teamService.getValidTeams(this.user.teams)
         this.user.teams.splice(this.selectedTeam, 1);
         this.teams=this.user.teams;
         console.log(this.user.teams);
@@ -262,61 +265,38 @@ export class TeamsComponent implements OnInit {
 
     })
   }
-}  
-    
 
-    /*
-    const ObjectMembers = this.team.team_members;
-    const ObjectLeaders = this.team.team_leaders;
-    //loop to get all members and remove them
-    for (let member of ObjectMembers){
-      var newMember = {
-        "member_id": member._id,
-        "team_id": this.team._id
-      }
-
-      this.teamService.removeMember(newMember).subscribe(data =>{
-      if (data.success){
-      }else{
-        this.toastr.error("Could not remove "+member.name+ " from team");
-  }
-    })          
-    }
-  
-    //loop to get all leaders and remove them
-    for (let leader of ObjectLeaders){
-      var newLeader = {
-        "leader_id": leader._id,
-        "team_id": this.team._id
-      }
-
-      this.teamService.removeLeader(newLeader).subscribe(data =>{
-      if (data.success){
-      }else{
-        this.toastr.clear();
-        this.toastr.error("Could not remove "+leader.name+ " from team");
-  }
-    })          
-    }
-
-    //Removing Team from db
-    this.teamService.removeTeam(this.team._id).subscribe(data =>{
-      if (data.success){
-        this.user.teams.splice(this.selectedTeam, 1);
-        console.log(this.user.teams);
-        this.teamService.getUserTeams(this.user.teams[0].team._id).subscribe( res => {
+  editTeam(event: Event){
+    event.preventDefault();
+    this.teamService.editTeam(this.team._id, this.new_team_name,this.new_team_info).subscribe(data =>{
+      if(data.success){
+        this.team.team_name=this.new_team_name;
+        this.team.team_info=this.new_team_info;  
+        this.user.teams=this.teamService.getValidTeams(this.user.teams);
+        this.user.teams[this.selectedTeam].team=this.team;
+        this.teamService.getUserTeam(this.user.teams[this.selectedTeam].team._id).subscribe( res => {
           this.team = res.team;
         },
         err=>{
           console.log(err);
           return false;
-        });
-        this.toastr.success("Team has been successfully removed!");
+        });      
+        this.toastr.clear();
+        this.toastr.success("The team has been successfully updated ");
+        this.new_team_name='';
+        this.new_team_info='';
       }else{
-        this.toastr.error("Somthing went wrong while removing team.");
+        this.toastr.clear();
+        this.toastr.error("Oops, it seems you need to try again");
+      }
+    })
   }
-    })*/
-
+  
+  isLeader(){
+    return (this.auth_user.teams[this.selectedTeam].leader);
+    //return (this.teams[this.selectedTeam].team.team_leaders.indexOf(this.auth_user._id) != -1)
+  }
+}   
 
 
 

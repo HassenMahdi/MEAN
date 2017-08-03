@@ -16,7 +16,7 @@
                   </p>
                   
                   <br>
-                  <div class="teams?.length==-1">
+                  <div *ngIf="teams?.length==-1">
                     <p>
                       You dont belong to any team at the moment.
                       click <a [routerLink]="['../teams']">here</a> create one.
