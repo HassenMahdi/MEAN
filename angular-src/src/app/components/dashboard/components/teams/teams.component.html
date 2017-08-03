@@ -34,8 +34,8 @@
                     <div class="team-info">
                         <h3><b>{{team?.team_name}}</b></h3>
                         <h5>{{team?.team_info}}</h5>
-                        <a href="#"  data-toggle="modal" data-target="#myEditTeamModal" ><span class="glyphicon glyphicon-edit"></span>Edit</a>  
-                        <a href="#"  data-toggle="modal" data-target="#myDeleteTeamModal" ><span class="glyphicon glyphicon-remove"></span> Delete</a>
+                        <a href="#" *ngIf='isLeader()'  data-toggle="modal" data-target="#myEditTeamModal" ><span class="glyphicon glyphicon-edit"></span>Edit</a>  
+                        <a href="#" *ngIf='isLeader()' data-toggle="modal" data-target="#myDeleteTeamModal" ><span class="glyphicon glyphicon-remove"></span> Delete</a>
                     </div>
                 </div>
             </div>
@@ -58,7 +58,7 @@
                 <div class="panel-body">
                     <h3>Leaders</h3>
                     <p><span class="glyphicon glyphicon-note"></span><b > Leaders</b> can create surveys and add other team members.</p>
-                    <a href="#" data-toggle="modal" data-target="#addLeader"><span class="glyphicon glyphicon-plus"></span> Add a new leader</a>
+                    <a href="#" *ngIf='isLeader()' data-toggle="modal" data-target="#addLeader"><span class="glyphicon glyphicon-plus"></span> Add a new leader</a>
                     <ul class="profiles-row">
                         <li class="profile" *ngFor="let leader of team?.team_leaders; let i = index">
                             <img class=" img-leader" src="{{leader.image}}" alt="" width="100px" height="100px">
@@ -66,7 +66,7 @@
                             <br>
                                 @{{leader.username}}
                             <br>
-                                <a  href="#" (click)='selectLeader(i)' data-toggle="modal" data-target="#removeLeader">
+                                <a  href="#" *ngIf='isLeader()' (click)='selectLeader(i)' data-toggle="modal" data-target="#removeLeader">
                                 <span class="glyphicon glyphicon-remove"></span>
                                 </a>
                         </p>
@@ -80,7 +80,7 @@
                 <div class="panel-body">
                     <h3>Members</h3>
                     <p><b>Members</b> can answer surveys.</p>
-                    <a href="#" data-toggle="modal" data-target="#addMember"><span class="glyphicon glyphicon-plus"></span> Add a new member</a>
+                    <a href="#" *ngIf='isLeader()' data-toggle="modal" data-target="#addMember"><span class="glyphicon glyphicon-plus"></span> Add a new member</a>
                     <ul class="profiles-row">
                          <li class="profile" *ngFor="let member of team?.team_members; let i = index">
                             <img class=" img-member" src="{{member.image}}" alt="" width="100px" height="100px">
@@ -88,7 +88,7 @@
                             <br>
                                 @{{member.username}}
                             <br>
-                                <a  href="#" (click)='selectMember(i)' data-toggle="modal" data-target="#removeMember">
+                                <a  href="#" *ngIf='isLeader()' (click)='selectMember(i)' data-toggle="modal" data-target="#removeMember">
                                 <span class="glyphicon glyphicon-remove"></span>
                                 </a>
                             </p>

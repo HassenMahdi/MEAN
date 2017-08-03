@@ -15,6 +15,7 @@ export class TeamsComponent implements OnInit {
   @ViewChild('myModal') modal;
 
   private user: any;
+  private auth_user:any;
   private teams: any[];
   private team: any;
   private team_name:any;
@@ -39,7 +40,8 @@ export class TeamsComponent implements OnInit {
   ngOnInit() {
 
     this.authService.getProfile().subscribe( profile => {
-        this.user = profile.user;
+        this.auth_user = profile.user;
+        this.user=this.auth_user;
         this.teams = this.teamService.getValidTeams(profile.user.teams) ;
         console.log(this.teams);
         this.team = this.teams[0].team;
@@ -137,10 +139,10 @@ export class TeamsComponent implements OnInit {
                     this.toastr.error('User with a same username already exists in this team')
             }else{
               if((this.team.team_members.map(function(e) { return e.username; }).indexOf(res.user.username) > -1)){
+                // The member is in team members, we need to graduate him
                 this.teamService.graduateMember(res.user._id, this.team._id).subscribe(data =>{
                 if (data.success){
-                  console.log(data.user);
-                  this.team.team_members.splice(this.team.team_members.indexOf(data.user),1);
+                  this.team.team_members.splice(this.teams[this.selectedTeam].team.team_members.indexOf(data.user._id),1);
                   this.team.team_leaders.push(data.user);
                   this.toastr.success('User transferred from member to leader');
                 }else{
@@ -288,7 +290,12 @@ export class TeamsComponent implements OnInit {
         this.toastr.error("Oops, it seems you need to try again");
       }
     })
-  } 
+  }
+  
+  isLeader(){
+    return (this.auth_user.teams[this.selectedTeam].leader);
+    //return (this.teams[this.selectedTeam].team.team_leaders.indexOf(this.auth_user._id) != -1)
+  }
 }   
 
 
