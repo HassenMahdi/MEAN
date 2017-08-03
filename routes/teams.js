@@ -52,26 +52,38 @@ router.post('/create',(req,res,next)=>{
     let team = new Team( {
         team_name : req.body.team_name,
         team_info : req.body.team_info,
-        team_leaders : [req.body.user_id]
+        team_leaders : [req.body.user_id],
+        team_members : req.body.users_usernames
     })
 
-    Team.addTeam(team,(err,team)=>{
-        if(err){
-            return res.json({success: false , msg : "failed to create team"});
-            throw err;
-        }
-        if(team){
-            User.addTeam(req.body.user_id, team._id,true,(err,user)=>{
-                if (err)
-                    return res.json({team : team , success: true , msg : "failed to create team"});
-                if(user)
-                {
-                    res.json({team : team , success: true , msg : "Successfully created a new team"});
-                }      
-            })
-            
-        }
-    });
+    user_usernames = req.body.users_usernames;
+    User.getUsersByUsernames(user_usernames, (err,users)=>{
+        if (err)
+            return res.json({success: false , msg : "failed to create team2"});
+        if (users)
+                team.team_members = users;
+                Team.addTeam(team,(err,team)=>{
+                    if(err){
+                        return res.json({success: false , msg : "failed to create team0"});
+                        throw err;
+                    }
+                    if(team){
+                        User.addManyToTeam(team.team_members,false, team._id, (err, users)=>{
+                            if(err)
+                                return res.json({team : team , success: true , msg : "failed to create team1"});
+                            if (users){
+                                User.addTeam(req.body.user_id, team._id,true,(err,user)=>{
+                                    if (err)
+                                        return res.json({team : team , success: true , msg : "failed to create team15"});
+                                    if(user)
+                                        res.json({team : team , success: true , msg : "Successfully created a new team"});   
+                                })
+                            }
+                        })
+                        
+                    }
+                });
+    })
 })
 
 //get the team by team id

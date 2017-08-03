@@ -245,10 +245,12 @@ export class TeamsComponent implements OnInit {
     event.preventDefault();
     this.teamService.removeTeam(this.team._id).subscribe(data =>{
       if (data.success){
+        console.log(this.user.teams);
+        console.log(this.selectedTeam);
         this.user.teams = this.teamService.getValidTeams(this.user.teams)
         this.user.teams.splice(this.selectedTeam, 1);
         this.teams=this.user.teams;
-        console.log(this.user.teams);
+        console.log(this.teams);
         this.teamService.getUserTeam(this.user.teams[0].team._id).subscribe( res => {
           console.log('debug');
           console.log(res);
@@ -293,8 +295,7 @@ export class TeamsComponent implements OnInit {
   }
   
   isLeader(){
-    return (this.auth_user.teams[this.selectedTeam].leader);
-    //return (this.teams[this.selectedTeam].team.team_leaders.indexOf(this.auth_user._id) != -1)
+    return (this.teams[this.selectedTeam].team.team_leaders.indexOf(this.auth_user._id) != -1)
   }
 }   
 

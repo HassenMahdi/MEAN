@@ -108,6 +108,22 @@ router.get('/get/:username',(req,res,next)=>{
     });
 })
 
+//Get users by Usernames
+router.post('/get',(req,res,next)=>{
+  let usernames_list = req.body.usernames_list;
+    User.getUsersByUsernames(usernames_list,(err,users)=>{
+        if(err){
+            return res.json({success: false , msg : "Failed to get users"})
+            throw err;
+        }
+        if (users.length != usernames_list.length){
+                res.json({users : users , success: true , msg : "One or many users not found"})
+        }else{
+            res.json({users : users , success: true , msg : "All users extraction successfull"});
+        }
+    });
+})
+
 router.put('/pic/url',(req,res,next)=>{
   console.log("Reached")
   User.changeImage(req.body.user_id,req.body.image,(err,user)=>{

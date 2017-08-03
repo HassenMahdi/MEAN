@@ -42,10 +42,17 @@ const UserSchema = mongoose.Schema({
 
 const User = module.exports = mongoose.model('User', UserSchema);
 
-module.exports.addTeam = function(user_id,team_id,leader = false,callback){
+module.exports.addTeam = function(user_id,team_id,leader,callback){
   User.findOneAndUpdate({_id:user_id},{$push:{teams:{
     team: team_id,
     leader:leader,
+  }}},callback)
+}
+
+module.exports.addManyToTeam = function(team_members,leader = false,team_id,callback){
+  User.updateMany({_id:{$in:team_members}},{$push:{teams:{
+    team: team_id,
+    leader:false,
   }}},callback)
 }
 
@@ -64,6 +71,11 @@ module.exports.getUserById = function(id, callback){
 module.exports.getUserByUsername = function(username, callback){
   const query = {username: username}
   User.findOne(query, callback);
+}
+
+module.exports.getUsersByUsernames = function(usernames_list, callback){
+  const query = {username: {$in:usernames_list}}
+  User.find(query, callback);
 }
 
 module.exports.addUser = function(newUser, callback){
