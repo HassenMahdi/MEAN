@@ -87,7 +87,7 @@
     list-style: none;
 }
 
-.sidebar-active  a{
+.sidebar-active  a , .sidebar-nav li a:active{
     background: #34495e;
     color: white !important;
 }

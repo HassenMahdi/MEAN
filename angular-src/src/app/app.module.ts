@@ -24,6 +24,7 @@ import { AuthService } from './services/auth.service';
 import { FirebaseService } from './services/firebase.service';
 import { ChatService } from './services/chat.service'
 import { StatService } from './services/stat.service'
+import { FileService } from './services/file.service'
 
 import { AuthGuard } from './guards/auth.guard';
 import { ViewContainerRef } from '@angular/core';
@@ -117,7 +118,8 @@ const appRoutes : Routes = [
     SurveysService,
     FirebaseService,
     ChatService,
-    StatService
+    StatService,
+    FileService,
   ],
   bootstrap: [
     AppComponent

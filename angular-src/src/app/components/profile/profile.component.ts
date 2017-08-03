@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import { TeamsService } from '../../services/teams.service';
+import { FileService } from '../../services/file.service';
 import { ToastrService } from 'toastr-ng2';
 import { Router } from '@angular/router';
 declare var jQuery : any
@@ -32,6 +33,7 @@ export class ProfileComponent implements OnInit {
     private authService : AuthService,
     private teamsService : TeamsService,
     private toastr : ToastrService,
+    private fileService: FileService,
   ) {}
 
   ngOnInit() {
@@ -96,8 +98,9 @@ export class ProfileComponent implements OnInit {
     }
   }
 
+  imageFile
   saveImage(){
-    if(this.image.source == "url")
+    if(this.image.source == "url" && this.image.loaded)
       this.authService.saveImageUrl(this.user._id,this.image.url).subscribe(res=>{
         if(res.success){
           this.toastr.success("Your profile picture have been changed")
@@ -107,7 +110,23 @@ export class ProfileComponent implements OnInit {
         }else{
           this.toastr.error("We've encoutered a problem please try again later")
         }
+        return
       })
+    else if (this.image.source == "upload" && this.image.loaded){
+      this.fileService.uploadImage(this.user._id,this.imageFile).subscribe(res=>{
+        if (res.success){
+          this.toastr.success("Your profile picture have been changed")
+          this.user.image=this.image.url;
+          $('#closechangepic').click()
+          $('body').click()
+        }else{
+          this.toastr.info(res.msg)
+        }
+      })
+      return
+    }else{
+      this.toastr.info("You should select a picture first")
+    }
   }
 
   fileChange(event) {
@@ -117,10 +136,19 @@ export class ProfileComponent implements OnInit {
         this.image = {
           name:file.name,
           url:"",
-          size:file.size+"kb",
+          size: (file.size/1000000) +" Mb",
           source:"upload",
           loaded:false,
       }
+      this.imageFile = file
+      var image = this.image
+
+      var reader = new FileReader()
+      reader.onload = function(e){
+        image.loaded = true;
+        image.url = reader.result;
+      }
+      reader.readAsDataURL(file)
     }
   }
 
