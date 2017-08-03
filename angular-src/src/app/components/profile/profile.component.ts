@@ -82,13 +82,17 @@ export class ProfileComponent implements OnInit {
     })  
   }
 
+  loadImage(){
+    this.image.loaded=true;
+  }
+
   urlChange(e){
     this.image = {
     name:"N/A",
     url:e.target.value,
     size:"N/A",
     source:"url",
-    loaded:true,
+    loaded:false,
     }
   }
 
@@ -98,6 +102,8 @@ export class ProfileComponent implements OnInit {
         if(res.success){
           this.toastr.success("Your profile picture have been changed")
           this.user.image=this.image.url;
+          $('#closechangepic').click()
+          $('body').click()
         }else{
           this.toastr.error("We've encoutered a problem please try again later")
         }
@@ -113,7 +119,7 @@ export class ProfileComponent implements OnInit {
           url:"",
           size:file.size+"kb",
           source:"upload",
-          loaded:true,
+          loaded:false,
       }
     }
   }

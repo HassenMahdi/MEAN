@@ -10,7 +10,11 @@
               </div>            
               <div class="info_container">
                   <h2 class="title">{{user?.name}}<br> <small>@{{user?.username}}</small></h2>
-                  <p><span class="glyphicon glyphicon-envelope"></span> {{user?.email}}</p>
+                  <p><span class="glyphicon glyphicon-envelope"></span> {{user?.email}}
+                  <br>
+                  <a href="#" data-toggle="modal" data-target="#changepass" >Change my password</a>
+                  </p>
+                  
                   <br>
                   <div class="teams?.length==-1">
                     <p>
@@ -25,9 +29,6 @@
                           {{team.team?.team_name}} as <span *ngIf="team.leader">(leader)</span> <span *ngIf="!team.leader">(Member)</span>
                         </li>
                       </ul>
-                      <div>
-                        <p><a href="#" data-toggle="modal" data-target="#changepass" >Change my password</a></p> 
-                      </div>  
                   </div>
               </div>
                   
@@ -76,14 +77,14 @@
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-body">
-          <button id="closechangepass" type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <button id="closechangepic" type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
             <h4 class="modal-title">Profile image</h4>
             <br>
 
-            <div class="row" *ngIf="image.loaded">
+            <div class="row" [ngClass]="{'show':image.loaded,'hidden':!image.loaded }">
               <div class="col-md-6">
                   <div class="up-image">
-                    <img id="up-image" src="{{image.url}}" alt="">
+                    <img id="up-image" src="{{image.url}}" (load)="loadImage()" alt="Image">
                   </div>
               </div>
               <div class="col-md-6">
@@ -103,7 +104,7 @@
               <div class="col-md-6">
                 <div class="form-group">
                   <label for="Choose a file">URL</label>
-                    <input class="form-control" (change)="urlChange($event)"  placeholder="URL here" type="url" name="image" value="" >
+                    <input class="form-control" (input)="urlChange($event)"  placeholder="URL here" type="text" name="imageUrl" value="" >
                 </div>
               </div>
             </div>
