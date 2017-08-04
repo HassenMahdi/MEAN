@@ -16,7 +16,6 @@ export class DropboxComponent implements OnInit {
   ngOnInit() {
     setTimeout(()=>{
       this.loading = false;
-      this.files=[]
     },2000)
   }
 }

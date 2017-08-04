@@ -138,8 +138,11 @@ export class TakeSurveyComponent implements OnInit {
     e.preventDefault();
     this.selectedAnswersIndex = index;
     var ai = this.displayanswered[index].submissions.findIndex(
-      a => (a.submitter_id = this.user_id )
+      a => (a.submitter_id == this.user_id )
     )
+    console.log("submission id "  + ai)
+    console.log("survey index id " +  index)
+    console.log(this.displayanswered)
     this.answers = this.displayanswered[index].submissions[ai].answers
     var an = this.displayanswered[index].submissions[ai].answers
     console.log(an)
@@ -152,8 +155,6 @@ export class TakeSurveyComponent implements OnInit {
           a: an[key][key2]
         })
       }
-
-   // do some more stuff with obj[key]
     }
   }
 

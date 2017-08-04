@@ -9,4 +9,14 @@
     margin: 0;
     padding: 10px;
     border: 0;
+    position: relative;
+}
+
+.empty{
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    transform: translateY(30%);
+    text-align: center;
+    color: lightgrey;
 }

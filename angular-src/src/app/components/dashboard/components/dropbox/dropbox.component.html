@@ -28,18 +28,22 @@
     </div>
     <!--  End toolbar -->
 
-    <!-- No files -->
-    <div *ngIf="!files">
-        <h4>No files found</h4>
-    </div>
-
     <!-- files found -->
-    <div *ngIf="files">
+    <div>
 
         <!-- files box -->
         <div class="col-md-8">
             <div class="panel panel-default">
                 <div class="panel-body panel-files">
+                    <!-- No files-->
+                    <div *ngIf="!files">
+                        <h4 class="empty">
+                            <i class="fa fa-ban fa-5x"></i>
+                            <br>
+                            No files
+                        </h4>
+                    </div>
+
                     
                 </div>
             </div>
@@ -49,7 +53,7 @@
         <!-- sidebar -->
         <div class="col-md-4">
             <h4>Details</h4>
-            <h1><i class="fa fa-file-image-o fa-4x"></i></h1>
+            <h1><i class="fa fa-file-image-o fa-3x"></i></h1>
             <table class="table">
                 <tr>
                     <td>Type</td>
@@ -67,7 +71,7 @@
                     <td></td>
                 </tr>
                 <tr>
-                    <td>Owenr</td>
+                    <td>Owener</td>
                     <td>@hassenmahdi</td>
                     <td></td>
                 </tr>
@@ -87,16 +91,6 @@
         <!-- sidebar -->
     </div>
     <!--  end files  -->
-
-
-
-
-
-
-
-
-
-
 </div>
 
 <!------       -------->        
