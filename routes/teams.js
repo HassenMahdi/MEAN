@@ -59,22 +59,22 @@ router.post('/create',(req,res,next)=>{
     user_usernames = req.body.users_usernames;
     User.getUsersByUsernames(user_usernames, (err,users)=>{
         if (err)
-            return res.json({success: false , msg : "failed to create team2"});
+            return res.json({success: false , msg : "failed to get members"});
         if (users)
                 team.team_members = users;
                 Team.addTeam(team,(err,team)=>{
                     if(err){
-                        return res.json({success: false , msg : "failed to create team0"});
+                        return res.json({success: false , msg : "failed to add team"});
                         throw err;
                     }
                     if(team){
                         User.addManyToTeam(team.team_members,false, team._id, (err, users)=>{
                             if(err)
-                                return res.json({team : team , success: true , msg : "failed to create team1"});
+                                return res.json({team : team , success: true , msg : "failed add members"});
                             if (users){
                                 User.addTeam(req.body.user_id, team._id,true,(err,user)=>{
                                     if (err)
-                                        return res.json({team : team , success: true , msg : "failed to create team15"});
+                                        return res.json({team : team , success: true , msg : "failed to create team"});
                                     if(user)
                                         res.json({team : team , success: true , msg : "Successfully created a new team"});   
                                 })
