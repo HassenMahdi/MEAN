@@ -4,18 +4,21 @@ a, u {
 }
 
 .team-image{
-    float: left;
+    text-align: center;
 }
 .team-image img{
-    width: 200px;
+    padding: 10px;
+    border: 1px solid lightgrey;
+    width: 60%;
+    border-radius: 50%;
 }
 
 .team-info{
-    float: left;
     margin-left:20px; 
 }
 
 .profiles-row{
+    min-height: 162px;
     overflow-x: scroll;
     text-align: left;
     padding-left:0; 
@@ -85,9 +88,18 @@ a, u {
 
 .teams-list li{
     list-style: none;
-    padding: 2px 0 2px 0;
+    padding: 5px 0 5px 0;
+    padding-left: 10px; 
+}
+
+.teams-list li a:hover{
+    color: blue !important;
 }
 
 .teams-list li:hover{
     cursor: pointer;
+}
+
+.panel{
+    overflow: hidden;
 }

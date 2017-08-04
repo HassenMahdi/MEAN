@@ -1,0 +1,12 @@
+.panel-fill{
+    min-height: 550px;
+    height: 100%;
+}
+
+.panel-files{
+    height: 420px;
+    background-color: #f9f9f9;
+    margin: 0;
+    padding: 10px;
+    border: 0;
+}

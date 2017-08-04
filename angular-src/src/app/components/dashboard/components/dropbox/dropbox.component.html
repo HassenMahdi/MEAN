@@ -1,3 +1,106 @@
-<p>
-  dropbox works!
-</p>
+<!-- Start Conatiner -->
+<div class="container-fluid fadeInanimated">
+<div class="panel panel-default">
+<div class="panel-body panel-fill">
+<div class="col-md-12">
+    <h4>Dropbox</h4>
+    <br>
+</div>
+<!------       -------->        
+
+<!-- Start loading -->
+<div *ngIf="loading" class="col-md-12 loading">
+    <p>loading...</p>
+</div>
+<!-- End loading -->
+
+<div class="fadeInUp animated" *ngIf="!loading">
+
+    <br>
+
+    <!--  Start Tool bar  -->
+    <div class="col-md-12">
+        <div class="btn-group">
+            <button type="button" class="btn btn-primary"><i class="fa fa-plus"></i></button>
+            <button type="button" class="btn btn-primary"><i class="fa fa-gear"></i></button>
+            <button type="button" class="btn btn-alert"><i class="fa fa-remove"></i></button>
+        </div>
+    </div>
+    <!--  End toolbar -->
+
+    <!-- No files -->
+    <div *ngIf="!files">
+        <h4>No files found</h4>
+    </div>
+
+    <!-- files found -->
+    <div *ngIf="files">
+
+        <!-- files box -->
+        <div class="col-md-8">
+            <div class="panel panel-default">
+                <div class="panel-body panel-files">
+                    
+                </div>
+            </div>
+        </div>
+        <!-- files box -->
+
+        <!-- sidebar -->
+        <div class="col-md-4">
+            <h4>Details</h4>
+            <h1><i class="fa fa-file-image-o fa-4x"></i></h1>
+            <table class="table">
+                <tr>
+                    <td>Type</td>
+                    <td>PNG</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>Name</td>
+                    <td>pictureofsomthing</td>
+                    <td class="text-right"><a href="#"><i class="fa fa-edit"></i></a></td>
+                </tr>
+                <tr>
+                    <td>Size</td>
+                    <td>12 Mb</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>Owenr</td>
+                    <td>@hassenmahdi</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>Access</td>
+                    <td>
+                        <ul class="access-list">
+                            <li>Team A</li>
+                            <li>Team B</li>
+                            <li>Team C</li>
+                        </ul>
+                    </td>
+                    <td class="text-right"><a href="#"><i class="fa fa-gear"></i></a></td>
+                </tr>
+            </table>
+        </div>
+        <!-- sidebar -->
+    </div>
+    <!--  end files  -->
+
+
+
+
+
+
+
+
+
+
+</div>
+
+<!------       -------->        
+</div>
+</div>  
+</div>
+<!-- End Container-->

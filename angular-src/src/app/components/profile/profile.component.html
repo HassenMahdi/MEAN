@@ -95,13 +95,14 @@
             </div>
 
             <div class="row">
-              <div class="col-md-6">
-                <div class="form-group">
-                    <label for="upload"><i class="fa fa-folder"></i> browse</label>
-                    <input id="upload"  (change)="fileChange($event)" class="form-control" type="file" name="image" value="" accept=".png,.png,.jpeg">
+              <div class="col-md-5">
+                <div class="browse">
+
+                    <label for="upload"><i class="fa fa-upload"></i> File from your device</label>
+                    <input id="upload"  (change)="fileChange($event)" type="file" name="image" value="" accept=".png,.png,.jpeg">
                 </div>
               </div>
-              <div class="col-md-6">
+              <div class="col-md-7">
                 <div class="form-group">
                   <label for="Choose a file">URL</label>
                     <input class="form-control" (input)="urlChange($event)"  placeholder="URL here" type="text" name="imageUrl" value="" >

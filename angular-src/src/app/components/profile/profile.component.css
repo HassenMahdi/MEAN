@@ -65,6 +65,24 @@
     width: 100%;
 }
 
+.browse label{
+    width: 100%;
+    color: white;
+    background: #48b6e0;
+    padding: 10px;
+    cursor: pointer;
+    font-size: 14px;
+    border-radius: 2px;
+    margin-bottom: 10px;
+    margin-top: 23px;
+}
+
+.browse input{
+    display: none;
+}
+
+
+
 @media(min-width:768px) {
     .image_container{
         width: auto;

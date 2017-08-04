@@ -62,7 +62,8 @@ export class TeamsComponent implements OnInit {
       })
   }
 
-  selectTeam(index){    
+  selectTeam(index){
+    this.team=null
     this.teamService.getUserTeam(this.teams[index].team._id).subscribe( res => {
           this.team = res.team;
           this.selectedTeamIndex = index;
