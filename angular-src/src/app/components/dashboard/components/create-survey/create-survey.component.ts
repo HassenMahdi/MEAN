@@ -6,7 +6,7 @@ import { AuthService } from '../../../../services/auth.service';
 import { ToastrService } from 'toastr-ng2';
 import { SurveysService } from '../../../../services/surveys.service';
 
-
+declare var jQuery:any;
 
 @Component({
   selector: 'app-create-survey',
@@ -69,8 +69,8 @@ export class CreateSurveyComponent implements OnInit {
     this.authService.getProfile().subscribe( profile => {
       this.user = profile.user;
 
-      console.log(this.user);
-      
+      $(".container-fluid").removeClass("fadeIn animated")
+
     },
     err=>{
       console.log(err);

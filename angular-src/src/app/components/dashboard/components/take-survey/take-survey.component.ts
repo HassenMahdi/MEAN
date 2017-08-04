@@ -73,6 +73,8 @@ export class TakeSurveyComponent implements OnInit {
             });
 
             this.updateDisplayedSurveys()
+            console.log("Surveys list")
+            console.log(this.displayanswered)
             
           }else{
             this.toastr.info(res.msg);
@@ -103,11 +105,13 @@ export class TakeSurveyComponent implements OnInit {
           if (res.success){
             this.toastr.success("Your answers have been submitted","Success");
             
-            
+              console.log("answers:")
+              console.log(answers)
+
               this.displayesurveys[this.selectedSurveyIndex]
                 .submissions.push({
                   submitter_id : this.user._id,
-                  answers : answers,
+                  answers : [answers],
                 })
 
             this.displayanswered.push(
@@ -140,9 +144,7 @@ export class TakeSurveyComponent implements OnInit {
     var ai = this.displayanswered[index].submissions.findIndex(
       a => (a.submitter_id == this.user_id )
     )
-    console.log("submission id "  + ai)
-    console.log("survey index id " +  index)
-    console.log(this.displayanswered)
+
     this.answers = this.displayanswered[index].submissions[ai].answers
     var an = this.displayanswered[index].submissions[ai].answers
     console.log(an)
@@ -164,5 +166,4 @@ export class TakeSurveyComponent implements OnInit {
     this.surveysService.formatSurveys(this.displayesurveys);
     this.surveysService.formatSurveys(this.displayanswered);
   }
-
 }
