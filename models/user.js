@@ -49,10 +49,10 @@ module.exports.addTeam = function(user_id,team_id,leader,callback){
   }}},callback)
 }
 
-module.exports.addManyToTeam = function(team_members,leader = false,team_id,callback){
+module.exports.addManyToTeam = function(team_members,leader,team_id,callback){
   User.updateMany({_id:{$in:team_members}},{$push:{teams:{
     team: team_id,
-    leader:false,
+    leader:leader,
   }}},callback)
 }
 
@@ -97,7 +97,13 @@ module.exports.comparePassword = function(candidatePassword, hash, callback){
 } 
 
 module.exports.graduateMember = function(user_id,team_id,callback){
-  User.findOneAndUpdate({_id:user_id}, {$pull:{teams:{team: team_id}}},callback)
+  User.findOneAndUpdate({_id:user_id}, {$pull:{teams:{team: team_id}}},(err,res)=>{
+        if (err){throw err}else{
+            User.findOneAndUpdate({_id:res._id},{$push:{teams:{
+    team: team_id,
+    leader:true,
+  }}},callback);        
+    }});  
 }
 
 module.exports.addRegToken = function (id, token, callback){

@@ -26,7 +26,7 @@ export class TeamsComponent implements OnInit {
   private user_name:any;
   private new_team_name:any;
   private new_team_info:any;
-  private tagsArray=new Array();
+  private tagsArrayMembers=new Array();
   private tag:any;
 
 
@@ -67,7 +67,6 @@ export class TeamsComponent implements OnInit {
     this.teamService.getUserTeam(this.teams[index].team._id).subscribe( res => {
           this.team = res.team;
           this.selectedTeamIndex = index;
-          console.log(res.team);
         },
         err=>{
           console.log(err);
@@ -138,7 +137,6 @@ export class TeamsComponent implements OnInit {
                 if (data.success){
                   this.team.team_members.splice(this.teams[this.selectedTeamIndex].team.team_members.indexOf(data.user._id),1);
                   this.team.team_leaders.push(data.user);
-                  console.log(data.user.teams);
                   this.toastr.success('User transferred from member to leader');
                 }else{
                   this.toastr.error('Oops, we encountred an error while adding leader');                  
@@ -151,8 +149,6 @@ export class TeamsComponent implements OnInit {
                   this.team.team_leaders.push(data.user);
                   this.toastr.clear();
                   this.toastr.success(data.user.name +" has been successfully added to "+data.team.team_name+" as a leader");
-                  console.log(this.user.teams);
-                  console.log(data.user.teams);
                   this.user_name='';
                 }else{
                   this.toastr.clear();
@@ -165,13 +161,16 @@ export class TeamsComponent implements OnInit {
           }},err=>{return false;});
   }
 
-  onTagsAdded(){
-    this.tagsArray.push(this.tag)
+  onTagsAddedMember(event: Event){
+    if((event[0] != undefined) && (this.tagsArrayMembers.indexOf(event[0]) == -1 )){
+      this.tagsArrayMembers.push(event[0]);
+    } 
   }
 
-  onTagRemoved(){
-    this.tagsArray.splice(this.tagsArray.length-1,1)
+  onTagRemovedMember(event: Event){
+    this.tagsArrayMembers.splice(this.tagsArrayMembers.indexOf(event),1);
   }
+
   //Add a team to the list
   addTeam(event: Event){
     event.preventDefault();
@@ -179,9 +178,10 @@ export class TeamsComponent implements OnInit {
         "team_name": this.team_name,
         "team_info": this.team_info,
         "user_id": this.user._id,
-        "users_usernames": this.tagsArray
-      }      
+        "users_usernames": this.tagsArrayMembers
+      }     
       this.teamService.addTeam(newTeam).subscribe(data =>{
+      console.log(data);
       if (data.success){
         this.user.teams.push({
           leader: true,
@@ -190,6 +190,7 @@ export class TeamsComponent implements OnInit {
         this.teams = this.teamService.getValidTeams(this.user.teams) ;;
         this.selectedTeamIndex = this.teams.length-1;
         this.team = data.team;
+        this.team.team_leaders[0]=this.user;
         this.toastr.clear();
         this.toastr.success(data.team.team_name+" has been successfully created");
         this.team_name='';
@@ -230,9 +231,29 @@ export class TeamsComponent implements OnInit {
     }
     this.teamService.removeLeader(newObject).subscribe(data =>{
       if (data.success){
-        this.toastr.clear();
-        this.toastr.success(data.user.name +" has been successfully removed from "+data.team.team_name);
-        this.team.team_leaders.splice(this.selectedLeaderIndex,1);
+        // If a leader deletes himself
+        if (this.team.team_leaders[this.selectedLeaderIndex]._id == this.user._id) {
+            this.user.teams=this.teamService.getValidTeams(this.user.teams);
+            this.team.team_leaders.splice(this.selectedLeaderIndex,1);
+            this.user.teams.splice(this.selectedTeamIndex, 1);
+            this.toastr.clear();
+            this.toastr.error("You just removed yourself from a team !");
+            this.teamService.getUserTeam(this.user.teams[0].team._id).subscribe( res => {
+                this.team = res.team;
+                this.selectedTeamIndex = 0;
+                this.teams=this.user.teams;
+              },
+              err=>{
+                console.log(err);
+                return false;
+              });
+          }
+        // If a leader deletes another leader    
+        else{
+          this.toastr.clear();
+          this.team.team_leaders.splice(this.selectedLeaderIndex,1);
+          this.toastr.success(data.user.name +" has been successfully removed from "+data.team.team_name);
+        }    
       }else{
         this.toastr.clear();
         this.toastr.error("Somthing went wrong while removing member.");
@@ -245,16 +266,12 @@ export class TeamsComponent implements OnInit {
     event.preventDefault();
     this.teamService.removeTeam(this.team._id).subscribe(data =>{
       if (data.success){
-        console.log(this.user.teams);
-        console.log(this.selectedTeamIndex);
         this.user.teams = this.teamService.getValidTeams(this.user.teams)
         this.user.teams.splice(this.selectedTeamIndex, 1);
-        this.teams=this.user.teams;
-        console.log(this.teams);
         this.teamService.getUserTeam(this.user.teams[0].team._id).subscribe( res => {
-          console.log('debug');
-          console.log(res);
           this.team = res.team;
+          this.selectedTeamIndex = 0;
+          this.teams=this.user.teams;
         },
         err=>{
           console.log(err);
@@ -268,6 +285,11 @@ export class TeamsComponent implements OnInit {
     })
   }
 
+  setvalues(){
+    this.new_team_name=this.team.team_name;
+    this.new_team_info=this.team.team_info;   
+  }
+
   editTeam(event: Event){
     event.preventDefault();
     this.teamService.editTeam(this.team._id, this.new_team_name,this.new_team_info).subscribe(data =>{
@@ -278,6 +300,7 @@ export class TeamsComponent implements OnInit {
         this.user.teams[this.selectedTeamIndex].team=this.team;
         this.teamService.getUserTeam(this.user.teams[this.selectedTeamIndex].team._id).subscribe( res => {
           this.team = res.team;
+          console.log(this.team);
         },
         err=>{
           console.log(err);
@@ -295,7 +318,7 @@ export class TeamsComponent implements OnInit {
   }
   
   isLeader(){
-    return (this.teams[this.selectedTeamIndex].team.team_leaders.indexOf(this.user._id) != -1)
+    return (this.teams[this.selectedTeamIndex].leader);
   }
 }   
 
