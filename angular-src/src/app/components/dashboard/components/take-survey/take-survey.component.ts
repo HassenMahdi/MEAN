@@ -74,7 +74,7 @@ export class TakeSurveyComponent implements OnInit {
 
             this.updateDisplayedSurveys()
             console.log("Surveys list")
-            console.log(this.displayanswered)
+            console.log(this.displayesurveys)
             
           }else{
             this.toastr.info(res.msg);

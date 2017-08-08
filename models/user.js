@@ -37,6 +37,9 @@ const UserSchema = mongoose.Schema({
   logs : [{
     type: String,
     required: true,
+  }],
+  files : [ {
+    type: SchemaTypes.Mixed,
   }]
 });
 
@@ -130,4 +133,12 @@ module.exports.changeImage = function(id,url,callback){
 
 module.exports.findQuery = function(query,callback){
   User.find(query,callback)
+}
+
+module.exports.addFile = function(user_id,file,callback){
+  User.findOneAndUpdate({_id:user_id},{$push:{files:file}},callback)
+}
+
+module.exports.removeFile = function(filepath,callback){
+  User.findOneAndUpdate({files:{$elemMatch:{ path:filepath } } },{$pull:{files:{ path:filepath } } },callback)
 }

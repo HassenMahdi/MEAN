@@ -1,29 +1,26 @@
 <!-- Start Conatiner -->
-<div class="container-fluid fadeInanimated">
+<div class="container-fluid fadeIn animated">
 <div class="panel panel-default">
 <div class="panel-body panel-fill">
 <div class="col-md-12">
     <h4>Dropbox</h4>
-    <br>
 </div>
 <!------       -------->        
 
 <!-- Start loading -->
 <div *ngIf="loading" class="col-md-12 loading">
-    <p>loading...</p>
+    <i class="fa fa-circle-o-notch fa-spin"></i> Loading...
 </div>
 <!-- End loading -->
 
-<div class="fadeInUp animated" *ngIf="!loading">
-
-    <br>
+<div class="fadeIn animated" *ngIf="!loading">
 
     <!--  Start Tool bar  -->
     <div class="col-md-12">
         <div class="btn-group">
-            <button type="button" class="btn btn-primary"><i class="fa fa-plus"></i></button>
-            <button type="button" class="btn btn-primary"><i class="fa fa-gear"></i></button>
-            <button type="button" class="btn btn-alert"><i class="fa fa-remove"></i></button>
+            <label for="up-file" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i></label>
+            <input (change)="confirmUpload($event)" type="file" id="up-file" style="display:none">
+            <button type="button" class="btn btn-primary btn-sm"><i class="fa fa-gear"></i></button>
         </div>
     </div>
     <!--  End toolbar -->
@@ -32,61 +29,86 @@
     <div>
 
         <!-- files box -->
-        <div class="col-md-8">
+        <div class="col-md-9">
             <div class="panel panel-default">
                 <div class="panel-body panel-files">
                     <!-- No files-->
-                    <div *ngIf="!files">
+                    <div *ngIf="files.length==0">
                         <h4 class="empty">
                             <i class="fa fa-ban fa-5x"></i>
                             <br>
                             No files
                         </h4>
                     </div>
+                    <!-- End No files -->
 
-                    
+                    <!-- files -->
+                    <div *ngIf="files">
+                        <div class="file-list"> 
+                            <div 
+                                *ngFor="let file of files; let i = index;" 
+                                (click)="selectFile(i)" 
+                                class="file">
+                                <div class="filethumnail">
+                                    <div class="type">
+                                        {{file.type}}
+                                    </div>
+                                    <i class="fa fa-file fa-3x"></i>
+                                </div>
+                                <div class="filename">
+                                    {{file.name}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
         <!-- files box -->
 
         <!-- sidebar -->
-        <div class="col-md-4">
+        <div *ngIf="!file" class="col-md-3">
+        </div>
+
+        <div *ngIf="file" class="col-md-3 cont">
+            <div class="fadeInRight animated">
             <h4>Details</h4>
-            <h1><i class="fa fa-file-image-o fa-3x"></i></h1>
+            <h1 class="file-icon"><i class="{{file.icon}}" ></i></h1>
+            <a href="#" data-toggle="modal" data-target="#preview" (click)="openFile($event,file.path)">Open file</a>
             <table class="table">
                 <tr>
                     <td>Type</td>
-                    <td>PNG</td>
+                    <td>{{file.type}}</td>
                     <td></td>
                 </tr>
                 <tr>
                     <td>Name</td>
-                    <td>pictureofsomthing</td>
+                    <td>{{file.name}}</td>
                     <td class="text-right"><a href="#"><i class="fa fa-edit"></i></a></td>
                 </tr>
                 <tr>
                     <td>Size</td>
-                    <td>12 Mb</td>
+                    <td>{{file.size}}</td>
                     <td></td>
                 </tr>
                 <tr>
-                    <td>Owener</td>
-                    <td>@hassenmahdi</td>
+                    <td>Owner</td>
+                    <td>{{user.name}}</td>
                     <td></td>
                 </tr>
                 <tr>
                     <td>Access</td>
                     <td>
                         <ul class="access-list">
-                            <li>Team A</li>
-                            <li>Team B</li>
-                            <li>Team C</li>
+                            <li *ngFor="let team of access" > {{team.team_name}}</li>
                         </ul>
                     </td>
                     <td class="text-right"><a href="#"><i class="fa fa-gear"></i></a></td>
                 </tr>
             </table>
+            <a href="#" (click)="downloadFile($event,file.path)"><i class="fa fa-download"></i> Download</a>
+            <a href="#" (click)="deleteFile($event,file.path)" ><i class="fa fa-trash"></i> Delete</a>
+            </div>
         </div>
         <!-- sidebar -->
     </div>
@@ -98,3 +120,15 @@
 </div>  
 </div>
 <!-- End Container-->
+
+
+<!-- Modals -->
+<div class="modal fade" id="preview"><div class="modal-dialog modal-lg"><div class="modal-content"><div class="modal-body">
+
+    <button type="button" class="close" data-dismiss="modal">&times;</button>
+    <div id="frame-container">
+        <iframe id="frame"></iframe>    
+    </div>
+    
+
+</div></div></div></div>

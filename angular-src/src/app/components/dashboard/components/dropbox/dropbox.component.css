@@ -1,9 +1,10 @@
 .panel-fill{
-    min-height: 550px;
     height: 100%;
 }
 
 .panel-files{
+    overflow-y: auto;
+    overflow-x: hidden;
     height: 420px;
     background-color: #f9f9f9;
     margin: 0;
@@ -12,11 +13,81 @@
     position: relative;
 }
 
+.file{
+    display: inline-block;
+    width: 100px;
+    height: 100px;
+    text-align: center;
+    vertical-align: top;
+    color: #dddddd;
+    overflow: hidden;
+    margin: 5px;
+}
+
+.file:hover{
+    color: #e9e9e9;
+    cursor: pointer;
+}
+
+.file .filethumnail{
+    position: relative;
+}
+
+.file-icon i{
+    color: lightgrey;
+}
+
+.file .filename{
+    color: #505050;
+}
+
+.file .type{
+    position: absolute;
+    font-weight: bold;
+    color: #666666;
+    margin: 0 auto;
+    left:  0;
+    right: 0;
+    margin-top:15px;
+    font-size: 12px;
+}
+
 .empty{
-    height: 100%;
+    margin-top:100px; 
     width: 100%;
     position: absolute;
     transform: translateY(30%);
     text-align: center;
     color: lightgrey;
+}
+
+.cont{
+    overflow: hidden;
+}
+
+#frame-container{
+    height:fit-content;
+    width: 100%;
+}
+#frame{
+    min-height:500px;
+    width: 100%;
+    border: 0;
+}
+
+.surveyslist::-webkit-scrollbar-track
+{
+	background-color: #F5F5F5;
+}
+
+.surveyslist::-webkit-scrollbar
+{
+    width: 5px;
+    height: 5px;
+	background-color: #F5F5F5;
+}
+
+.surveyslist::-webkit-scrollbar-thumb
+{
+	background-color: lightgrey;
 }

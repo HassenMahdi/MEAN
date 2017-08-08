@@ -11,7 +11,7 @@
     "bcryptjs": "*",
     "body-parser": "*",
     "cors": "*",
-    "express": "*",
+    "express": "^4.15.4",
     "firebase-admin": "^5.0.1",
     "jsonwebtoken": "*",
     "mongoose": "*",

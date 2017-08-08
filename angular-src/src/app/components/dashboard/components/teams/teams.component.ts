@@ -29,6 +29,8 @@ export class TeamsComponent implements OnInit {
   private tagsArrayMembers=new Array();
   private tag:any;
 
+  loading= true;
+
 
   selectedLeaderIndex = 0;
   selectedMemberIndex =0;
@@ -46,6 +48,7 @@ export class TeamsComponent implements OnInit {
         this.user = profile.user;
         this.teams = this.teamService.getValidTeams(profile.user.teams) ;
         this.team = this.teams[0].team;
+        this.loading = false;
         this.teamService.getUserTeam(this.team._id).subscribe( res => {
           this.team = res.team;
         },

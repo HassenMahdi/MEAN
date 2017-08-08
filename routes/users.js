@@ -11,8 +11,8 @@ router.post('/register', (req, res, next) => {
     name: req.body.name,
     email: req.body.email,
     username: req.body.username,
-    password: req.body.password
-  });
+    password: req.body.password,
+ });
 
   User.addUser(newUser, (err, user) => {
     if(err){
@@ -125,12 +125,11 @@ router.post('/get',(req,res,next)=>{
 })
 
 router.put('/pic/url',(req,res,next)=>{
-  console.log("Reached")
   User.changeImage(req.body.user_id,req.body.image,(err,user)=>{
-    if(err || !user){
+    if(err || !user ){
       return res.json({success:false})
     }else{
-      return res.json({success:true,url:req.bodyimage})
+      return res.json({success:true,url:req.body.image})
     }
   })
 })

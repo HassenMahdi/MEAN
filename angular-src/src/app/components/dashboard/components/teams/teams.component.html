@@ -8,7 +8,10 @@
                     
                     <div class="col-sm-4">
                         <h4>Teams list</h4>
-                           <ul *ngIf="teams"  class="teams-list">
+                        <div *ngIf="loading">
+                            <i class="fa fa-circle-o-notch fa-spin"></i> Loading...
+                        </div>
+                        <ul *ngIf="!loading"  class="teams-list">
                             <li *ngFor="let team of teams; let i = index" >
                                 <a (click)="selectTeam(i)">{{team?.team?.team_name}}</a>
                             </li>

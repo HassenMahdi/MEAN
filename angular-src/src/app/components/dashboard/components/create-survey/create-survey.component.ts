@@ -102,7 +102,10 @@ export class CreateSurveyComponent implements OnInit {
 
     if ( this.questions == null )
       this.invalideMsg.push("Save your changes before submitting.");
-    
+
+    if (this.questions == null || this.questions == [] )
+      this.invalideMsg.push("The survey is empty")
+
     if (this.invalideMsg.length<=0){
 
       let survey = {
@@ -125,7 +128,6 @@ export class CreateSurveyComponent implements OnInit {
 
       this.surveysService.CreateSurvey(survey).subscribe(
         res=>{
-          console.log(res)
           if(res.success)
             this.toasrt.success("Your team members will be notified","Great!");
           else
@@ -136,10 +138,6 @@ export class CreateSurveyComponent implements OnInit {
       });
       
     }
-  }
-
-  printDate(){
-    console.log(this.endDate);
   }
 
   validDates(beginDate, endDate){
