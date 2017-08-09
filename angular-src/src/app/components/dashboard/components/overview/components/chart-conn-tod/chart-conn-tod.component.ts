@@ -14,6 +14,7 @@ export class ChartConnTodComponent implements OnInit {
   @ViewChild(BaseChartDirective) chart : BaseChartDirective 
 
   gotData:boolean = false
+  gotEmptyData:boolean = false
 
   constructor() { }
 
@@ -41,7 +42,13 @@ export class ChartConnTodComponent implements OnInit {
 
   ngOnChanges(changes:any){
     if (!this.user || !this.list) return
-      
+    
+    if ( this.list.length == 0 ){
+      this.gotEmptyData = true;
+      this.gotData = true;
+      return;
+    }
+
       var list=[];
       var teams = this.user.teams 
       

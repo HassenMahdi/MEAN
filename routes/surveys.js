@@ -71,6 +71,10 @@ router.route('/get')
 //Get survey by ID
 router.get('/get/:id',(req,res,next)=>{
  
+    //console.log("Reached /get/id")
+    if( req.params.id == "teams") 
+        return res.json({success:false,msg:"Bad request"});
+
     Survey.getSurveyById(
         req.params.id,
         (err, survey)=>{
@@ -102,6 +106,10 @@ router.get('/get/owner/:id',(req,res,next)=>{
 });
 
 //get surveys by team id list
+router.get('/get/teams/',(req,res,next)=>{
+    return res.json({success:false,msg:"Bad request"})
+})
+
 router.get('/get/teams/:id_list',(req,res,next)=>{
     let teams_list = req.params.id_list.split(',');
 

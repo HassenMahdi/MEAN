@@ -1,6 +1,9 @@
 <div class="loader" *ngIf="!gotData">
   fetching data...
 </div>
+<div *ngIf="gotEmptyData">
+  No data found yet.
+</div>
 <div style="display: block;">
   <canvas id="chart-line" baseChart height="250"></canvas>
 </div>

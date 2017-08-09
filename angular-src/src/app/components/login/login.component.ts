@@ -35,20 +35,12 @@ export class LoginComponent implements OnInit {
         this.router.navigate(['/dashboard']);
         this.toaster.clear();
         this.toaster.success("you are now logged in","HELLO THERE!");
-        console.log(data);
         this.authService.storeUserData(data.token,data.user);
       }else{
         this.toaster.error("Please check your username and password","Oops!");
         this.router.navigate(['/login']);
-        console.log(data);
       }
-      
-    })
-
-
-    console.log(user);
-
-    
+    })    
   }
 
 }

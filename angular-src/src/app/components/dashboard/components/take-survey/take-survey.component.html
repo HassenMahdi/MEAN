@@ -1,4 +1,12 @@
 <div class="container-fluid fadeIn animated">
+    <div *ngIf="loaded" class="panel panel-default">
+        <div class="panel-body">
+            <h4>Surveys</h4>
+            <div>
+                No surveys to dispaly.
+            </div>
+        </div>
+    </div>
     <div class="row " *ngIf="displayesurveys?.length > 0 ">
         <div class="col-md-12">
             <div class="panel panel-default">

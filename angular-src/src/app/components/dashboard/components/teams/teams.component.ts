@@ -47,19 +47,25 @@ export class TeamsComponent implements OnInit {
     this.authService.getProfile().subscribe( profile => {
         this.user = profile.user;
         this.teams = this.teamService.getValidTeams(profile.user.teams) ;
-        this.team = this.teams[0].team;
-        this.loading = false;
-        this.teamService.getUserTeam(this.team._id).subscribe( res => {
-          this.team = res.team;
-        },
-        err=>{
-          console.log(err);
-          return false;
-        });
         
-        
+        if(this.teams[0]){
+          this.team = this.teams[0].team;
+          
+          this.teamService.getUserTeam(this.team._id).subscribe( res => {
+            this.team = res.team;
+            },
+            err=>{
+              console.log(err);
+              return false;
+            });
+          
+        }
+          
+
+        this.loading = false;      
       },
       err=>{
+        this.loading = false;
         console.log(err);
         return false;
       })

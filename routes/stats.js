@@ -5,14 +5,19 @@ const Team = require('../models/team');
 const User = require('../models/user');
 const config = require('../config/database');
 
+router.get('/',(req,res,next)=>{
+    return res.json({success:false,msg:"Invalid request"})
+})
+
 router.get('/:team_list',(req,res,next)=>{
     getTeamsActivity(req,(list,dates,activemembers)=>{
         getSurveysInfo(req,(up_sur,act_sur)=>{
             res.json({
-                activemembers:activemembers,
-                upcoming_surveys:up_sur,
-                active_surveys:act_sur,
-                list:list,dates:dates})
+                activemembers:activemembers || [],
+                upcoming_surveys:up_sur  || [],
+                active_surveys:act_sur  || [],
+                list:list,dates:dates  || [] 
+            })
         })
     });
 })
@@ -37,7 +42,7 @@ getTeamsActivity = function(req,callback){
 
     User.findQuery({ "teams.team" : { $in : team_list }} , (err,users)=>{
         if(err || !users){
-            res.json({success: flase, msg:"failed to get users"})
+            callback(null,null,null)
         }
         else{
 
@@ -85,6 +90,7 @@ getTeamsActivity = function(req,callback){
 
             return callback(list,dates,activemembers)
         }
+        callback(null,null,null)
     })
 
 }
@@ -95,7 +101,7 @@ getSurveysInfo = function(req,callback){
     let currentdate = new Date()
 
     Survey.findActive(team_list,currentdate,(err,surveys)=>{
-        if(err || !surveys) callback(null)
+        if(err || !surveys) callback(null,null)
         else{
             var active_surveys = surveys.filter( survey =>{
                 return (survey.enddate > currentdate && survey.begindate < currentdate ) 
@@ -106,6 +112,7 @@ getSurveysInfo = function(req,callback){
             console.log("active surveys: "+ active_surveys.length + "  Upcoming suveys: "+ upcoming_surveys.length)
             callback(upcoming_surveys,active_surveys)
         }
+        callback(null,null)
     })
 
 }

@@ -35,10 +35,11 @@ export class OverviewComponent implements OnInit {
       })
         
       this.statService.getLogsStats(team_list).subscribe(res=>{
-        this.datasets1 = res.list
-        this.activesurveys = res.active_surveys
-        this.upcomingsurveys = res.upcoming_surveys
-        this.activemembers = res.activemembers
+        console.log("Got data")
+        this.datasets1 = res.list || []
+        this.activesurveys = res.active_surveys || []
+        this.upcomingsurveys = res.upcoming_surveys || []
+        this.activemembers = res.activemembers || []
         this.dataset1 = {
           data : [5,10,8],
           labels :["Tom","Peter","Hannibal"]

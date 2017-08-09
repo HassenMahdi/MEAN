@@ -29,6 +29,7 @@ export class TakeSurveyComponent implements OnInit {
   user_id :any;
   user :any;
   teamsList : any[];
+  loaded:boolean = false;
 
   constructor( 
     private surveysService : SurveysService,
@@ -73,12 +74,12 @@ export class TakeSurveyComponent implements OnInit {
             });
 
             this.updateDisplayedSurveys()
-            console.log("Surveys list")
-            console.log(this.displayesurveys)
-            
+                      
           }else{
-            this.toastr.info(res.msg);
+            this.loaded = true;  
+            //this.toastr.info(res.msg);
           }
+         
         },
         err=>{
           console.log(err);
