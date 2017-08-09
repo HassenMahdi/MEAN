@@ -90,7 +90,6 @@ getTeamsActivity = function(req,callback){
 
             return callback(list,dates,activemembers)
         }
-        callback(null,null,null)
     })
 
 }
@@ -112,7 +111,6 @@ getSurveysInfo = function(req,callback){
             console.log("active surveys: "+ active_surveys.length + "  Upcoming suveys: "+ upcoming_surveys.length)
             callback(upcoming_surveys,active_surveys)
         }
-        callback(null,null)
     })
 
 }

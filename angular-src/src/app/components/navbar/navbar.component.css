@@ -2,6 +2,10 @@
     height: 100%;
 }
 
+.navbar-default{
+    background-color: #222222;
+}
+
 @media(min-width:768px){
     .space{
     margin-left: 5px !important;

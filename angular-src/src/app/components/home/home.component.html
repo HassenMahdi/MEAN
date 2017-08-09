@@ -1,30 +1,42 @@
-<div class="main fadeInUp animated">
+<div class="main fadeIn animated">
  
   <div class="container c1">
     <div class="text-center">
       <img class="logo" src="assets/images/logo/logo2.png" alt="Solair">
-      <h3 class="slogan"><em>Review</em> <span>&#38;</span> <em>Enhance</em> your team's productivity</h3>
-    </div>
+      <h4 class="slogan">Review <span>&#38;</span> enhance your team's productivity</h4>
+    </div>    
   </div>
   
   <div class="container c2">
+
+    <div class="device">
+        <div class="laptop">
+          <div class="screen">
+            <div class="start">
+              <a [routerLink]="['/register']">> GET STARTED</a>
+            </div>
+          </div>
+        </div>
+        <div class="base"></div>   
+    </div>
+
     <div class="text-center">
       <div class="row r1">
         <h2>BENEFIT FROM OUR SERVICES</h2>
         <br><br>
         <div class="col-md-4">
           <i class="fa fa-podcast color1"></i>
-          <h2>STAY UPDATED</h2>
+          <h3>STAY UPDATED</h3>
           <p>Automated notifications to keep you and you team updated.</p>
         </div>
         <div class="col-md-4">
           <i class="fa fa-paper-plane color2"></i>
-          <h2>WORK TOGETHER</h2>
+          <h3>WORK TOGETHER</h3>
           <p>improve your workflow with our real time chat service.</p>
         </div>
         <div class="col-md-4">
           <i class="fa fa-cloud  color3"></i>
-          <h2>CLOUD STORAGE</h2>
+          <h3>CLOUD STORAGE</h3>
           <p>We offer up to 50Mb of free storage space on our servers.</p>
         </div>
       </div>
@@ -36,22 +48,24 @@
       <div class="row text-center">
         <div class="col-md-12">
           <h2>BUILD WITH INDUSTRY LEADING <b>TECH</b></h2>
+
+          <h1 class="mean">MEAN<span>.JS</span></h1>
+
           <br><br>
           <div class="row">
-            <div class="col-md-2"></div>
-            <div class="col-md-2">
+            <div class="col-md-4"></div>
+            <div class="col-md-1">
               <img class="tech" src="assets/images/tech/final/angular2.png" alt="angular2">
             </div>
-            <div class="col-md-2">
+            <div class="col-md-1">
               <img class="tech" src="assets/images/tech/final/mongodb.png" alt="angular2">
             </div>
-            <div class="col-md-2">
+            <div class="col-md-1">
               <img class="tech" src="assets/images/tech/final/node.png" alt="angular2">
             </div>
-            <div class="col-md-2">
+            <div class="col-md-1">
               <img class="tech" src="assets/images/tech/final/socketio.png" alt="angular2">
             </div>
-            <div class="col-md-2"></div>
           </div>
         </div>
       </div>
@@ -61,15 +75,25 @@
   <div class="footer">
     <div class="container">
       <div class="row">
-        <div class="col-md-6">
-          <h5>Authers</h5>
-          <p>This product is made by</p>
-          <ul>
-            <li>Hassen Mahdi</li>
-            <li>Ahmed Akakzia</li>
-          </ul>
-          <br>
-          <p>Supervised by <b>Cloudisia</b></p>
+        <div class="col-md-3">
+          <h5>About Us</h5>
+          <h6><b>Hassen Mahdi</b><br>Second year student at ENSI
+            <br>
+            <br><i class="fa fa-envelope"></i> hassenmahdi77@gmail.com
+            <br><i class="fa fa-phone"></i> (+216) 24 306 834
+          </h6>
+          <p>In collaboration with</p>
+           <h6><b>Ahmed Akakzia</b><br>First year student HERE
+            <br>
+            <br><i class="fa fa-envelope"></i> ahmed.akakzia@gmail.com
+            <br><i class="fa fa-phone"></i> (+216) 24 306 834
+          </h6>
+          
+        </div>
+        <div class="col-md-3">
+          <h5>CLOADISIA</h5>
+          <p>This project was supervised by</p>
+          <h6><b>Mohemed Foulen</b></h6>
         </div>
         <div class="col-md-6">
           <h5>Contact Us</h5>
@@ -80,10 +104,9 @@
               </div>
               <br>
               <div class="form-group">
-                <label for="comment">TEXT</label>
                 <textarea placeholder="type here..." class="form-control" rows="5" id="comment"></textarea>
               </div>
-              <button type="submit" class="btn btn-sm btn-default">Submit</button>
+              <button type="submit" class="pull-right btn btn-sm btn-default">Send <i class="fa fa-paper-plane"></i> </button>
           </form>
         </div>
 

@@ -1,6 +1,5 @@
 .main{
     position: absolute;
-    background-color: #222222;
     min-height: 100%;
     margin: 0;
     padding: 0;
@@ -11,12 +10,20 @@
 }
 
 .logo{
-    width: 500px;
+    width: 90%;
+    padding-top: 200px;
 }
+.c1 h5,
+.c1 h4 {
+     padding-bottom:300px;
+}
+
 .c1{
     color: white;
     min-height: 100%;
-    display: table
+    width: 100%;
+    display: table;
+    background-color: #222222;
 }
 
 .c1 > div {
@@ -24,16 +31,19 @@
     vertical-align: middle;
 }
 
+
 .c1 .slogan span{
     font-weight: bold;
 }
 
 .c1 .slogan {
-    color: grey;
+    color: white;
 }
 
 .c2{
-    background: rgba(0 , 0, 0, 0);
+    position: relative;
+    padding-top: 150px;
+    z-index: 50000000;
 }
 
 .color1{
@@ -68,23 +78,30 @@
 }
 
 .r1 i{
-    font-size: 120px;
+    font-size: 100px;
     padding-bottom: 0px;
 }
 
 .c3{
     width: 100%;
-    color: white;
-    background: #fefe7c;
+    color: black;
+    background: #d6e45c;
 }
 
 .c3 h3{
     margin: 50px 0 50px 0; 
 }
 
+.mean{
+    color: white;
+    font-size: 120px;
+}
+.mean span{
+    color: black;
+}
+
 .tech{
-    width: 160px;
-    border: 0;
+    width:100px;
 }
 
 .gsbtn{
@@ -100,10 +117,64 @@
 }
 
 .footer h5{
-    margin-top: 20px;
+    margin-top: 50px;
     font-weight: bold;
 }
 
 .footer p{
     color: lightgrey;
+}
+
+.footer .form-control {
+    border: 0;
+    color: white;
+    background-color: #333333;
+    resize: none;
+}
+
+.laptop{
+    left: 0;
+    right: 0;
+    margin: auto;
+    background: lightgrey;
+    width: 600px;
+    height: 370px;
+    border-radius: 20px;
+    position: relative;
+    padding: 40px;
+}
+.laptop .screen{
+    background:#8781bd;
+    height: 100%;
+    width: 100%;
+}
+.laptop .screen .start{
+    padding: 50px;
+}
+.laptop .screen .start a{
+    color: white;
+    font-size: 15px;
+}
+.base{
+    left: 0;
+    right: 0;
+    margin: auto;
+    width: 670px;
+    height: 20px;
+    background-color: grey;
+    border-radius: 5px 5px 100px 100px;
+}
+
+.device{
+    position: absolute;
+    top: -250px;
+    left: 0;
+    right: 0;
+    margin: auto;
+}
+
+@media(min-width:768px){
+    .logo{
+        width: 350px;
+    }
 }

@@ -8,15 +8,11 @@
             <span class="icon-bar"></span>
           </button>
           
-          <a class="space navbar-brand" href="/"><img class="logo" src="assets/images/logo/logo2.png" alt="SOLAIR"></a>
+          <a class="space navbar-brand" [routerLink]="['/']" ><img class="logo" src="assets/images/logo/logo2.png" alt="SOLAIR"></a>
         </div>
         <div id="navbar" class="collapse navbar-collapse">
-          <ul class="nav navbar-nav navbar-left">
-            <li [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}"><a [routerLink]="['/']">Home</a></li>
-          </ul>
           <ul class="nav navbar-nav navbar-right">
             <li *ngIf="authService.loggedIn()" [routerLinkActive]="['active']"><a [routerLink]="['/dashboard']">Dashboard</a></li>
-
             <li *ngIf="!authService.loggedIn()" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}"><a [routerLink]="['/register']">Register</a></li>
             <li *ngIf="!authService.loggedIn()" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}"><a [routerLink]="['/login']">Login</a></li>
 
