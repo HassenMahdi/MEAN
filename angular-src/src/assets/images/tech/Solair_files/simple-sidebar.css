@@ -1,0 +1,241 @@
+/*!
+ * Start Bootstrap - Simple Sidebar (http://startbootstrap.com/)
+ * Copyright 2013-2016 Start Bootstrap
+ * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap/blob/gh-pages/LICENSE)
+ */
+
+ body {
+    overflow-x: hidden;
+ }
+
+/* Toggle Styles */
+
+.navbar-brand{
+    margin-left: 100px;
+}
+
+.toggle-btn{
+    background: #111;
+    z-index: 999;
+    position: fixed;
+    padding: 10px;
+    top: 35%;
+    left: 0px;
+    border-radius: 0px 5px 5px 0px;
+    border: 0;
+}
+.toggle-btn:hover{
+    padding: 10px;
+    border: 0;
+}
+
+#wrapper {
+    padding-left: 0;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+}
+
+#wrapper.toggled {
+    padding-left: 250px;
+}
+
+#sidebar-wrapper {
+
+    margin-top: -10px;
+    z-index: 1000;
+    position: fixed;
+    left: 250px;
+     /* Navbar padding offset */
+    width: 0;
+    height: 100%;
+    margin-left: -250px;
+    overflow-y: auto;
+    background: #2b2b2b;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+}
+
+#wrapper.toggled #sidebar-wrapper {
+    width: 250px;
+}
+
+#page-content-wrapper {
+    overflow: hidden;
+    width: 100%;
+    position: absolute;
+    padding: 5px;
+    margin: 0;
+}
+
+#wrapper.toggled #page-content-wrapper {
+    position: absolute;
+    margin-right: -250px;
+}
+
+/* Sidebar Styles */
+
+.sidebar-nav {
+    position: absolute;
+    top: 0;
+    width: 250px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.sidebar-active  a , .sidebar-nav li a:active{
+    background: #34495e;
+    color: white !important;
+}
+
+.sidebar-nav li {
+    text-indent: 20px;
+    line-height: 40px;
+}
+
+.nav-option a , .submenu a{
+    transition: all 0.3s ease;
+}
+
+.nav-option a span{
+    padding-right: 20px;
+}
+
+.submenu ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    background:#222222;
+}
+.submenu ul li a{
+    padding-left: 50px;
+}
+
+.sidebar-nav li a {
+    display: block;
+    text-decoration: none;
+    color: #888;
+}
+
+.sidebar-nav li a:hover {
+    text-decoration: none;
+    color: lightgrey;
+}
+
+.sidebar-nav li a:active,
+.sidebar-nav li a:focus {
+    text-decoration: none;
+}
+
+.sidebar-nav > .sidebar-brand {
+    height: 65px;
+    font-size: 18px;
+    line-height: 60px;
+}
+
+.sidebar-nav > .sidebar-brand a {
+    color: #999999;
+}
+
+.sidebar-nav > .sidebar-brand a:hover {
+    color: #fff;
+    background: none;
+}
+
+.sidebar-profile{
+    font-size: 15px;
+    display: flex;
+    padding-left: 20px;
+    margin: 0px;
+    margin-top: 10px;
+    margin-bottom: 25px;
+    width: 100%;
+}
+
+.sidebar-profile-pic{
+    /*border-radius: 360px;*/
+    flex: left;
+    width: 55px;
+    height: 55px;
+    background: rgba(0, 0, 0, 0);
+    margin: 0;
+    padding: 0; 
+    display: inline-block;
+}
+
+.sidebar-profile-info{
+    flex: left;
+    color: white;
+    font-weight: bold;
+    width: auto;
+    height: 50px;
+    padding: 10px;
+    margin: 0;
+    display: inline-block;
+}
+
+.sidebar-profile-info span{
+    color: grey;
+    font-weight: lighter;
+}
+
+#menu-toggle{
+    font-size: 32px;
+    position: fixed;
+    top: -2px;
+    left: 10px;
+    display:block;
+    z-index: 1030;
+    filter: brightness(1000) grayscale(1000);
+}
+#menu-toggle.active{
+    display: block;
+}
+
+#sidebar-wrapper::-webkit-scrollbar-track
+{
+	background-color: #2b2b2b;
+}
+
+#sidebar-wrapper::-webkit-scrollbar
+{
+	width: 10px;
+	background-color: #F5F5F5;
+}
+
+#sidebar-wrapper::-webkit-scrollbar-thumb
+{
+	background-color: #333;
+}
+
+@media(min-width:768px) {
+    #wrapper {
+        padding-left: 0;
+    }
+
+    #wrapper.toggled {
+        padding-left: 250px;
+    }
+
+    #sidebar-wrapper {
+        width: 0;
+    }
+
+    #wrapper.toggled #sidebar-wrapper {
+        width: 250px;
+    }
+
+    #page-content-wrapper {
+        padding: 5px;
+        position: relative;
+    }
+
+    #wrapper.toggled #page-content-wrapper {
+        position: relative;
+        margin-right: 0;
+    }
+}
