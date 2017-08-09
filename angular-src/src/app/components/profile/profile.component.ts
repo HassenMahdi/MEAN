@@ -105,6 +105,7 @@ export class ProfileComponent implements OnInit {
         if(res.success){
           this.toastr.success("Your profile picture have been changed")
           this.user.image=this.image.url;
+          this.authService.updateUser(this.user)
           $('#closechangepic').click()
           $('body').click()
         }else{
@@ -117,6 +118,7 @@ export class ProfileComponent implements OnInit {
         if (res.success){
           this.toastr.success("Your profile picture have been changed")
           this.user.image=this.image.url;
+          this.authService.updateUser(this.user)
           $('#closechangepic').click()
           $('body').click()
         }else{

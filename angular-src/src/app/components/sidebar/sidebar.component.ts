@@ -17,7 +17,10 @@ export class SidebarComponent implements OnInit {
   
   ngOnInit() {
     this.authService.getProfile().subscribe( profile => {
-      this.user = profile.user;      
+      this.user = profile.user;
+      this.authService.getUser().subscribe(user=>{
+        this.user=user
+      })   
     },
     err=>{
       console.log(err);

@@ -2,12 +2,16 @@ import { Injectable } from '@angular/core';
 import { Http , Headers } from '@angular/http';
 import { tokenNotExpired } from 'angular2-jwt';
 import 'rxjs/add/operator/map'; 
+import { Observable } from "rxjs/Observable";
+import { Subject } from "rxjs/Subject";
 
 @Injectable()
 export class AuthService {
 
   authToken:any;
   user:any;
+  private userSubject = new Subject<any>()
+
   url="http://localhost:3000"
 
   constructor(private http:Http) {}
@@ -33,6 +37,14 @@ export class AuthService {
     headers.append('Content-Type','application/json');
     return  this.http.get('http://localhost:3000/users/profile', {headers:headers})
       .map(res => res.json());
+  }
+
+  updateUser(user){
+    this.userSubject.next(user)
+  }
+
+  getUser(){
+    return this.userSubject.asObservable()
   }
 
   saveUserRegToken(user_id, token){
